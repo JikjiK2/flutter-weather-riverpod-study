@@ -26,6 +26,8 @@ dependencies:
 
   json_annotation: ^4.9.0
 
+  shared_preferences: ^2.5.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -41,6 +43,8 @@ dev_dependencies:
   json_serializable: ^6.11.2
 
   riverpod_generator: ^3.0.3
+
+  pretty_dio_logger: ^1.4.0
 
 flutter:
   uses-material-design: true

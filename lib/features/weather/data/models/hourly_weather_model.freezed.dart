@@ -15,14 +15,14 @@ T _$identity<T>(T value) => value;
 mixin _$HourlyWeather {
 
  DateTime get forecastDateTime; int get nx; int get ny; double get temperature;// 기온 (T1H category)
- double get feelsLikeTemperature;// 체감온도 (계산 필요)
+ double get feelsLikeTemperature;// 체감온도
  SkyStatus get skyStatus;// 하늘 상태 (SKY category)
  PrecipitationType get precipitationType;// 강수 형태 (PTY category)
  double get precipitationAmount;// 1시간 강수량 (RN1 category)
  int get humidity;// 습도 (REH category)
  double get windSpeed;// 풍속 (WSD category)
  int get windDirectionDegree;// 풍향 (VEC category)
- Thunderbolt get thunderbolt;// 낙뢰 (LGT category) 
+ Thunderbolt get thunderbolt;
 /// Create a copy of HourlyWeather
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -70,7 +70,7 @@ class _$HourlyWeatherCopyWithImpl<$Res>
 
 /// Create a copy of HourlyWeather
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? forecastDateTime = null,Object? nx = null,Object? ny = null,Object? temperature = null,Object? feelsLikeTemperature = null,Object? skyStatus = null,Object? precipitationType = null,Object? precipitationAmount = null,Object? humidity = null,Object? windSpeed = null,Object? windDirectionDegree = null,Object? thunderbolt = null}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? forecastDateTime = null,Object? nx = null,Object? ny = null,Object? temperature = null,Object? feelsLikeTemperature = null,Object? skyStatus = null,Object? precipitationType = null,Object? precipitationAmount = null,Object? humidity = null,Object? windSpeed = null,Object? windDirectionDegree = null,Object? thunderbolt = null,}) {
   return _then(_self.copyWith(
 forecastDateTime: null == forecastDateTime ? _self.forecastDateTime : forecastDateTime // ignore: cast_nullable_to_non_nullable
 as DateTime,nx: null == nx ? _self.nx : nx // ignore: cast_nullable_to_non_nullable
@@ -84,8 +84,7 @@ as double,humidity: null == humidity ? _self.humidity : humidity // ignore: cast
 as int,windSpeed: null == windSpeed ? _self.windSpeed : windSpeed // ignore: cast_nullable_to_non_nullable
 as double,windDirectionDegree: null == windDirectionDegree ? _self.windDirectionDegree : windDirectionDegree // ignore: cast_nullable_to_non_nullable
 as int,thunderbolt: null == thunderbolt ? _self.thunderbolt : thunderbolt // ignore: cast_nullable_to_non_nullable
-as Thunderbolt // ignore: cast_nullable_to_non_nullable
-
+as Thunderbolt,
   ));
 }
 
@@ -235,7 +234,7 @@ class _HourlyWeather implements HourlyWeather {
 @override@JsonKey() final  double temperature;
 // 기온 (T1H category)
 @override@JsonKey() final  double feelsLikeTemperature;
-// 체감온도 (계산 필요)
+// 체감온도
 @override@JsonKey() final  SkyStatus skyStatus;
 // 하늘 상태 (SKY category)
 @override@JsonKey() final  PrecipitationType precipitationType;
@@ -249,7 +248,6 @@ class _HourlyWeather implements HourlyWeather {
 @override@JsonKey() final  int windDirectionDegree;
 // 풍향 (VEC category)
 @override@JsonKey() final  Thunderbolt thunderbolt;
-// 낙뢰 (LGT category)
 
 /// Create a copy of HourlyWeather
 /// with the given fields replaced by the non-null parameter values.

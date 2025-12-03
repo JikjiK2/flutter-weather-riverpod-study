@@ -864,7 +864,6 @@ as String,
 /// @nodoc
 mixin _$KmaUltraSrtFcstBody {
 
-// JSON 응답 시 "dataType": "JSON"으로 올 것으로 예상
  String get dataType; KmaUltraSrtFcstItems get items; int get pageNo; int get numOfRows; int get totalCount;
 /// Create a copy of KmaUltraSrtFcstBody
 /// with the given fields replaced by the non-null parameter values.
@@ -1075,7 +1074,6 @@ class _KmaUltraSrtFcstBody implements KmaUltraSrtFcstBody {
   const _KmaUltraSrtFcstBody({required this.dataType, required this.items, required this.pageNo, required this.numOfRows, required this.totalCount});
   factory _KmaUltraSrtFcstBody.fromJson(Map<String, dynamic> json) => _$KmaUltraSrtFcstBodyFromJson(json);
 
-// JSON 응답 시 "dataType": "JSON"으로 올 것으로 예상
 @override final  String dataType;
 @override final  KmaUltraSrtFcstItems items;
 @override final  int pageNo;
@@ -1428,8 +1426,7 @@ as List<KmaUltraSrtFcstItem>,
 /// @nodoc
 mixin _$KmaUltraSrtFcstItem {
 
- String get baseDate; String get baseTime; String get category; String get fcstDate; String get fcstTime; String get fcstValue;// String으로 오므로 파싱 시 주의
- int get nx; int get ny;
+ String get baseDate; String get baseTime; String get category; String get fcstDate; String get fcstTime; String get fcstValue; int get nx; int get ny;
 /// Create a copy of KmaUltraSrtFcstItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1639,7 +1636,6 @@ class _KmaUltraSrtFcstItem implements KmaUltraSrtFcstItem {
 @override final  String fcstDate;
 @override final  String fcstTime;
 @override final  String fcstValue;
-// String으로 오므로 파싱 시 주의
 @override final  int nx;
 @override final  int ny;
 

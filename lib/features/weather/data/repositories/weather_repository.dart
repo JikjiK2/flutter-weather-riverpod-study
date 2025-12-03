@@ -1,18 +1,19 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:dio/dio.dart';
 
 import 'package:ai_weather/features/weather/data/models/hourly_weather_model.dart';
 import 'package:ai_weather/features/weather/data/models/kma_ultra_srt_fcst_response_models.dart';
-import 'package:ai_weather/features/weather/data/data_sources/kma_ultra_srt_fcst_api_service.dart';
+import 'package:ai_weather/features/weather/data/datasources/kma_ultra_srt_fcst_api_service.dart';
 
 import 'package:ai_weather/features/weather/utils/pointToLatLng.dart';
 import 'package:ai_weather/features/weather/utils/KmaDateTime.dart';
 
 class WeatherRepository {
-  final KmaUltraSrtFcstApiService _apiService;
+  final KmaUltraSrtFcstApiService _kmaApiService;
 
-  WeatherRepository(this._apiService);
+  WeatherRepository(this._kmaApiService);
 
   Future<List<HourlyWeather>> getHourlyWeatherForCurrentLocation(
     double lat,
@@ -27,7 +28,7 @@ class WeatherRepository {
       DateTime.now(),
     );
     try {
-      final kmaResponse = await _apiService.getUltraSrtFcst(
+      final kmaResponse = await _kmaApiService.getUltraSrtFcst(
         authKey: dotenv.env['KMA_API_KEY']!,
         baseDate: baseDateTime['baseDate']!,
         baseTime: baseDateTime['baseTime']!,
@@ -82,16 +83,15 @@ class WeatherRepository {
       return hourlyWeatherList;
     } on DioException catch (e) {
       if (e.response != null) {
-        print("DioError Response: ${e.response!.data}");
         throw Exception(
           "네트워크 오류 (KMA API): ${e.response!.statusCode} - ${e.response!.statusMessage}",
         );
       } else {
-        print("DioError Request: ${e.requestOptions}");
+        debugPrint("DioError Request: ${e.requestOptions}");
         throw Exception("네트워크 연결 오류: ${e.message}");
       }
     } catch (e) {
-      print("날씨 데이터 로드 중 알 수 없는 오류 발생: $e");
+      debugPrint("날씨 데이터 로드 중 알 수 없는 오류 발생: $e");
       rethrow;
     }
   }
