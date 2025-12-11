@@ -11,9 +11,9 @@ Dio createAndConfigureDio() {
   if (kDebugMode) {
     dio.interceptors.add(
       PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
+        requestHeader: false,
+        requestBody: false,
+        responseBody: false,
         responseHeader: false,
         error: true,
         compact: true,

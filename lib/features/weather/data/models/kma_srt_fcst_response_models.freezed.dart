@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'kma_ultra_srt_fcst_response_models.dart';
+part of 'kma_srt_fcst_response_models.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,79 +13,79 @@ part of 'kma_ultra_srt_fcst_response_models.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$KmaUltraSrtFcstApiResponse {
+mixin _$KmaSrtFcstApiResponse {
 
-@JsonKey(name: 'response') KmaUltraSrtFcstApiResult get response;
-/// Create a copy of KmaUltraSrtFcstApiResponse
+@JsonKey(name: 'response') KmaSrtFcstApiResult get result;
+/// Create a copy of KmaSrtFcstApiResponse
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiResponseCopyWith<KmaUltraSrtFcstApiResponse> get copyWith => _$KmaUltraSrtFcstApiResponseCopyWithImpl<KmaUltraSrtFcstApiResponse>(this as KmaUltraSrtFcstApiResponse, _$identity);
+$KmaSrtFcstApiResponseCopyWith<KmaSrtFcstApiResponse> get copyWith => _$KmaSrtFcstApiResponseCopyWithImpl<KmaSrtFcstApiResponse>(this as KmaSrtFcstApiResponse, _$identity);
 
-  /// Serializes this KmaUltraSrtFcstApiResponse to a JSON map.
+  /// Serializes this KmaSrtFcstApiResponse to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaUltraSrtFcstApiResponse&&(identical(other.response, response) || other.response == response));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaSrtFcstApiResponse&&(identical(other.result, result) || other.result == result));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,response);
+int get hashCode => Object.hash(runtimeType,result);
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiResponse(response: $response)';
+  return 'KmaSrtFcstApiResponse(result: $result)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $KmaUltraSrtFcstApiResponseCopyWith<$Res>  {
-  factory $KmaUltraSrtFcstApiResponseCopyWith(KmaUltraSrtFcstApiResponse value, $Res Function(KmaUltraSrtFcstApiResponse) _then) = _$KmaUltraSrtFcstApiResponseCopyWithImpl;
+abstract mixin class $KmaSrtFcstApiResponseCopyWith<$Res>  {
+  factory $KmaSrtFcstApiResponseCopyWith(KmaSrtFcstApiResponse value, $Res Function(KmaSrtFcstApiResponse) _then) = _$KmaSrtFcstApiResponseCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'response') KmaUltraSrtFcstApiResult response
+@JsonKey(name: 'response') KmaSrtFcstApiResult result
 });
 
 
-$KmaUltraSrtFcstApiResultCopyWith<$Res> get response;
+$KmaSrtFcstApiResultCopyWith<$Res> get result;
 
 }
 /// @nodoc
-class _$KmaUltraSrtFcstApiResponseCopyWithImpl<$Res>
-    implements $KmaUltraSrtFcstApiResponseCopyWith<$Res> {
-  _$KmaUltraSrtFcstApiResponseCopyWithImpl(this._self, this._then);
+class _$KmaSrtFcstApiResponseCopyWithImpl<$Res>
+    implements $KmaSrtFcstApiResponseCopyWith<$Res> {
+  _$KmaSrtFcstApiResponseCopyWithImpl(this._self, this._then);
 
-  final KmaUltraSrtFcstApiResponse _self;
-  final $Res Function(KmaUltraSrtFcstApiResponse) _then;
+  final KmaSrtFcstApiResponse _self;
+  final $Res Function(KmaSrtFcstApiResponse) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiResponse
+/// Create a copy of KmaSrtFcstApiResponse
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? response = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? result = null,}) {
   return _then(_self.copyWith(
-response: null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
-as KmaUltraSrtFcstApiResult,
+result: null == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
+as KmaSrtFcstApiResult,
   ));
 }
-/// Create a copy of KmaUltraSrtFcstApiResponse
+/// Create a copy of KmaSrtFcstApiResponse
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiResultCopyWith<$Res> get response {
+$KmaSrtFcstApiResultCopyWith<$Res> get result {
   
-  return $KmaUltraSrtFcstApiResultCopyWith<$Res>(_self.response, (value) {
-    return _then(_self.copyWith(response: value));
+  return $KmaSrtFcstApiResultCopyWith<$Res>(_self.result, (value) {
+    return _then(_self.copyWith(result: value));
   });
 }
 }
 
 
-/// Adds pattern-matching-related methods to [KmaUltraSrtFcstApiResponse].
-extension KmaUltraSrtFcstApiResponsePatterns on KmaUltraSrtFcstApiResponse {
+/// Adds pattern-matching-related methods to [KmaSrtFcstApiResponse].
+extension KmaSrtFcstApiResponsePatterns on KmaSrtFcstApiResponse {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -98,10 +98,10 @@ extension KmaUltraSrtFcstApiResponsePatterns on KmaUltraSrtFcstApiResponse {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiResponse value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaSrtFcstApiResponse value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResponse() when $default != null:
+case _KmaSrtFcstApiResponse() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -120,10 +120,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiResponse value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaSrtFcstApiResponse value)  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResponse():
+case _KmaSrtFcstApiResponse():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -141,10 +141,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaUltraSrtFcstApiResponse value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaSrtFcstApiResponse value)?  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResponse() when $default != null:
+case _KmaSrtFcstApiResponse() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -162,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'response')  KmaUltraSrtFcstApiResult response)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'response')  KmaSrtFcstApiResult result)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResponse() when $default != null:
-return $default(_that.response);case _:
+case _KmaSrtFcstApiResponse() when $default != null:
+return $default(_that.result);case _:
   return orElse();
 
 }
@@ -183,10 +183,10 @@ return $default(_that.response);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'response')  KmaUltraSrtFcstApiResult response)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'response')  KmaSrtFcstApiResult result)  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResponse():
-return $default(_that.response);case _:
+case _KmaSrtFcstApiResponse():
+return $default(_that.result);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -203,10 +203,10 @@ return $default(_that.response);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'response')  KmaUltraSrtFcstApiResult response)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'response')  KmaSrtFcstApiResult result)?  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResponse() when $default != null:
-return $default(_that.response);case _:
+case _KmaSrtFcstApiResponse() when $default != null:
+return $default(_that.result);case _:
   return null;
 
 }
@@ -217,99 +217,99 @@ return $default(_that.response);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _KmaUltraSrtFcstApiResponse implements KmaUltraSrtFcstApiResponse {
-  const _KmaUltraSrtFcstApiResponse({@JsonKey(name: 'response') required this.response});
-  factory _KmaUltraSrtFcstApiResponse.fromJson(Map<String, dynamic> json) => _$KmaUltraSrtFcstApiResponseFromJson(json);
+class _KmaSrtFcstApiResponse implements KmaSrtFcstApiResponse {
+  const _KmaSrtFcstApiResponse({@JsonKey(name: 'response') required this.result});
+  factory _KmaSrtFcstApiResponse.fromJson(Map<String, dynamic> json) => _$KmaSrtFcstApiResponseFromJson(json);
 
-@override@JsonKey(name: 'response') final  KmaUltraSrtFcstApiResult response;
+@override@JsonKey(name: 'response') final  KmaSrtFcstApiResult result;
 
-/// Create a copy of KmaUltraSrtFcstApiResponse
+/// Create a copy of KmaSrtFcstApiResponse
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$KmaUltraSrtFcstApiResponseCopyWith<_KmaUltraSrtFcstApiResponse> get copyWith => __$KmaUltraSrtFcstApiResponseCopyWithImpl<_KmaUltraSrtFcstApiResponse>(this, _$identity);
+_$KmaSrtFcstApiResponseCopyWith<_KmaSrtFcstApiResponse> get copyWith => __$KmaSrtFcstApiResponseCopyWithImpl<_KmaSrtFcstApiResponse>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$KmaUltraSrtFcstApiResponseToJson(this, );
+  return _$KmaSrtFcstApiResponseToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaUltraSrtFcstApiResponse&&(identical(other.response, response) || other.response == response));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaSrtFcstApiResponse&&(identical(other.result, result) || other.result == result));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,response);
+int get hashCode => Object.hash(runtimeType,result);
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiResponse(response: $response)';
+  return 'KmaSrtFcstApiResponse(result: $result)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$KmaUltraSrtFcstApiResponseCopyWith<$Res> implements $KmaUltraSrtFcstApiResponseCopyWith<$Res> {
-  factory _$KmaUltraSrtFcstApiResponseCopyWith(_KmaUltraSrtFcstApiResponse value, $Res Function(_KmaUltraSrtFcstApiResponse) _then) = __$KmaUltraSrtFcstApiResponseCopyWithImpl;
+abstract mixin class _$KmaSrtFcstApiResponseCopyWith<$Res> implements $KmaSrtFcstApiResponseCopyWith<$Res> {
+  factory _$KmaSrtFcstApiResponseCopyWith(_KmaSrtFcstApiResponse value, $Res Function(_KmaSrtFcstApiResponse) _then) = __$KmaSrtFcstApiResponseCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'response') KmaUltraSrtFcstApiResult response
+@JsonKey(name: 'response') KmaSrtFcstApiResult result
 });
 
 
-@override $KmaUltraSrtFcstApiResultCopyWith<$Res> get response;
+@override $KmaSrtFcstApiResultCopyWith<$Res> get result;
 
 }
 /// @nodoc
-class __$KmaUltraSrtFcstApiResponseCopyWithImpl<$Res>
-    implements _$KmaUltraSrtFcstApiResponseCopyWith<$Res> {
-  __$KmaUltraSrtFcstApiResponseCopyWithImpl(this._self, this._then);
+class __$KmaSrtFcstApiResponseCopyWithImpl<$Res>
+    implements _$KmaSrtFcstApiResponseCopyWith<$Res> {
+  __$KmaSrtFcstApiResponseCopyWithImpl(this._self, this._then);
 
-  final _KmaUltraSrtFcstApiResponse _self;
-  final $Res Function(_KmaUltraSrtFcstApiResponse) _then;
+  final _KmaSrtFcstApiResponse _self;
+  final $Res Function(_KmaSrtFcstApiResponse) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiResponse
+/// Create a copy of KmaSrtFcstApiResponse
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? response = null,}) {
-  return _then(_KmaUltraSrtFcstApiResponse(
-response: null == response ? _self.response : response // ignore: cast_nullable_to_non_nullable
-as KmaUltraSrtFcstApiResult,
+@override @pragma('vm:prefer-inline') $Res call({Object? result = null,}) {
+  return _then(_KmaSrtFcstApiResponse(
+result: null == result ? _self.result : result // ignore: cast_nullable_to_non_nullable
+as KmaSrtFcstApiResult,
   ));
 }
 
-/// Create a copy of KmaUltraSrtFcstApiResponse
+/// Create a copy of KmaSrtFcstApiResponse
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiResultCopyWith<$Res> get response {
+$KmaSrtFcstApiResultCopyWith<$Res> get result {
   
-  return $KmaUltraSrtFcstApiResultCopyWith<$Res>(_self.response, (value) {
-    return _then(_self.copyWith(response: value));
+  return $KmaSrtFcstApiResultCopyWith<$Res>(_self.result, (value) {
+    return _then(_self.copyWith(result: value));
   });
 }
 }
 
 
 /// @nodoc
-mixin _$KmaUltraSrtFcstApiResult {
+mixin _$KmaSrtFcstApiResult {
 
-@JsonKey(name: 'header') KmaUltraSrtFcstApiHeader get header;@JsonKey(name: 'body') KmaUltraSrtFcstApiBody get body;
-/// Create a copy of KmaUltraSrtFcstApiResult
+@JsonKey(name: 'header') KmaSrtFcstApiHeader get header;@JsonKey(name: 'body') KmaSrtFcstApiBody get body;
+/// Create a copy of KmaSrtFcstApiResult
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiResultCopyWith<KmaUltraSrtFcstApiResult> get copyWith => _$KmaUltraSrtFcstApiResultCopyWithImpl<KmaUltraSrtFcstApiResult>(this as KmaUltraSrtFcstApiResult, _$identity);
+$KmaSrtFcstApiResultCopyWith<KmaSrtFcstApiResult> get copyWith => _$KmaSrtFcstApiResultCopyWithImpl<KmaSrtFcstApiResult>(this as KmaSrtFcstApiResult, _$identity);
 
-  /// Serializes this KmaUltraSrtFcstApiResult to a JSON map.
+  /// Serializes this KmaSrtFcstApiResult to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaUltraSrtFcstApiResult&&(identical(other.header, header) || other.header == header)&&(identical(other.body, body) || other.body == body));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaSrtFcstApiResult&&(identical(other.header, header) || other.header == header)&&(identical(other.body, body) || other.body == body));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -318,65 +318,65 @@ int get hashCode => Object.hash(runtimeType,header,body);
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiResult(header: $header, body: $body)';
+  return 'KmaSrtFcstApiResult(header: $header, body: $body)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $KmaUltraSrtFcstApiResultCopyWith<$Res>  {
-  factory $KmaUltraSrtFcstApiResultCopyWith(KmaUltraSrtFcstApiResult value, $Res Function(KmaUltraSrtFcstApiResult) _then) = _$KmaUltraSrtFcstApiResultCopyWithImpl;
+abstract mixin class $KmaSrtFcstApiResultCopyWith<$Res>  {
+  factory $KmaSrtFcstApiResultCopyWith(KmaSrtFcstApiResult value, $Res Function(KmaSrtFcstApiResult) _then) = _$KmaSrtFcstApiResultCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'header') KmaUltraSrtFcstApiHeader header,@JsonKey(name: 'body') KmaUltraSrtFcstApiBody body
+@JsonKey(name: 'header') KmaSrtFcstApiHeader header,@JsonKey(name: 'body') KmaSrtFcstApiBody body
 });
 
 
-$KmaUltraSrtFcstApiHeaderCopyWith<$Res> get header;$KmaUltraSrtFcstApiBodyCopyWith<$Res> get body;
+$KmaSrtFcstApiHeaderCopyWith<$Res> get header;$KmaSrtFcstApiBodyCopyWith<$Res> get body;
 
 }
 /// @nodoc
-class _$KmaUltraSrtFcstApiResultCopyWithImpl<$Res>
-    implements $KmaUltraSrtFcstApiResultCopyWith<$Res> {
-  _$KmaUltraSrtFcstApiResultCopyWithImpl(this._self, this._then);
+class _$KmaSrtFcstApiResultCopyWithImpl<$Res>
+    implements $KmaSrtFcstApiResultCopyWith<$Res> {
+  _$KmaSrtFcstApiResultCopyWithImpl(this._self, this._then);
 
-  final KmaUltraSrtFcstApiResult _self;
-  final $Res Function(KmaUltraSrtFcstApiResult) _then;
+  final KmaSrtFcstApiResult _self;
+  final $Res Function(KmaSrtFcstApiResult) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiResult
+/// Create a copy of KmaSrtFcstApiResult
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? header = null,Object? body = null,}) {
   return _then(_self.copyWith(
 header: null == header ? _self.header : header // ignore: cast_nullable_to_non_nullable
-as KmaUltraSrtFcstApiHeader,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as KmaUltraSrtFcstApiBody,
+as KmaSrtFcstApiHeader,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
+as KmaSrtFcstApiBody,
   ));
 }
-/// Create a copy of KmaUltraSrtFcstApiResult
+/// Create a copy of KmaSrtFcstApiResult
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiHeaderCopyWith<$Res> get header {
+$KmaSrtFcstApiHeaderCopyWith<$Res> get header {
   
-  return $KmaUltraSrtFcstApiHeaderCopyWith<$Res>(_self.header, (value) {
+  return $KmaSrtFcstApiHeaderCopyWith<$Res>(_self.header, (value) {
     return _then(_self.copyWith(header: value));
   });
-}/// Create a copy of KmaUltraSrtFcstApiResult
+}/// Create a copy of KmaSrtFcstApiResult
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiBodyCopyWith<$Res> get body {
+$KmaSrtFcstApiBodyCopyWith<$Res> get body {
   
-  return $KmaUltraSrtFcstApiBodyCopyWith<$Res>(_self.body, (value) {
+  return $KmaSrtFcstApiBodyCopyWith<$Res>(_self.body, (value) {
     return _then(_self.copyWith(body: value));
   });
 }
 }
 
 
-/// Adds pattern-matching-related methods to [KmaUltraSrtFcstApiResult].
-extension KmaUltraSrtFcstApiResultPatterns on KmaUltraSrtFcstApiResult {
+/// Adds pattern-matching-related methods to [KmaSrtFcstApiResult].
+extension KmaSrtFcstApiResultPatterns on KmaSrtFcstApiResult {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -389,10 +389,10 @@ extension KmaUltraSrtFcstApiResultPatterns on KmaUltraSrtFcstApiResult {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiResult value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaSrtFcstApiResult value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResult() when $default != null:
+case _KmaSrtFcstApiResult() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -411,10 +411,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiResult value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaSrtFcstApiResult value)  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResult():
+case _KmaSrtFcstApiResult():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -432,10 +432,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaUltraSrtFcstApiResult value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaSrtFcstApiResult value)?  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResult() when $default != null:
+case _KmaSrtFcstApiResult() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -453,9 +453,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'header')  KmaUltraSrtFcstApiHeader header, @JsonKey(name: 'body')  KmaUltraSrtFcstApiBody body)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'header')  KmaSrtFcstApiHeader header, @JsonKey(name: 'body')  KmaSrtFcstApiBody body)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResult() when $default != null:
+case _KmaSrtFcstApiResult() when $default != null:
 return $default(_that.header,_that.body);case _:
   return orElse();
 
@@ -474,9 +474,9 @@ return $default(_that.header,_that.body);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'header')  KmaUltraSrtFcstApiHeader header, @JsonKey(name: 'body')  KmaUltraSrtFcstApiBody body)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'header')  KmaSrtFcstApiHeader header, @JsonKey(name: 'body')  KmaSrtFcstApiBody body)  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResult():
+case _KmaSrtFcstApiResult():
 return $default(_that.header,_that.body);case _:
   throw StateError('Unexpected subclass');
 
@@ -494,9 +494,9 @@ return $default(_that.header,_that.body);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'header')  KmaUltraSrtFcstApiHeader header, @JsonKey(name: 'body')  KmaUltraSrtFcstApiBody body)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'header')  KmaSrtFcstApiHeader header, @JsonKey(name: 'body')  KmaSrtFcstApiBody body)?  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiResult() when $default != null:
+case _KmaSrtFcstApiResult() when $default != null:
 return $default(_that.header,_that.body);case _:
   return null;
 
@@ -508,27 +508,27 @@ return $default(_that.header,_that.body);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _KmaUltraSrtFcstApiResult implements KmaUltraSrtFcstApiResult {
-  const _KmaUltraSrtFcstApiResult({@JsonKey(name: 'header') required this.header, @JsonKey(name: 'body') required this.body});
-  factory _KmaUltraSrtFcstApiResult.fromJson(Map<String, dynamic> json) => _$KmaUltraSrtFcstApiResultFromJson(json);
+class _KmaSrtFcstApiResult implements KmaSrtFcstApiResult {
+  const _KmaSrtFcstApiResult({@JsonKey(name: 'header') required this.header, @JsonKey(name: 'body') required this.body});
+  factory _KmaSrtFcstApiResult.fromJson(Map<String, dynamic> json) => _$KmaSrtFcstApiResultFromJson(json);
 
-@override@JsonKey(name: 'header') final  KmaUltraSrtFcstApiHeader header;
-@override@JsonKey(name: 'body') final  KmaUltraSrtFcstApiBody body;
+@override@JsonKey(name: 'header') final  KmaSrtFcstApiHeader header;
+@override@JsonKey(name: 'body') final  KmaSrtFcstApiBody body;
 
-/// Create a copy of KmaUltraSrtFcstApiResult
+/// Create a copy of KmaSrtFcstApiResult
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$KmaUltraSrtFcstApiResultCopyWith<_KmaUltraSrtFcstApiResult> get copyWith => __$KmaUltraSrtFcstApiResultCopyWithImpl<_KmaUltraSrtFcstApiResult>(this, _$identity);
+_$KmaSrtFcstApiResultCopyWith<_KmaSrtFcstApiResult> get copyWith => __$KmaSrtFcstApiResultCopyWithImpl<_KmaSrtFcstApiResult>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$KmaUltraSrtFcstApiResultToJson(this, );
+  return _$KmaSrtFcstApiResultToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaUltraSrtFcstApiResult&&(identical(other.header, header) || other.header == header)&&(identical(other.body, body) || other.body == body));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaSrtFcstApiResult&&(identical(other.header, header) || other.header == header)&&(identical(other.body, body) || other.body == body));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -537,58 +537,58 @@ int get hashCode => Object.hash(runtimeType,header,body);
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiResult(header: $header, body: $body)';
+  return 'KmaSrtFcstApiResult(header: $header, body: $body)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$KmaUltraSrtFcstApiResultCopyWith<$Res> implements $KmaUltraSrtFcstApiResultCopyWith<$Res> {
-  factory _$KmaUltraSrtFcstApiResultCopyWith(_KmaUltraSrtFcstApiResult value, $Res Function(_KmaUltraSrtFcstApiResult) _then) = __$KmaUltraSrtFcstApiResultCopyWithImpl;
+abstract mixin class _$KmaSrtFcstApiResultCopyWith<$Res> implements $KmaSrtFcstApiResultCopyWith<$Res> {
+  factory _$KmaSrtFcstApiResultCopyWith(_KmaSrtFcstApiResult value, $Res Function(_KmaSrtFcstApiResult) _then) = __$KmaSrtFcstApiResultCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'header') KmaUltraSrtFcstApiHeader header,@JsonKey(name: 'body') KmaUltraSrtFcstApiBody body
+@JsonKey(name: 'header') KmaSrtFcstApiHeader header,@JsonKey(name: 'body') KmaSrtFcstApiBody body
 });
 
 
-@override $KmaUltraSrtFcstApiHeaderCopyWith<$Res> get header;@override $KmaUltraSrtFcstApiBodyCopyWith<$Res> get body;
+@override $KmaSrtFcstApiHeaderCopyWith<$Res> get header;@override $KmaSrtFcstApiBodyCopyWith<$Res> get body;
 
 }
 /// @nodoc
-class __$KmaUltraSrtFcstApiResultCopyWithImpl<$Res>
-    implements _$KmaUltraSrtFcstApiResultCopyWith<$Res> {
-  __$KmaUltraSrtFcstApiResultCopyWithImpl(this._self, this._then);
+class __$KmaSrtFcstApiResultCopyWithImpl<$Res>
+    implements _$KmaSrtFcstApiResultCopyWith<$Res> {
+  __$KmaSrtFcstApiResultCopyWithImpl(this._self, this._then);
 
-  final _KmaUltraSrtFcstApiResult _self;
-  final $Res Function(_KmaUltraSrtFcstApiResult) _then;
+  final _KmaSrtFcstApiResult _self;
+  final $Res Function(_KmaSrtFcstApiResult) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiResult
+/// Create a copy of KmaSrtFcstApiResult
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? header = null,Object? body = null,}) {
-  return _then(_KmaUltraSrtFcstApiResult(
+  return _then(_KmaSrtFcstApiResult(
 header: null == header ? _self.header : header // ignore: cast_nullable_to_non_nullable
-as KmaUltraSrtFcstApiHeader,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as KmaUltraSrtFcstApiBody,
+as KmaSrtFcstApiHeader,body: null == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
+as KmaSrtFcstApiBody,
   ));
 }
 
-/// Create a copy of KmaUltraSrtFcstApiResult
+/// Create a copy of KmaSrtFcstApiResult
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiHeaderCopyWith<$Res> get header {
+$KmaSrtFcstApiHeaderCopyWith<$Res> get header {
   
-  return $KmaUltraSrtFcstApiHeaderCopyWith<$Res>(_self.header, (value) {
+  return $KmaSrtFcstApiHeaderCopyWith<$Res>(_self.header, (value) {
     return _then(_self.copyWith(header: value));
   });
-}/// Create a copy of KmaUltraSrtFcstApiResult
+}/// Create a copy of KmaSrtFcstApiResult
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiBodyCopyWith<$Res> get body {
+$KmaSrtFcstApiBodyCopyWith<$Res> get body {
   
-  return $KmaUltraSrtFcstApiBodyCopyWith<$Res>(_self.body, (value) {
+  return $KmaSrtFcstApiBodyCopyWith<$Res>(_self.body, (value) {
     return _then(_self.copyWith(body: value));
   });
 }
@@ -596,22 +596,22 @@ $KmaUltraSrtFcstApiBodyCopyWith<$Res> get body {
 
 
 /// @nodoc
-mixin _$KmaUltraSrtFcstApiHeader {
+mixin _$KmaSrtFcstApiHeader {
 
 @JsonKey(name: 'resultCode') String get resultCode;@JsonKey(name: 'resultMsg') String get resultMsg;
-/// Create a copy of KmaUltraSrtFcstApiHeader
+/// Create a copy of KmaSrtFcstApiHeader
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiHeaderCopyWith<KmaUltraSrtFcstApiHeader> get copyWith => _$KmaUltraSrtFcstApiHeaderCopyWithImpl<KmaUltraSrtFcstApiHeader>(this as KmaUltraSrtFcstApiHeader, _$identity);
+$KmaSrtFcstApiHeaderCopyWith<KmaSrtFcstApiHeader> get copyWith => _$KmaSrtFcstApiHeaderCopyWithImpl<KmaSrtFcstApiHeader>(this as KmaSrtFcstApiHeader, _$identity);
 
-  /// Serializes this KmaUltraSrtFcstApiHeader to a JSON map.
+  /// Serializes this KmaSrtFcstApiHeader to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaUltraSrtFcstApiHeader&&(identical(other.resultCode, resultCode) || other.resultCode == resultCode)&&(identical(other.resultMsg, resultMsg) || other.resultMsg == resultMsg));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaSrtFcstApiHeader&&(identical(other.resultCode, resultCode) || other.resultCode == resultCode)&&(identical(other.resultMsg, resultMsg) || other.resultMsg == resultMsg));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -620,15 +620,15 @@ int get hashCode => Object.hash(runtimeType,resultCode,resultMsg);
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiHeader(resultCode: $resultCode, resultMsg: $resultMsg)';
+  return 'KmaSrtFcstApiHeader(resultCode: $resultCode, resultMsg: $resultMsg)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $KmaUltraSrtFcstApiHeaderCopyWith<$Res>  {
-  factory $KmaUltraSrtFcstApiHeaderCopyWith(KmaUltraSrtFcstApiHeader value, $Res Function(KmaUltraSrtFcstApiHeader) _then) = _$KmaUltraSrtFcstApiHeaderCopyWithImpl;
+abstract mixin class $KmaSrtFcstApiHeaderCopyWith<$Res>  {
+  factory $KmaSrtFcstApiHeaderCopyWith(KmaSrtFcstApiHeader value, $Res Function(KmaSrtFcstApiHeader) _then) = _$KmaSrtFcstApiHeaderCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'resultCode') String resultCode,@JsonKey(name: 'resultMsg') String resultMsg
@@ -639,14 +639,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$KmaUltraSrtFcstApiHeaderCopyWithImpl<$Res>
-    implements $KmaUltraSrtFcstApiHeaderCopyWith<$Res> {
-  _$KmaUltraSrtFcstApiHeaderCopyWithImpl(this._self, this._then);
+class _$KmaSrtFcstApiHeaderCopyWithImpl<$Res>
+    implements $KmaSrtFcstApiHeaderCopyWith<$Res> {
+  _$KmaSrtFcstApiHeaderCopyWithImpl(this._self, this._then);
 
-  final KmaUltraSrtFcstApiHeader _self;
-  final $Res Function(KmaUltraSrtFcstApiHeader) _then;
+  final KmaSrtFcstApiHeader _self;
+  final $Res Function(KmaSrtFcstApiHeader) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiHeader
+/// Create a copy of KmaSrtFcstApiHeader
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? resultCode = null,Object? resultMsg = null,}) {
   return _then(_self.copyWith(
@@ -659,8 +659,8 @@ as String,
 }
 
 
-/// Adds pattern-matching-related methods to [KmaUltraSrtFcstApiHeader].
-extension KmaUltraSrtFcstApiHeaderPatterns on KmaUltraSrtFcstApiHeader {
+/// Adds pattern-matching-related methods to [KmaSrtFcstApiHeader].
+extension KmaSrtFcstApiHeaderPatterns on KmaSrtFcstApiHeader {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -673,10 +673,10 @@ extension KmaUltraSrtFcstApiHeaderPatterns on KmaUltraSrtFcstApiHeader {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiHeader value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaSrtFcstApiHeader value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiHeader() when $default != null:
+case _KmaSrtFcstApiHeader() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -695,10 +695,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiHeader value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaSrtFcstApiHeader value)  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiHeader():
+case _KmaSrtFcstApiHeader():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -716,10 +716,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaUltraSrtFcstApiHeader value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaSrtFcstApiHeader value)?  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiHeader() when $default != null:
+case _KmaSrtFcstApiHeader() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -739,7 +739,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'resultCode')  String resultCode, @JsonKey(name: 'resultMsg')  String resultMsg)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiHeader() when $default != null:
+case _KmaSrtFcstApiHeader() when $default != null:
 return $default(_that.resultCode,_that.resultMsg);case _:
   return orElse();
 
@@ -760,7 +760,7 @@ return $default(_that.resultCode,_that.resultMsg);case _:
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'resultCode')  String resultCode, @JsonKey(name: 'resultMsg')  String resultMsg)  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiHeader():
+case _KmaSrtFcstApiHeader():
 return $default(_that.resultCode,_that.resultMsg);case _:
   throw StateError('Unexpected subclass');
 
@@ -780,7 +780,7 @@ return $default(_that.resultCode,_that.resultMsg);case _:
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'resultCode')  String resultCode, @JsonKey(name: 'resultMsg')  String resultMsg)?  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiHeader() when $default != null:
+case _KmaSrtFcstApiHeader() when $default != null:
 return $default(_that.resultCode,_that.resultMsg);case _:
   return null;
 
@@ -792,27 +792,27 @@ return $default(_that.resultCode,_that.resultMsg);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _KmaUltraSrtFcstApiHeader implements KmaUltraSrtFcstApiHeader {
-  const _KmaUltraSrtFcstApiHeader({@JsonKey(name: 'resultCode') required this.resultCode, @JsonKey(name: 'resultMsg') required this.resultMsg});
-  factory _KmaUltraSrtFcstApiHeader.fromJson(Map<String, dynamic> json) => _$KmaUltraSrtFcstApiHeaderFromJson(json);
+class _KmaSrtFcstApiHeader implements KmaSrtFcstApiHeader {
+  const _KmaSrtFcstApiHeader({@JsonKey(name: 'resultCode') required this.resultCode, @JsonKey(name: 'resultMsg') required this.resultMsg});
+  factory _KmaSrtFcstApiHeader.fromJson(Map<String, dynamic> json) => _$KmaSrtFcstApiHeaderFromJson(json);
 
 @override@JsonKey(name: 'resultCode') final  String resultCode;
 @override@JsonKey(name: 'resultMsg') final  String resultMsg;
 
-/// Create a copy of KmaUltraSrtFcstApiHeader
+/// Create a copy of KmaSrtFcstApiHeader
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$KmaUltraSrtFcstApiHeaderCopyWith<_KmaUltraSrtFcstApiHeader> get copyWith => __$KmaUltraSrtFcstApiHeaderCopyWithImpl<_KmaUltraSrtFcstApiHeader>(this, _$identity);
+_$KmaSrtFcstApiHeaderCopyWith<_KmaSrtFcstApiHeader> get copyWith => __$KmaSrtFcstApiHeaderCopyWithImpl<_KmaSrtFcstApiHeader>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$KmaUltraSrtFcstApiHeaderToJson(this, );
+  return _$KmaSrtFcstApiHeaderToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaUltraSrtFcstApiHeader&&(identical(other.resultCode, resultCode) || other.resultCode == resultCode)&&(identical(other.resultMsg, resultMsg) || other.resultMsg == resultMsg));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaSrtFcstApiHeader&&(identical(other.resultCode, resultCode) || other.resultCode == resultCode)&&(identical(other.resultMsg, resultMsg) || other.resultMsg == resultMsg));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -821,15 +821,15 @@ int get hashCode => Object.hash(runtimeType,resultCode,resultMsg);
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiHeader(resultCode: $resultCode, resultMsg: $resultMsg)';
+  return 'KmaSrtFcstApiHeader(resultCode: $resultCode, resultMsg: $resultMsg)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$KmaUltraSrtFcstApiHeaderCopyWith<$Res> implements $KmaUltraSrtFcstApiHeaderCopyWith<$Res> {
-  factory _$KmaUltraSrtFcstApiHeaderCopyWith(_KmaUltraSrtFcstApiHeader value, $Res Function(_KmaUltraSrtFcstApiHeader) _then) = __$KmaUltraSrtFcstApiHeaderCopyWithImpl;
+abstract mixin class _$KmaSrtFcstApiHeaderCopyWith<$Res> implements $KmaSrtFcstApiHeaderCopyWith<$Res> {
+  factory _$KmaSrtFcstApiHeaderCopyWith(_KmaSrtFcstApiHeader value, $Res Function(_KmaSrtFcstApiHeader) _then) = __$KmaSrtFcstApiHeaderCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'resultCode') String resultCode,@JsonKey(name: 'resultMsg') String resultMsg
@@ -840,17 +840,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$KmaUltraSrtFcstApiHeaderCopyWithImpl<$Res>
-    implements _$KmaUltraSrtFcstApiHeaderCopyWith<$Res> {
-  __$KmaUltraSrtFcstApiHeaderCopyWithImpl(this._self, this._then);
+class __$KmaSrtFcstApiHeaderCopyWithImpl<$Res>
+    implements _$KmaSrtFcstApiHeaderCopyWith<$Res> {
+  __$KmaSrtFcstApiHeaderCopyWithImpl(this._self, this._then);
 
-  final _KmaUltraSrtFcstApiHeader _self;
-  final $Res Function(_KmaUltraSrtFcstApiHeader) _then;
+  final _KmaSrtFcstApiHeader _self;
+  final $Res Function(_KmaSrtFcstApiHeader) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiHeader
+/// Create a copy of KmaSrtFcstApiHeader
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? resultCode = null,Object? resultMsg = null,}) {
-  return _then(_KmaUltraSrtFcstApiHeader(
+  return _then(_KmaSrtFcstApiHeader(
 resultCode: null == resultCode ? _self.resultCode : resultCode // ignore: cast_nullable_to_non_nullable
 as String,resultMsg: null == resultMsg ? _self.resultMsg : resultMsg // ignore: cast_nullable_to_non_nullable
 as String,
@@ -862,22 +862,22 @@ as String,
 
 
 /// @nodoc
-mixin _$KmaUltraSrtFcstApiBody {
+mixin _$KmaSrtFcstApiBody {
 
-@JsonKey(name: 'dataType') String get dataType;@JsonKey(name: 'items') KmaUltraSrtFcstApiItems get items;@JsonKey(name: 'pageNo') int get pageNo;@JsonKey(name: 'numOfRows') int get numOfRows;@JsonKey(name: 'totalCount') int get totalCount;
-/// Create a copy of KmaUltraSrtFcstApiBody
+@JsonKey(name: 'dataType') String get dataType;@JsonKey(name: 'items') KmaSrtFcstApiItems get items;@JsonKey(name: 'pageNo') int get pageNo;@JsonKey(name: 'numOfRows') int get numOfRows;@JsonKey(name: 'totalCount') int get totalCount;
+/// Create a copy of KmaSrtFcstApiBody
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiBodyCopyWith<KmaUltraSrtFcstApiBody> get copyWith => _$KmaUltraSrtFcstApiBodyCopyWithImpl<KmaUltraSrtFcstApiBody>(this as KmaUltraSrtFcstApiBody, _$identity);
+$KmaSrtFcstApiBodyCopyWith<KmaSrtFcstApiBody> get copyWith => _$KmaSrtFcstApiBodyCopyWithImpl<KmaSrtFcstApiBody>(this as KmaSrtFcstApiBody, _$identity);
 
-  /// Serializes this KmaUltraSrtFcstApiBody to a JSON map.
+  /// Serializes this KmaSrtFcstApiBody to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaUltraSrtFcstApiBody&&(identical(other.dataType, dataType) || other.dataType == dataType)&&(identical(other.items, items) || other.items == items)&&(identical(other.pageNo, pageNo) || other.pageNo == pageNo)&&(identical(other.numOfRows, numOfRows) || other.numOfRows == numOfRows)&&(identical(other.totalCount, totalCount) || other.totalCount == totalCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaSrtFcstApiBody&&(identical(other.dataType, dataType) || other.dataType == dataType)&&(identical(other.items, items) || other.items == items)&&(identical(other.pageNo, pageNo) || other.pageNo == pageNo)&&(identical(other.numOfRows, numOfRows) || other.numOfRows == numOfRows)&&(identical(other.totalCount, totalCount) || other.totalCount == totalCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -886,59 +886,59 @@ int get hashCode => Object.hash(runtimeType,dataType,items,pageNo,numOfRows,tota
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiBody(dataType: $dataType, items: $items, pageNo: $pageNo, numOfRows: $numOfRows, totalCount: $totalCount)';
+  return 'KmaSrtFcstApiBody(dataType: $dataType, items: $items, pageNo: $pageNo, numOfRows: $numOfRows, totalCount: $totalCount)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $KmaUltraSrtFcstApiBodyCopyWith<$Res>  {
-  factory $KmaUltraSrtFcstApiBodyCopyWith(KmaUltraSrtFcstApiBody value, $Res Function(KmaUltraSrtFcstApiBody) _then) = _$KmaUltraSrtFcstApiBodyCopyWithImpl;
+abstract mixin class $KmaSrtFcstApiBodyCopyWith<$Res>  {
+  factory $KmaSrtFcstApiBodyCopyWith(KmaSrtFcstApiBody value, $Res Function(KmaSrtFcstApiBody) _then) = _$KmaSrtFcstApiBodyCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'dataType') String dataType,@JsonKey(name: 'items') KmaUltraSrtFcstApiItems items,@JsonKey(name: 'pageNo') int pageNo,@JsonKey(name: 'numOfRows') int numOfRows,@JsonKey(name: 'totalCount') int totalCount
+@JsonKey(name: 'dataType') String dataType,@JsonKey(name: 'items') KmaSrtFcstApiItems items,@JsonKey(name: 'pageNo') int pageNo,@JsonKey(name: 'numOfRows') int numOfRows,@JsonKey(name: 'totalCount') int totalCount
 });
 
 
-$KmaUltraSrtFcstApiItemsCopyWith<$Res> get items;
+$KmaSrtFcstApiItemsCopyWith<$Res> get items;
 
 }
 /// @nodoc
-class _$KmaUltraSrtFcstApiBodyCopyWithImpl<$Res>
-    implements $KmaUltraSrtFcstApiBodyCopyWith<$Res> {
-  _$KmaUltraSrtFcstApiBodyCopyWithImpl(this._self, this._then);
+class _$KmaSrtFcstApiBodyCopyWithImpl<$Res>
+    implements $KmaSrtFcstApiBodyCopyWith<$Res> {
+  _$KmaSrtFcstApiBodyCopyWithImpl(this._self, this._then);
 
-  final KmaUltraSrtFcstApiBody _self;
-  final $Res Function(KmaUltraSrtFcstApiBody) _then;
+  final KmaSrtFcstApiBody _self;
+  final $Res Function(KmaSrtFcstApiBody) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiBody
+/// Create a copy of KmaSrtFcstApiBody
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? dataType = null,Object? items = null,Object? pageNo = null,Object? numOfRows = null,Object? totalCount = null,}) {
   return _then(_self.copyWith(
 dataType: null == dataType ? _self.dataType : dataType // ignore: cast_nullable_to_non_nullable
 as String,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
-as KmaUltraSrtFcstApiItems,pageNo: null == pageNo ? _self.pageNo : pageNo // ignore: cast_nullable_to_non_nullable
+as KmaSrtFcstApiItems,pageNo: null == pageNo ? _self.pageNo : pageNo // ignore: cast_nullable_to_non_nullable
 as int,numOfRows: null == numOfRows ? _self.numOfRows : numOfRows // ignore: cast_nullable_to_non_nullable
 as int,totalCount: null == totalCount ? _self.totalCount : totalCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
-/// Create a copy of KmaUltraSrtFcstApiBody
+/// Create a copy of KmaSrtFcstApiBody
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiItemsCopyWith<$Res> get items {
+$KmaSrtFcstApiItemsCopyWith<$Res> get items {
   
-  return $KmaUltraSrtFcstApiItemsCopyWith<$Res>(_self.items, (value) {
+  return $KmaSrtFcstApiItemsCopyWith<$Res>(_self.items, (value) {
     return _then(_self.copyWith(items: value));
   });
 }
 }
 
 
-/// Adds pattern-matching-related methods to [KmaUltraSrtFcstApiBody].
-extension KmaUltraSrtFcstApiBodyPatterns on KmaUltraSrtFcstApiBody {
+/// Adds pattern-matching-related methods to [KmaSrtFcstApiBody].
+extension KmaSrtFcstApiBodyPatterns on KmaSrtFcstApiBody {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -951,10 +951,10 @@ extension KmaUltraSrtFcstApiBodyPatterns on KmaUltraSrtFcstApiBody {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiBody value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaSrtFcstApiBody value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiBody() when $default != null:
+case _KmaSrtFcstApiBody() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -973,10 +973,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiBody value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaSrtFcstApiBody value)  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiBody():
+case _KmaSrtFcstApiBody():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -994,10 +994,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaUltraSrtFcstApiBody value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaSrtFcstApiBody value)?  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiBody() when $default != null:
+case _KmaSrtFcstApiBody() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -1015,9 +1015,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'dataType')  String dataType, @JsonKey(name: 'items')  KmaUltraSrtFcstApiItems items, @JsonKey(name: 'pageNo')  int pageNo, @JsonKey(name: 'numOfRows')  int numOfRows, @JsonKey(name: 'totalCount')  int totalCount)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'dataType')  String dataType, @JsonKey(name: 'items')  KmaSrtFcstApiItems items, @JsonKey(name: 'pageNo')  int pageNo, @JsonKey(name: 'numOfRows')  int numOfRows, @JsonKey(name: 'totalCount')  int totalCount)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiBody() when $default != null:
+case _KmaSrtFcstApiBody() when $default != null:
 return $default(_that.dataType,_that.items,_that.pageNo,_that.numOfRows,_that.totalCount);case _:
   return orElse();
 
@@ -1036,9 +1036,9 @@ return $default(_that.dataType,_that.items,_that.pageNo,_that.numOfRows,_that.to
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'dataType')  String dataType, @JsonKey(name: 'items')  KmaUltraSrtFcstApiItems items, @JsonKey(name: 'pageNo')  int pageNo, @JsonKey(name: 'numOfRows')  int numOfRows, @JsonKey(name: 'totalCount')  int totalCount)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'dataType')  String dataType, @JsonKey(name: 'items')  KmaSrtFcstApiItems items, @JsonKey(name: 'pageNo')  int pageNo, @JsonKey(name: 'numOfRows')  int numOfRows, @JsonKey(name: 'totalCount')  int totalCount)  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiBody():
+case _KmaSrtFcstApiBody():
 return $default(_that.dataType,_that.items,_that.pageNo,_that.numOfRows,_that.totalCount);case _:
   throw StateError('Unexpected subclass');
 
@@ -1056,9 +1056,9 @@ return $default(_that.dataType,_that.items,_that.pageNo,_that.numOfRows,_that.to
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'dataType')  String dataType, @JsonKey(name: 'items')  KmaUltraSrtFcstApiItems items, @JsonKey(name: 'pageNo')  int pageNo, @JsonKey(name: 'numOfRows')  int numOfRows, @JsonKey(name: 'totalCount')  int totalCount)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'dataType')  String dataType, @JsonKey(name: 'items')  KmaSrtFcstApiItems items, @JsonKey(name: 'pageNo')  int pageNo, @JsonKey(name: 'numOfRows')  int numOfRows, @JsonKey(name: 'totalCount')  int totalCount)?  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiBody() when $default != null:
+case _KmaSrtFcstApiBody() when $default != null:
 return $default(_that.dataType,_that.items,_that.pageNo,_that.numOfRows,_that.totalCount);case _:
   return null;
 
@@ -1070,30 +1070,30 @@ return $default(_that.dataType,_that.items,_that.pageNo,_that.numOfRows,_that.to
 /// @nodoc
 @JsonSerializable()
 
-class _KmaUltraSrtFcstApiBody implements KmaUltraSrtFcstApiBody {
-  const _KmaUltraSrtFcstApiBody({@JsonKey(name: 'dataType') required this.dataType, @JsonKey(name: 'items') required this.items, @JsonKey(name: 'pageNo') required this.pageNo, @JsonKey(name: 'numOfRows') required this.numOfRows, @JsonKey(name: 'totalCount') required this.totalCount});
-  factory _KmaUltraSrtFcstApiBody.fromJson(Map<String, dynamic> json) => _$KmaUltraSrtFcstApiBodyFromJson(json);
+class _KmaSrtFcstApiBody implements KmaSrtFcstApiBody {
+  const _KmaSrtFcstApiBody({@JsonKey(name: 'dataType') required this.dataType, @JsonKey(name: 'items') required this.items, @JsonKey(name: 'pageNo') required this.pageNo, @JsonKey(name: 'numOfRows') required this.numOfRows, @JsonKey(name: 'totalCount') required this.totalCount});
+  factory _KmaSrtFcstApiBody.fromJson(Map<String, dynamic> json) => _$KmaSrtFcstApiBodyFromJson(json);
 
 @override@JsonKey(name: 'dataType') final  String dataType;
-@override@JsonKey(name: 'items') final  KmaUltraSrtFcstApiItems items;
+@override@JsonKey(name: 'items') final  KmaSrtFcstApiItems items;
 @override@JsonKey(name: 'pageNo') final  int pageNo;
 @override@JsonKey(name: 'numOfRows') final  int numOfRows;
 @override@JsonKey(name: 'totalCount') final  int totalCount;
 
-/// Create a copy of KmaUltraSrtFcstApiBody
+/// Create a copy of KmaSrtFcstApiBody
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$KmaUltraSrtFcstApiBodyCopyWith<_KmaUltraSrtFcstApiBody> get copyWith => __$KmaUltraSrtFcstApiBodyCopyWithImpl<_KmaUltraSrtFcstApiBody>(this, _$identity);
+_$KmaSrtFcstApiBodyCopyWith<_KmaSrtFcstApiBody> get copyWith => __$KmaSrtFcstApiBodyCopyWithImpl<_KmaSrtFcstApiBody>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$KmaUltraSrtFcstApiBodyToJson(this, );
+  return _$KmaSrtFcstApiBodyToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaUltraSrtFcstApiBody&&(identical(other.dataType, dataType) || other.dataType == dataType)&&(identical(other.items, items) || other.items == items)&&(identical(other.pageNo, pageNo) || other.pageNo == pageNo)&&(identical(other.numOfRows, numOfRows) || other.numOfRows == numOfRows)&&(identical(other.totalCount, totalCount) || other.totalCount == totalCount));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaSrtFcstApiBody&&(identical(other.dataType, dataType) || other.dataType == dataType)&&(identical(other.items, items) || other.items == items)&&(identical(other.pageNo, pageNo) || other.pageNo == pageNo)&&(identical(other.numOfRows, numOfRows) || other.numOfRows == numOfRows)&&(identical(other.totalCount, totalCount) || other.totalCount == totalCount));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1102,52 +1102,52 @@ int get hashCode => Object.hash(runtimeType,dataType,items,pageNo,numOfRows,tota
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiBody(dataType: $dataType, items: $items, pageNo: $pageNo, numOfRows: $numOfRows, totalCount: $totalCount)';
+  return 'KmaSrtFcstApiBody(dataType: $dataType, items: $items, pageNo: $pageNo, numOfRows: $numOfRows, totalCount: $totalCount)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$KmaUltraSrtFcstApiBodyCopyWith<$Res> implements $KmaUltraSrtFcstApiBodyCopyWith<$Res> {
-  factory _$KmaUltraSrtFcstApiBodyCopyWith(_KmaUltraSrtFcstApiBody value, $Res Function(_KmaUltraSrtFcstApiBody) _then) = __$KmaUltraSrtFcstApiBodyCopyWithImpl;
+abstract mixin class _$KmaSrtFcstApiBodyCopyWith<$Res> implements $KmaSrtFcstApiBodyCopyWith<$Res> {
+  factory _$KmaSrtFcstApiBodyCopyWith(_KmaSrtFcstApiBody value, $Res Function(_KmaSrtFcstApiBody) _then) = __$KmaSrtFcstApiBodyCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'dataType') String dataType,@JsonKey(name: 'items') KmaUltraSrtFcstApiItems items,@JsonKey(name: 'pageNo') int pageNo,@JsonKey(name: 'numOfRows') int numOfRows,@JsonKey(name: 'totalCount') int totalCount
+@JsonKey(name: 'dataType') String dataType,@JsonKey(name: 'items') KmaSrtFcstApiItems items,@JsonKey(name: 'pageNo') int pageNo,@JsonKey(name: 'numOfRows') int numOfRows,@JsonKey(name: 'totalCount') int totalCount
 });
 
 
-@override $KmaUltraSrtFcstApiItemsCopyWith<$Res> get items;
+@override $KmaSrtFcstApiItemsCopyWith<$Res> get items;
 
 }
 /// @nodoc
-class __$KmaUltraSrtFcstApiBodyCopyWithImpl<$Res>
-    implements _$KmaUltraSrtFcstApiBodyCopyWith<$Res> {
-  __$KmaUltraSrtFcstApiBodyCopyWithImpl(this._self, this._then);
+class __$KmaSrtFcstApiBodyCopyWithImpl<$Res>
+    implements _$KmaSrtFcstApiBodyCopyWith<$Res> {
+  __$KmaSrtFcstApiBodyCopyWithImpl(this._self, this._then);
 
-  final _KmaUltraSrtFcstApiBody _self;
-  final $Res Function(_KmaUltraSrtFcstApiBody) _then;
+  final _KmaSrtFcstApiBody _self;
+  final $Res Function(_KmaSrtFcstApiBody) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiBody
+/// Create a copy of KmaSrtFcstApiBody
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? dataType = null,Object? items = null,Object? pageNo = null,Object? numOfRows = null,Object? totalCount = null,}) {
-  return _then(_KmaUltraSrtFcstApiBody(
+  return _then(_KmaSrtFcstApiBody(
 dataType: null == dataType ? _self.dataType : dataType // ignore: cast_nullable_to_non_nullable
 as String,items: null == items ? _self.items : items // ignore: cast_nullable_to_non_nullable
-as KmaUltraSrtFcstApiItems,pageNo: null == pageNo ? _self.pageNo : pageNo // ignore: cast_nullable_to_non_nullable
+as KmaSrtFcstApiItems,pageNo: null == pageNo ? _self.pageNo : pageNo // ignore: cast_nullable_to_non_nullable
 as int,numOfRows: null == numOfRows ? _self.numOfRows : numOfRows // ignore: cast_nullable_to_non_nullable
 as int,totalCount: null == totalCount ? _self.totalCount : totalCount // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
 
-/// Create a copy of KmaUltraSrtFcstApiBody
+/// Create a copy of KmaSrtFcstApiBody
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiItemsCopyWith<$Res> get items {
+$KmaSrtFcstApiItemsCopyWith<$Res> get items {
   
-  return $KmaUltraSrtFcstApiItemsCopyWith<$Res>(_self.items, (value) {
+  return $KmaSrtFcstApiItemsCopyWith<$Res>(_self.items, (value) {
     return _then(_self.copyWith(items: value));
   });
 }
@@ -1155,22 +1155,22 @@ $KmaUltraSrtFcstApiItemsCopyWith<$Res> get items {
 
 
 /// @nodoc
-mixin _$KmaUltraSrtFcstApiItems {
+mixin _$KmaSrtFcstApiItems {
 
-@JsonKey(name: 'item') List<KmaUltraSrtFcstApiItem> get item;
-/// Create a copy of KmaUltraSrtFcstApiItems
+@JsonKey(name: 'item') List<KmaSrtFcstApiItem> get item;
+/// Create a copy of KmaSrtFcstApiItems
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiItemsCopyWith<KmaUltraSrtFcstApiItems> get copyWith => _$KmaUltraSrtFcstApiItemsCopyWithImpl<KmaUltraSrtFcstApiItems>(this as KmaUltraSrtFcstApiItems, _$identity);
+$KmaSrtFcstApiItemsCopyWith<KmaSrtFcstApiItems> get copyWith => _$KmaSrtFcstApiItemsCopyWithImpl<KmaSrtFcstApiItems>(this as KmaSrtFcstApiItems, _$identity);
 
-  /// Serializes this KmaUltraSrtFcstApiItems to a JSON map.
+  /// Serializes this KmaSrtFcstApiItems to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaUltraSrtFcstApiItems&&const DeepCollectionEquality().equals(other.item, item));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaSrtFcstApiItems&&const DeepCollectionEquality().equals(other.item, item));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1179,18 +1179,18 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiItems(item: $item)';
+  return 'KmaSrtFcstApiItems(item: $item)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $KmaUltraSrtFcstApiItemsCopyWith<$Res>  {
-  factory $KmaUltraSrtFcstApiItemsCopyWith(KmaUltraSrtFcstApiItems value, $Res Function(KmaUltraSrtFcstApiItems) _then) = _$KmaUltraSrtFcstApiItemsCopyWithImpl;
+abstract mixin class $KmaSrtFcstApiItemsCopyWith<$Res>  {
+  factory $KmaSrtFcstApiItemsCopyWith(KmaSrtFcstApiItems value, $Res Function(KmaSrtFcstApiItems) _then) = _$KmaSrtFcstApiItemsCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'item') List<KmaUltraSrtFcstApiItem> item
+@JsonKey(name: 'item') List<KmaSrtFcstApiItem> item
 });
 
 
@@ -1198,27 +1198,27 @@ $Res call({
 
 }
 /// @nodoc
-class _$KmaUltraSrtFcstApiItemsCopyWithImpl<$Res>
-    implements $KmaUltraSrtFcstApiItemsCopyWith<$Res> {
-  _$KmaUltraSrtFcstApiItemsCopyWithImpl(this._self, this._then);
+class _$KmaSrtFcstApiItemsCopyWithImpl<$Res>
+    implements $KmaSrtFcstApiItemsCopyWith<$Res> {
+  _$KmaSrtFcstApiItemsCopyWithImpl(this._self, this._then);
 
-  final KmaUltraSrtFcstApiItems _self;
-  final $Res Function(KmaUltraSrtFcstApiItems) _then;
+  final KmaSrtFcstApiItems _self;
+  final $Res Function(KmaSrtFcstApiItems) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiItems
+/// Create a copy of KmaSrtFcstApiItems
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? item = null,}) {
   return _then(_self.copyWith(
 item: null == item ? _self.item : item // ignore: cast_nullable_to_non_nullable
-as List<KmaUltraSrtFcstApiItem>,
+as List<KmaSrtFcstApiItem>,
   ));
 }
 
 }
 
 
-/// Adds pattern-matching-related methods to [KmaUltraSrtFcstApiItems].
-extension KmaUltraSrtFcstApiItemsPatterns on KmaUltraSrtFcstApiItems {
+/// Adds pattern-matching-related methods to [KmaSrtFcstApiItems].
+extension KmaSrtFcstApiItemsPatterns on KmaSrtFcstApiItems {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -1231,10 +1231,10 @@ extension KmaUltraSrtFcstApiItemsPatterns on KmaUltraSrtFcstApiItems {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiItems value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaSrtFcstApiItems value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItems() when $default != null:
+case _KmaSrtFcstApiItems() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -1253,10 +1253,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiItems value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaSrtFcstApiItems value)  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItems():
+case _KmaSrtFcstApiItems():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -1274,10 +1274,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaUltraSrtFcstApiItems value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaSrtFcstApiItems value)?  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItems() when $default != null:
+case _KmaSrtFcstApiItems() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -1295,9 +1295,9 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'item')  List<KmaUltraSrtFcstApiItem> item)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'item')  List<KmaSrtFcstApiItem> item)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItems() when $default != null:
+case _KmaSrtFcstApiItems() when $default != null:
 return $default(_that.item);case _:
   return orElse();
 
@@ -1316,9 +1316,9 @@ return $default(_that.item);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'item')  List<KmaUltraSrtFcstApiItem> item)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'item')  List<KmaSrtFcstApiItem> item)  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItems():
+case _KmaSrtFcstApiItems():
 return $default(_that.item);case _:
   throw StateError('Unexpected subclass');
 
@@ -1336,9 +1336,9 @@ return $default(_that.item);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'item')  List<KmaUltraSrtFcstApiItem> item)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'item')  List<KmaSrtFcstApiItem> item)?  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItems() when $default != null:
+case _KmaSrtFcstApiItems() when $default != null:
 return $default(_that.item);case _:
   return null;
 
@@ -1350,32 +1350,32 @@ return $default(_that.item);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _KmaUltraSrtFcstApiItems implements KmaUltraSrtFcstApiItems {
-  const _KmaUltraSrtFcstApiItems({@JsonKey(name: 'item') required final  List<KmaUltraSrtFcstApiItem> item}): _item = item;
-  factory _KmaUltraSrtFcstApiItems.fromJson(Map<String, dynamic> json) => _$KmaUltraSrtFcstApiItemsFromJson(json);
+class _KmaSrtFcstApiItems implements KmaSrtFcstApiItems {
+  const _KmaSrtFcstApiItems({@JsonKey(name: 'item') required final  List<KmaSrtFcstApiItem> item}): _item = item;
+  factory _KmaSrtFcstApiItems.fromJson(Map<String, dynamic> json) => _$KmaSrtFcstApiItemsFromJson(json);
 
- final  List<KmaUltraSrtFcstApiItem> _item;
-@override@JsonKey(name: 'item') List<KmaUltraSrtFcstApiItem> get item {
+ final  List<KmaSrtFcstApiItem> _item;
+@override@JsonKey(name: 'item') List<KmaSrtFcstApiItem> get item {
   if (_item is EqualUnmodifiableListView) return _item;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_item);
 }
 
 
-/// Create a copy of KmaUltraSrtFcstApiItems
+/// Create a copy of KmaSrtFcstApiItems
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$KmaUltraSrtFcstApiItemsCopyWith<_KmaUltraSrtFcstApiItems> get copyWith => __$KmaUltraSrtFcstApiItemsCopyWithImpl<_KmaUltraSrtFcstApiItems>(this, _$identity);
+_$KmaSrtFcstApiItemsCopyWith<_KmaSrtFcstApiItems> get copyWith => __$KmaSrtFcstApiItemsCopyWithImpl<_KmaSrtFcstApiItems>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$KmaUltraSrtFcstApiItemsToJson(this, );
+  return _$KmaSrtFcstApiItemsToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaUltraSrtFcstApiItems&&const DeepCollectionEquality().equals(other._item, _item));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaSrtFcstApiItems&&const DeepCollectionEquality().equals(other._item, _item));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1384,18 +1384,18 @@ int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiItems(item: $item)';
+  return 'KmaSrtFcstApiItems(item: $item)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$KmaUltraSrtFcstApiItemsCopyWith<$Res> implements $KmaUltraSrtFcstApiItemsCopyWith<$Res> {
-  factory _$KmaUltraSrtFcstApiItemsCopyWith(_KmaUltraSrtFcstApiItems value, $Res Function(_KmaUltraSrtFcstApiItems) _then) = __$KmaUltraSrtFcstApiItemsCopyWithImpl;
+abstract mixin class _$KmaSrtFcstApiItemsCopyWith<$Res> implements $KmaSrtFcstApiItemsCopyWith<$Res> {
+  factory _$KmaSrtFcstApiItemsCopyWith(_KmaSrtFcstApiItems value, $Res Function(_KmaSrtFcstApiItems) _then) = __$KmaSrtFcstApiItemsCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'item') List<KmaUltraSrtFcstApiItem> item
+@JsonKey(name: 'item') List<KmaSrtFcstApiItem> item
 });
 
 
@@ -1403,19 +1403,19 @@ $Res call({
 
 }
 /// @nodoc
-class __$KmaUltraSrtFcstApiItemsCopyWithImpl<$Res>
-    implements _$KmaUltraSrtFcstApiItemsCopyWith<$Res> {
-  __$KmaUltraSrtFcstApiItemsCopyWithImpl(this._self, this._then);
+class __$KmaSrtFcstApiItemsCopyWithImpl<$Res>
+    implements _$KmaSrtFcstApiItemsCopyWith<$Res> {
+  __$KmaSrtFcstApiItemsCopyWithImpl(this._self, this._then);
 
-  final _KmaUltraSrtFcstApiItems _self;
-  final $Res Function(_KmaUltraSrtFcstApiItems) _then;
+  final _KmaSrtFcstApiItems _self;
+  final $Res Function(_KmaSrtFcstApiItems) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiItems
+/// Create a copy of KmaSrtFcstApiItems
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? item = null,}) {
-  return _then(_KmaUltraSrtFcstApiItems(
+  return _then(_KmaSrtFcstApiItems(
 item: null == item ? _self._item : item // ignore: cast_nullable_to_non_nullable
-as List<KmaUltraSrtFcstApiItem>,
+as List<KmaSrtFcstApiItem>,
   ));
 }
 
@@ -1424,22 +1424,22 @@ as List<KmaUltraSrtFcstApiItem>,
 
 
 /// @nodoc
-mixin _$KmaUltraSrtFcstApiItem {
+mixin _$KmaSrtFcstApiItem {
 
 @JsonKey(name: 'baseDate') String get baseDate;@JsonKey(name: 'baseTime') String get baseTime;@JsonKey(name: 'category') String get category;@JsonKey(name: 'fcstDate') String get fcstDate;@JsonKey(name: 'fcstTime') String get fcstTime;@JsonKey(name: 'fcstValue') String get fcstValue;@JsonKey(name: 'nx') int get nx;@JsonKey(name: 'ny') int get ny;
-/// Create a copy of KmaUltraSrtFcstApiItem
+/// Create a copy of KmaSrtFcstApiItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$KmaUltraSrtFcstApiItemCopyWith<KmaUltraSrtFcstApiItem> get copyWith => _$KmaUltraSrtFcstApiItemCopyWithImpl<KmaUltraSrtFcstApiItem>(this as KmaUltraSrtFcstApiItem, _$identity);
+$KmaSrtFcstApiItemCopyWith<KmaSrtFcstApiItem> get copyWith => _$KmaSrtFcstApiItemCopyWithImpl<KmaSrtFcstApiItem>(this as KmaSrtFcstApiItem, _$identity);
 
-  /// Serializes this KmaUltraSrtFcstApiItem to a JSON map.
+  /// Serializes this KmaSrtFcstApiItem to a JSON map.
   Map<String, dynamic> toJson();
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaUltraSrtFcstApiItem&&(identical(other.baseDate, baseDate) || other.baseDate == baseDate)&&(identical(other.baseTime, baseTime) || other.baseTime == baseTime)&&(identical(other.category, category) || other.category == category)&&(identical(other.fcstDate, fcstDate) || other.fcstDate == fcstDate)&&(identical(other.fcstTime, fcstTime) || other.fcstTime == fcstTime)&&(identical(other.fcstValue, fcstValue) || other.fcstValue == fcstValue)&&(identical(other.nx, nx) || other.nx == nx)&&(identical(other.ny, ny) || other.ny == ny));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaSrtFcstApiItem&&(identical(other.baseDate, baseDate) || other.baseDate == baseDate)&&(identical(other.baseTime, baseTime) || other.baseTime == baseTime)&&(identical(other.category, category) || other.category == category)&&(identical(other.fcstDate, fcstDate) || other.fcstDate == fcstDate)&&(identical(other.fcstTime, fcstTime) || other.fcstTime == fcstTime)&&(identical(other.fcstValue, fcstValue) || other.fcstValue == fcstValue)&&(identical(other.nx, nx) || other.nx == nx)&&(identical(other.ny, ny) || other.ny == ny));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1448,15 +1448,15 @@ int get hashCode => Object.hash(runtimeType,baseDate,baseTime,category,fcstDate,
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiItem(baseDate: $baseDate, baseTime: $baseTime, category: $category, fcstDate: $fcstDate, fcstTime: $fcstTime, fcstValue: $fcstValue, nx: $nx, ny: $ny)';
+  return 'KmaSrtFcstApiItem(baseDate: $baseDate, baseTime: $baseTime, category: $category, fcstDate: $fcstDate, fcstTime: $fcstTime, fcstValue: $fcstValue, nx: $nx, ny: $ny)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $KmaUltraSrtFcstApiItemCopyWith<$Res>  {
-  factory $KmaUltraSrtFcstApiItemCopyWith(KmaUltraSrtFcstApiItem value, $Res Function(KmaUltraSrtFcstApiItem) _then) = _$KmaUltraSrtFcstApiItemCopyWithImpl;
+abstract mixin class $KmaSrtFcstApiItemCopyWith<$Res>  {
+  factory $KmaSrtFcstApiItemCopyWith(KmaSrtFcstApiItem value, $Res Function(KmaSrtFcstApiItem) _then) = _$KmaSrtFcstApiItemCopyWithImpl;
 @useResult
 $Res call({
 @JsonKey(name: 'baseDate') String baseDate,@JsonKey(name: 'baseTime') String baseTime,@JsonKey(name: 'category') String category,@JsonKey(name: 'fcstDate') String fcstDate,@JsonKey(name: 'fcstTime') String fcstTime,@JsonKey(name: 'fcstValue') String fcstValue,@JsonKey(name: 'nx') int nx,@JsonKey(name: 'ny') int ny
@@ -1467,14 +1467,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$KmaUltraSrtFcstApiItemCopyWithImpl<$Res>
-    implements $KmaUltraSrtFcstApiItemCopyWith<$Res> {
-  _$KmaUltraSrtFcstApiItemCopyWithImpl(this._self, this._then);
+class _$KmaSrtFcstApiItemCopyWithImpl<$Res>
+    implements $KmaSrtFcstApiItemCopyWith<$Res> {
+  _$KmaSrtFcstApiItemCopyWithImpl(this._self, this._then);
 
-  final KmaUltraSrtFcstApiItem _self;
-  final $Res Function(KmaUltraSrtFcstApiItem) _then;
+  final KmaSrtFcstApiItem _self;
+  final $Res Function(KmaSrtFcstApiItem) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiItem
+/// Create a copy of KmaSrtFcstApiItem
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? baseDate = null,Object? baseTime = null,Object? category = null,Object? fcstDate = null,Object? fcstTime = null,Object? fcstValue = null,Object? nx = null,Object? ny = null,}) {
   return _then(_self.copyWith(
@@ -1493,8 +1493,8 @@ as int,
 }
 
 
-/// Adds pattern-matching-related methods to [KmaUltraSrtFcstApiItem].
-extension KmaUltraSrtFcstApiItemPatterns on KmaUltraSrtFcstApiItem {
+/// Adds pattern-matching-related methods to [KmaSrtFcstApiItem].
+extension KmaSrtFcstApiItemPatterns on KmaSrtFcstApiItem {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -1507,10 +1507,10 @@ extension KmaUltraSrtFcstApiItemPatterns on KmaUltraSrtFcstApiItem {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiItem value)?  $default,{required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _KmaSrtFcstApiItem value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItem() when $default != null:
+case _KmaSrtFcstApiItem() when $default != null:
 return $default(_that);case _:
   return orElse();
 
@@ -1529,10 +1529,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaUltraSrtFcstApiItem value)  $default,){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _KmaSrtFcstApiItem value)  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItem():
+case _KmaSrtFcstApiItem():
 return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -1550,10 +1550,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaUltraSrtFcstApiItem value)?  $default,){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _KmaSrtFcstApiItem value)?  $default,){
 final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItem() when $default != null:
+case _KmaSrtFcstApiItem() when $default != null:
 return $default(_that);case _:
   return null;
 
@@ -1573,7 +1573,7 @@ return $default(_that);case _:
 
 @optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'baseDate')  String baseDate, @JsonKey(name: 'baseTime')  String baseTime, @JsonKey(name: 'category')  String category, @JsonKey(name: 'fcstDate')  String fcstDate, @JsonKey(name: 'fcstTime')  String fcstTime, @JsonKey(name: 'fcstValue')  String fcstValue, @JsonKey(name: 'nx')  int nx, @JsonKey(name: 'ny')  int ny)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItem() when $default != null:
+case _KmaSrtFcstApiItem() when $default != null:
 return $default(_that.baseDate,_that.baseTime,_that.category,_that.fcstDate,_that.fcstTime,_that.fcstValue,_that.nx,_that.ny);case _:
   return orElse();
 
@@ -1594,7 +1594,7 @@ return $default(_that.baseDate,_that.baseTime,_that.category,_that.fcstDate,_tha
 
 @optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'baseDate')  String baseDate, @JsonKey(name: 'baseTime')  String baseTime, @JsonKey(name: 'category')  String category, @JsonKey(name: 'fcstDate')  String fcstDate, @JsonKey(name: 'fcstTime')  String fcstTime, @JsonKey(name: 'fcstValue')  String fcstValue, @JsonKey(name: 'nx')  int nx, @JsonKey(name: 'ny')  int ny)  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItem():
+case _KmaSrtFcstApiItem():
 return $default(_that.baseDate,_that.baseTime,_that.category,_that.fcstDate,_that.fcstTime,_that.fcstValue,_that.nx,_that.ny);case _:
   throw StateError('Unexpected subclass');
 
@@ -1614,7 +1614,7 @@ return $default(_that.baseDate,_that.baseTime,_that.category,_that.fcstDate,_tha
 
 @optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'baseDate')  String baseDate, @JsonKey(name: 'baseTime')  String baseTime, @JsonKey(name: 'category')  String category, @JsonKey(name: 'fcstDate')  String fcstDate, @JsonKey(name: 'fcstTime')  String fcstTime, @JsonKey(name: 'fcstValue')  String fcstValue, @JsonKey(name: 'nx')  int nx, @JsonKey(name: 'ny')  int ny)?  $default,) {final _that = this;
 switch (_that) {
-case _KmaUltraSrtFcstApiItem() when $default != null:
+case _KmaSrtFcstApiItem() when $default != null:
 return $default(_that.baseDate,_that.baseTime,_that.category,_that.fcstDate,_that.fcstTime,_that.fcstValue,_that.nx,_that.ny);case _:
   return null;
 
@@ -1626,9 +1626,9 @@ return $default(_that.baseDate,_that.baseTime,_that.category,_that.fcstDate,_tha
 /// @nodoc
 @JsonSerializable()
 
-class _KmaUltraSrtFcstApiItem implements KmaUltraSrtFcstApiItem {
-  const _KmaUltraSrtFcstApiItem({@JsonKey(name: 'baseDate') required this.baseDate, @JsonKey(name: 'baseTime') required this.baseTime, @JsonKey(name: 'category') required this.category, @JsonKey(name: 'fcstDate') required this.fcstDate, @JsonKey(name: 'fcstTime') required this.fcstTime, @JsonKey(name: 'fcstValue') required this.fcstValue, @JsonKey(name: 'nx') required this.nx, @JsonKey(name: 'ny') required this.ny});
-  factory _KmaUltraSrtFcstApiItem.fromJson(Map<String, dynamic> json) => _$KmaUltraSrtFcstApiItemFromJson(json);
+class _KmaSrtFcstApiItem implements KmaSrtFcstApiItem {
+  const _KmaSrtFcstApiItem({@JsonKey(name: 'baseDate') required this.baseDate, @JsonKey(name: 'baseTime') required this.baseTime, @JsonKey(name: 'category') required this.category, @JsonKey(name: 'fcstDate') required this.fcstDate, @JsonKey(name: 'fcstTime') required this.fcstTime, @JsonKey(name: 'fcstValue') required this.fcstValue, @JsonKey(name: 'nx') required this.nx, @JsonKey(name: 'ny') required this.ny});
+  factory _KmaSrtFcstApiItem.fromJson(Map<String, dynamic> json) => _$KmaSrtFcstApiItemFromJson(json);
 
 @override@JsonKey(name: 'baseDate') final  String baseDate;
 @override@JsonKey(name: 'baseTime') final  String baseTime;
@@ -1639,20 +1639,20 @@ class _KmaUltraSrtFcstApiItem implements KmaUltraSrtFcstApiItem {
 @override@JsonKey(name: 'nx') final  int nx;
 @override@JsonKey(name: 'ny') final  int ny;
 
-/// Create a copy of KmaUltraSrtFcstApiItem
+/// Create a copy of KmaSrtFcstApiItem
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$KmaUltraSrtFcstApiItemCopyWith<_KmaUltraSrtFcstApiItem> get copyWith => __$KmaUltraSrtFcstApiItemCopyWithImpl<_KmaUltraSrtFcstApiItem>(this, _$identity);
+_$KmaSrtFcstApiItemCopyWith<_KmaSrtFcstApiItem> get copyWith => __$KmaSrtFcstApiItemCopyWithImpl<_KmaSrtFcstApiItem>(this, _$identity);
 
 @override
 Map<String, dynamic> toJson() {
-  return _$KmaUltraSrtFcstApiItemToJson(this, );
+  return _$KmaSrtFcstApiItemToJson(this, );
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaUltraSrtFcstApiItem&&(identical(other.baseDate, baseDate) || other.baseDate == baseDate)&&(identical(other.baseTime, baseTime) || other.baseTime == baseTime)&&(identical(other.category, category) || other.category == category)&&(identical(other.fcstDate, fcstDate) || other.fcstDate == fcstDate)&&(identical(other.fcstTime, fcstTime) || other.fcstTime == fcstTime)&&(identical(other.fcstValue, fcstValue) || other.fcstValue == fcstValue)&&(identical(other.nx, nx) || other.nx == nx)&&(identical(other.ny, ny) || other.ny == ny));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaSrtFcstApiItem&&(identical(other.baseDate, baseDate) || other.baseDate == baseDate)&&(identical(other.baseTime, baseTime) || other.baseTime == baseTime)&&(identical(other.category, category) || other.category == category)&&(identical(other.fcstDate, fcstDate) || other.fcstDate == fcstDate)&&(identical(other.fcstTime, fcstTime) || other.fcstTime == fcstTime)&&(identical(other.fcstValue, fcstValue) || other.fcstValue == fcstValue)&&(identical(other.nx, nx) || other.nx == nx)&&(identical(other.ny, ny) || other.ny == ny));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1661,15 +1661,15 @@ int get hashCode => Object.hash(runtimeType,baseDate,baseTime,category,fcstDate,
 
 @override
 String toString() {
-  return 'KmaUltraSrtFcstApiItem(baseDate: $baseDate, baseTime: $baseTime, category: $category, fcstDate: $fcstDate, fcstTime: $fcstTime, fcstValue: $fcstValue, nx: $nx, ny: $ny)';
+  return 'KmaSrtFcstApiItem(baseDate: $baseDate, baseTime: $baseTime, category: $category, fcstDate: $fcstDate, fcstTime: $fcstTime, fcstValue: $fcstValue, nx: $nx, ny: $ny)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$KmaUltraSrtFcstApiItemCopyWith<$Res> implements $KmaUltraSrtFcstApiItemCopyWith<$Res> {
-  factory _$KmaUltraSrtFcstApiItemCopyWith(_KmaUltraSrtFcstApiItem value, $Res Function(_KmaUltraSrtFcstApiItem) _then) = __$KmaUltraSrtFcstApiItemCopyWithImpl;
+abstract mixin class _$KmaSrtFcstApiItemCopyWith<$Res> implements $KmaSrtFcstApiItemCopyWith<$Res> {
+  factory _$KmaSrtFcstApiItemCopyWith(_KmaSrtFcstApiItem value, $Res Function(_KmaSrtFcstApiItem) _then) = __$KmaSrtFcstApiItemCopyWithImpl;
 @override @useResult
 $Res call({
 @JsonKey(name: 'baseDate') String baseDate,@JsonKey(name: 'baseTime') String baseTime,@JsonKey(name: 'category') String category,@JsonKey(name: 'fcstDate') String fcstDate,@JsonKey(name: 'fcstTime') String fcstTime,@JsonKey(name: 'fcstValue') String fcstValue,@JsonKey(name: 'nx') int nx,@JsonKey(name: 'ny') int ny
@@ -1680,17 +1680,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$KmaUltraSrtFcstApiItemCopyWithImpl<$Res>
-    implements _$KmaUltraSrtFcstApiItemCopyWith<$Res> {
-  __$KmaUltraSrtFcstApiItemCopyWithImpl(this._self, this._then);
+class __$KmaSrtFcstApiItemCopyWithImpl<$Res>
+    implements _$KmaSrtFcstApiItemCopyWith<$Res> {
+  __$KmaSrtFcstApiItemCopyWithImpl(this._self, this._then);
 
-  final _KmaUltraSrtFcstApiItem _self;
-  final $Res Function(_KmaUltraSrtFcstApiItem) _then;
+  final _KmaSrtFcstApiItem _self;
+  final $Res Function(_KmaSrtFcstApiItem) _then;
 
-/// Create a copy of KmaUltraSrtFcstApiItem
+/// Create a copy of KmaSrtFcstApiItem
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? baseDate = null,Object? baseTime = null,Object? category = null,Object? fcstDate = null,Object? fcstTime = null,Object? fcstValue = null,Object? nx = null,Object? ny = null,}) {
-  return _then(_KmaUltraSrtFcstApiItem(
+  return _then(_KmaSrtFcstApiItem(
 baseDate: null == baseDate ? _self.baseDate : baseDate // ignore: cast_nullable_to_non_nullable
 as String,baseTime: null == baseTime ? _self.baseTime : baseTime // ignore: cast_nullable_to_non_nullable
 as String,category: null == category ? _self.category : category // ignore: cast_nullable_to_non_nullable

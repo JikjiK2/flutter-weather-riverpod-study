@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:ai_weather/utils/app_logger.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -28,64 +28,54 @@ final currentLocationProvider = FutureProvider.autoDispose<Position>((
   bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
   LocationPermission permission = await Geolocator.checkPermission();
 
-  if (!serviceEnabled ||
-      permission == LocationPermission.denied ||
-      permission == LocationPermission.deniedForever) {
-    debugPrint("위치 서비스 비활성 또는 권한 없음. 마지막 저장 위치 확인.");
-    Position? lastLocation = await locationRepo.getLastLocation();
-    if (lastLocation != null) {
-      debugPrint(
-        "마지막 저장 위치 사용: ${lastLocation.latitude}, ${lastLocation.longitude}",
+  if (permission == LocationPermission.denied) {
+    appLogger.w("위치 권한 거부됨. 사용자에게 권한 요청.");
+    permission = await Geolocator.requestPermission();
+  }
+
+  // GPS 서비스가 활성화되어 있고, 권한이 부여된 경우에만 현재 위치 가져오기 시도
+  if (serviceEnabled &&
+      (permission == LocationPermission.whileInUse ||
+          permission == LocationPermission.always)) {
+    try {
+      appLogger.i("Geolocator를 통해 현재 위치 가져오기 시도...");
+      Position currentPosition = await Geolocator.getCurrentPosition(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+        ),
       );
-      return lastLocation;
-    } else {
-      debugPrint("마지막 저장 위치 없음. 기본 위치 사용: $defaultLatitude, $defaultLongitude");
-      return Position(
-        latitude: defaultLatitude,
-        longitude: defaultLongitude,
-        timestamp: DateTime.now(),
-        accuracy: 0.0,
-        altitude: 0.0,
-        altitudeAccuracy: 0.0,
-        heading: 0.0,
-        headingAccuracy: 0.0,
-        speed: 0.0,
-        speedAccuracy: 0.0,
+      appLogger.i(
+        "현재 GPS 위치 가져옴: ${currentPosition.latitude}, ${currentPosition.longitude}",
       );
+      return currentPosition;
+    } catch (e) {
+      appLogger.e("현재 위치를 가져오는 중 오류 발생, 대체 로직으로 넘어갑니다: $e");
+      // 오류 발생 시 아래의 대체 로직으로 넘어감
     }
   }
 
-  try {
-    Position currentPosition = await Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
+  // 대체 로직: GPS 사용 불가 또는 현재 위치 가져오기 실패 시 실행
+  appLogger.i("GPS 사용 불가 또는 실패. 마지막으로 저장된 위치를 확인합니다.");
+  Position? lastLocation = await locationRepo.getLastLocation();
+  if (lastLocation != null) {
+    appLogger.i(
+      "마지막 저장 위치 사용: ${lastLocation.latitude}, ${lastLocation.longitude}",
     );
-    debugPrint(
-      "현재 GPS 위치 가져옴: ${currentPosition.latitude}, ${currentPosition.longitude}",
+    return lastLocation;
+  } else {
+    appLogger.i("마지막 저장 위치 없음. 기본 위치 사용: $defaultLatitude, $defaultLongitude");
+    return Position(
+      latitude: defaultLatitude,
+      longitude: defaultLongitude,
+      timestamp: DateTime.now(),
+      accuracy: 0.0,
+      altitude: 0.0,
+      altitudeAccuracy: 0.0,
+      heading: 0.0,
+      headingAccuracy: 0.0,
+      speed: 0.0,
+      speedAccuracy: 0.0,
     );
-    return currentPosition;
-  } catch (e) {
-    debugPrint("Geolocator.getCurrentPosition() 오류 발생: $e");
-    Position? lastLocation = await locationRepo.getLastLocation();
-    if (lastLocation != null) {
-      debugPrint(
-        "실제 위치 가져오기 실패, 마지막 저장 위치 사용: ${lastLocation.latitude}, ${lastLocation.longitude}",
-      );
-      return lastLocation;
-    } else {
-      debugPrint("실제 위치 가져오기 실패, 마지막 저장 위치 없음. 기본 위치 사용.");
-      return Position(
-        latitude: defaultLatitude,
-        longitude: defaultLongitude,
-        timestamp: DateTime.now(),
-        accuracy: 0.0,
-        altitude: 0.0,
-        altitudeAccuracy: 0.0,
-        heading: 0.0,
-        headingAccuracy: 0.0,
-        speed: 0.0,
-        speedAccuracy: 0.0,
-      );
-    }
   }
 });
 
@@ -131,7 +121,7 @@ final gpsStatusProvider = FutureProvider.autoDispose<bool>((ref) async {
   try {
     return await Geolocator.isLocationServiceEnabled();
   } catch (e) {
-    debugPrint("GPS 상태 확인 중 오류 발생: $e");
+    appLogger.e("GPS 상태 확인 중 오류 발생: $e");
     return false;
   }
 });

@@ -20,7 +20,6 @@ abstract class GeocodingResult with _$GeocodingResult {
     @JsonKey(name: 'address_components')
     required List<AddressComponent> addressComponents,
     @JsonKey(name: 'formatted_address') required String formattedAddress,
-    // geometry, place_id, types 등 추가 가능
   }) = _GeocodingResult;
 
   factory GeocodingResult.fromJson(Map<String, dynamic> json) =>

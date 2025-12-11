@@ -14,14 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Address {
 
- String? get country;// ex) 대한민국
- String? get administrativeArea;// ex) 서울특별시, 부산광역시 (시/도) - administrative_area_level_1
- String? get locality;// ex) 제주시, 밀양시, 합천군 (시/군/구) - locality
- String? get subLocality;// ex) 부산진구, 용산구 (자치구) - sublocality_level_1 (구)
- String? get subLocalityLevel2;// ex) 삼문동, 동자동, 합천읍 (읍/면/동) - sublocality_level_2
- String? get subLocalityLevel3;// ex) 합천리 (리) - sublocality_level_3
- String? get subLocalityLevel4;// ex) 엄광로, 중앙로 (도로명 일부 또는 상세) - sublocality_level_4
- String? get formattedAddress;
+ String? get country; String? get administrativeArea; String? get locality; String? get subLocality; String? get subLocalityLevel2; String? get subLocalityLevel3; String? get subLocalityLevel4; String? get formattedAddress;
 /// Create a copy of Address
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -224,19 +217,12 @@ class _Address implements Address {
   
 
 @override final  String? country;
-// ex) 대한민국
 @override final  String? administrativeArea;
-// ex) 서울특별시, 부산광역시 (시/도) - administrative_area_level_1
 @override final  String? locality;
-// ex) 제주시, 밀양시, 합천군 (시/군/구) - locality
 @override final  String? subLocality;
-// ex) 부산진구, 용산구 (자치구) - sublocality_level_1 (구)
 @override final  String? subLocalityLevel2;
-// ex) 삼문동, 동자동, 합천읍 (읍/면/동) - sublocality_level_2
 @override final  String? subLocalityLevel3;
-// ex) 합천리 (리) - sublocality_level_3
 @override final  String? subLocalityLevel4;
-// ex) 엄광로, 중앙로 (도로명 일부 또는 상세) - sublocality_level_4
 @override final  String? formattedAddress;
 
 /// Create a copy of Address

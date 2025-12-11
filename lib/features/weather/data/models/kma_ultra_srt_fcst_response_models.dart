@@ -6,7 +6,7 @@ part 'kma_ultra_srt_fcst_response_models.g.dart';
 @freezed
 abstract class KmaUltraSrtFcstApiResponse with _$KmaUltraSrtFcstApiResponse {
   const factory KmaUltraSrtFcstApiResponse({
-    required KmaUltraSrtFcstResponse response,
+    @JsonKey(name: 'response') required KmaUltraSrtFcstApiResult response,
   }) = _KmaUltraSrtFcstApiResponse;
 
   factory KmaUltraSrtFcstApiResponse.fromJson(Map<String, dynamic> json) =>
@@ -14,64 +14,64 @@ abstract class KmaUltraSrtFcstApiResponse with _$KmaUltraSrtFcstApiResponse {
 }
 
 @freezed
-abstract class KmaUltraSrtFcstResponse with _$KmaUltraSrtFcstResponse {
-  const factory KmaUltraSrtFcstResponse({
-    required KmaUltraSrtFcstHeader header,
-    required KmaUltraSrtFcstBody body,
-  }) = _KmaUltraSrtFcstResponse;
+abstract class KmaUltraSrtFcstApiResult with _$KmaUltraSrtFcstApiResult {
+  const factory KmaUltraSrtFcstApiResult({
+    @JsonKey(name: 'header') required KmaUltraSrtFcstApiHeader header,
+    @JsonKey(name: 'body') required KmaUltraSrtFcstApiBody body,
+  }) = _KmaUltraSrtFcstApiResult;
 
-  factory KmaUltraSrtFcstResponse.fromJson(Map<String, dynamic> json) =>
-      _$KmaUltraSrtFcstResponseFromJson(json);
+  factory KmaUltraSrtFcstApiResult.fromJson(Map<String, dynamic> json) =>
+      _$KmaUltraSrtFcstApiResultFromJson(json);
 }
 
 @freezed
-abstract class KmaUltraSrtFcstHeader with _$KmaUltraSrtFcstHeader {
-  const factory KmaUltraSrtFcstHeader({
-    required String resultCode,
-    required String resultMsg,
-  }) = _KmaUltraSrtFcstHeader;
+abstract class KmaUltraSrtFcstApiHeader with _$KmaUltraSrtFcstApiHeader {
+  const factory KmaUltraSrtFcstApiHeader({
+    @JsonKey(name: 'resultCode') required String resultCode,
+    @JsonKey(name: 'resultMsg') required String resultMsg,
+  }) = _KmaUltraSrtFcstApiHeader;
 
-  factory KmaUltraSrtFcstHeader.fromJson(Map<String, dynamic> json) =>
-      _$KmaUltraSrtFcstHeaderFromJson(json);
+  factory KmaUltraSrtFcstApiHeader.fromJson(Map<String, dynamic> json) =>
+      _$KmaUltraSrtFcstApiHeaderFromJson(json);
 }
 
 @freezed
-abstract class KmaUltraSrtFcstBody with _$KmaUltraSrtFcstBody {
-  const factory KmaUltraSrtFcstBody({
-    required String dataType,
-    required KmaUltraSrtFcstItems items,
-    required int pageNo,
-    required int numOfRows,
-    required int totalCount,
-  }) = _KmaUltraSrtFcstBody;
+abstract class KmaUltraSrtFcstApiBody with _$KmaUltraSrtFcstApiBody {
+  const factory KmaUltraSrtFcstApiBody({
+    @JsonKey(name: 'dataType') required String dataType,
+    @JsonKey(name: 'items') required KmaUltraSrtFcstApiItems items,
+    @JsonKey(name: 'pageNo') required int pageNo,
+    @JsonKey(name: 'numOfRows') required int numOfRows,
+    @JsonKey(name: 'totalCount') required int totalCount,
+  }) = _KmaUltraSrtFcstApiBody;
 
-  factory KmaUltraSrtFcstBody.fromJson(Map<String, dynamic> json) =>
-      _$KmaUltraSrtFcstBodyFromJson(json);
+  factory KmaUltraSrtFcstApiBody.fromJson(Map<String, dynamic> json) =>
+      _$KmaUltraSrtFcstApiBodyFromJson(json);
 }
 
 @freezed
-abstract class KmaUltraSrtFcstItems with _$KmaUltraSrtFcstItems {
-  const factory KmaUltraSrtFcstItems({
-    required List<KmaUltraSrtFcstItem> item,
-  }) = _KmaUltraSrtFcstItems;
+abstract class KmaUltraSrtFcstApiItems with _$KmaUltraSrtFcstApiItems {
+  const factory KmaUltraSrtFcstApiItems({
+    @JsonKey(name: 'item') required List<KmaUltraSrtFcstApiItem> item,
+  }) = _KmaUltraSrtFcstApiItems;
 
-  factory KmaUltraSrtFcstItems.fromJson(Map<String, dynamic> json) =>
-      _$KmaUltraSrtFcstItemsFromJson(json);
+  factory KmaUltraSrtFcstApiItems.fromJson(Map<String, dynamic> json) =>
+      _$KmaUltraSrtFcstApiItemsFromJson(json);
 }
 
 @freezed
-abstract class KmaUltraSrtFcstItem with _$KmaUltraSrtFcstItem {
-  const factory KmaUltraSrtFcstItem({
-    required String baseDate,
-    required String baseTime,
-    required String category,
-    required String fcstDate,
-    required String fcstTime,
-    required String fcstValue,
-    required int nx,
-    required int ny,
-  }) = _KmaUltraSrtFcstItem;
+abstract class KmaUltraSrtFcstApiItem with _$KmaUltraSrtFcstApiItem {
+  const factory KmaUltraSrtFcstApiItem({
+    @JsonKey(name: 'baseDate') required String baseDate,
+    @JsonKey(name: 'baseTime') required String baseTime,
+    @JsonKey(name: 'category') required String category,
+    @JsonKey(name: 'fcstDate') required String fcstDate,
+    @JsonKey(name: 'fcstTime') required String fcstTime,
+    @JsonKey(name: 'fcstValue') required String fcstValue,
+    @JsonKey(name: 'nx') required int nx,
+    @JsonKey(name: 'ny') required int ny,
+  }) = _KmaUltraSrtFcstApiItem;
 
-  factory KmaUltraSrtFcstItem.fromJson(Map<String, dynamic> json) =>
-      _$KmaUltraSrtFcstItemFromJson(json);
+  factory KmaUltraSrtFcstApiItem.fromJson(Map<String, dynamic> json) =>
+      _$KmaUltraSrtFcstApiItemFromJson(json);
 }
