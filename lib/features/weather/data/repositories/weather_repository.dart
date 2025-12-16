@@ -19,7 +19,7 @@ abstract class WeatherRepository {
   // 통합 중기 예보
   Future<MidTermWeather> getMidTermWeather({
     required String regId, // 육상 예보와 기온 예보에 사용
-    required String stnId, // 중기 전망에 사용
+    String? stnId, // 중기 전망에 사용
     required String tmFc, // 발표 시간 (모든 중기 API에 공통)
   });
 }

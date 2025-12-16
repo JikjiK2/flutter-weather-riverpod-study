@@ -40,7 +40,7 @@ extension AddressX on Address {
     if (subLocalityLevel2 != null && subLocalityLevel2!.isNotEmpty) {
       components.add(subLocalityLevel2!);
     }
-    
+
     return components.take(3).join(' ');
   }
 }

@@ -3,8 +3,6 @@ import 'package:ai_weather/features/weather/data/models/kma_ultra_srt_fcst_respo
 import 'package:ai_weather/features/weather/data/models/kma_ultra_srt_ncst_response_models.dart';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:ai_weather/config/api_config.dart';
-
 part 'kma_short_term_api_data_source.g.dart';
 
 @RestApi(

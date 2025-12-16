@@ -17,7 +17,6 @@ class WeatherCalculatorUtils {
 
     final double rhDouble = rh.toDouble();
 
-    // atan은 dart:math에 있음
     final term1 = 0.151977 * pow(rhDouble + 8.313659, 0.5);
     final term2 = (ta + rhDouble);
     final term3 = (rhDouble - 1.67633);

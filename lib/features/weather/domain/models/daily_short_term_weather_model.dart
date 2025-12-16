@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ai_weather/features/weather/utils/weather_enums.dart';
+import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
 import 'package:ai_weather/features/weather/domain/models/hourly_short_term_weather_model.dart';
 
 part 'daily_short_term_weather_model.freezed.dart';

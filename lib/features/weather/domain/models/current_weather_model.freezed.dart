@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 mixin _$CurrentWeather {
 
  DateTime get dateTime;// 관측 시각 (baseDate + baseTime)
- double get temperature; int get humidity; double get windSpeed; int get windDirection; String get windDirectionText; PrecipitationType get precipitationType; double get precipitationAmount; double get feelsLikeTemperature;
+ double get temperature; int get humidity; double get windSpeed; int get windDirection; String get windDirectionText; PrecipitationType get precipitationType; double get precipitationAmount; double get feelsLikeTemperature; SkyStatus? get skyStatus;
 /// Create a copy of CurrentWeather
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $CurrentWeatherCopyWith<CurrentWeather> get copyWith => _$CurrentWeatherCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CurrentWeather&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&(identical(other.humidity, humidity) || other.humidity == humidity)&&(identical(other.windSpeed, windSpeed) || other.windSpeed == windSpeed)&&(identical(other.windDirection, windDirection) || other.windDirection == windDirection)&&(identical(other.windDirectionText, windDirectionText) || other.windDirectionText == windDirectionText)&&(identical(other.precipitationType, precipitationType) || other.precipitationType == precipitationType)&&(identical(other.precipitationAmount, precipitationAmount) || other.precipitationAmount == precipitationAmount)&&(identical(other.feelsLikeTemperature, feelsLikeTemperature) || other.feelsLikeTemperature == feelsLikeTemperature));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CurrentWeather&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&(identical(other.humidity, humidity) || other.humidity == humidity)&&(identical(other.windSpeed, windSpeed) || other.windSpeed == windSpeed)&&(identical(other.windDirection, windDirection) || other.windDirection == windDirection)&&(identical(other.windDirectionText, windDirectionText) || other.windDirectionText == windDirectionText)&&(identical(other.precipitationType, precipitationType) || other.precipitationType == precipitationType)&&(identical(other.precipitationAmount, precipitationAmount) || other.precipitationAmount == precipitationAmount)&&(identical(other.feelsLikeTemperature, feelsLikeTemperature) || other.feelsLikeTemperature == feelsLikeTemperature)&&(identical(other.skyStatus, skyStatus) || other.skyStatus == skyStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dateTime,temperature,humidity,windSpeed,windDirection,windDirectionText,precipitationType,precipitationAmount,feelsLikeTemperature);
+int get hashCode => Object.hash(runtimeType,dateTime,temperature,humidity,windSpeed,windDirection,windDirectionText,precipitationType,precipitationAmount,feelsLikeTemperature,skyStatus);
 
 @override
 String toString() {
-  return 'CurrentWeather(dateTime: $dateTime, temperature: $temperature, humidity: $humidity, windSpeed: $windSpeed, windDirection: $windDirection, windDirectionText: $windDirectionText, precipitationType: $precipitationType, precipitationAmount: $precipitationAmount, feelsLikeTemperature: $feelsLikeTemperature)';
+  return 'CurrentWeather(dateTime: $dateTime, temperature: $temperature, humidity: $humidity, windSpeed: $windSpeed, windDirection: $windDirection, windDirectionText: $windDirectionText, precipitationType: $precipitationType, precipitationAmount: $precipitationAmount, feelsLikeTemperature: $feelsLikeTemperature, skyStatus: $skyStatus)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $CurrentWeatherCopyWith<$Res>  {
   factory $CurrentWeatherCopyWith(CurrentWeather value, $Res Function(CurrentWeather) _then) = _$CurrentWeatherCopyWithImpl;
 @useResult
 $Res call({
- DateTime dateTime, double temperature, int humidity, double windSpeed, int windDirection, String windDirectionText, PrecipitationType precipitationType, double precipitationAmount, double feelsLikeTemperature
+ DateTime dateTime, double temperature, int humidity, double windSpeed, int windDirection, String windDirectionText, PrecipitationType precipitationType, double precipitationAmount, double feelsLikeTemperature, SkyStatus? skyStatus
 });
 
 
@@ -63,7 +63,7 @@ class _$CurrentWeatherCopyWithImpl<$Res>
 
 /// Create a copy of CurrentWeather
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? dateTime = null,Object? temperature = null,Object? humidity = null,Object? windSpeed = null,Object? windDirection = null,Object? windDirectionText = null,Object? precipitationType = null,Object? precipitationAmount = null,Object? feelsLikeTemperature = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? dateTime = null,Object? temperature = null,Object? humidity = null,Object? windSpeed = null,Object? windDirection = null,Object? windDirectionText = null,Object? precipitationType = null,Object? precipitationAmount = null,Object? feelsLikeTemperature = null,Object? skyStatus = freezed,}) {
   return _then(_self.copyWith(
 dateTime: null == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as DateTime,temperature: null == temperature ? _self.temperature : temperature // ignore: cast_nullable_to_non_nullable
@@ -74,7 +74,8 @@ as int,windDirectionText: null == windDirectionText ? _self.windDirectionText : 
 as String,precipitationType: null == precipitationType ? _self.precipitationType : precipitationType // ignore: cast_nullable_to_non_nullable
 as PrecipitationType,precipitationAmount: null == precipitationAmount ? _self.precipitationAmount : precipitationAmount // ignore: cast_nullable_to_non_nullable
 as double,feelsLikeTemperature: null == feelsLikeTemperature ? _self.feelsLikeTemperature : feelsLikeTemperature // ignore: cast_nullable_to_non_nullable
-as double,
+as double,skyStatus: freezed == skyStatus ? _self.skyStatus : skyStatus // ignore: cast_nullable_to_non_nullable
+as SkyStatus?,
   ));
 }
 
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime dateTime,  double temperature,  int humidity,  double windSpeed,  int windDirection,  String windDirectionText,  PrecipitationType precipitationType,  double precipitationAmount,  double feelsLikeTemperature)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime dateTime,  double temperature,  int humidity,  double windSpeed,  int windDirection,  String windDirectionText,  PrecipitationType precipitationType,  double precipitationAmount,  double feelsLikeTemperature,  SkyStatus? skyStatus)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CurrentWeather() when $default != null:
-return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,_that.windDirection,_that.windDirectionText,_that.precipitationType,_that.precipitationAmount,_that.feelsLikeTemperature);case _:
+return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,_that.windDirection,_that.windDirectionText,_that.precipitationType,_that.precipitationAmount,_that.feelsLikeTemperature,_that.skyStatus);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime dateTime,  double temperature,  int humidity,  double windSpeed,  int windDirection,  String windDirectionText,  PrecipitationType precipitationType,  double precipitationAmount,  double feelsLikeTemperature)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime dateTime,  double temperature,  int humidity,  double windSpeed,  int windDirection,  String windDirectionText,  PrecipitationType precipitationType,  double precipitationAmount,  double feelsLikeTemperature,  SkyStatus? skyStatus)  $default,) {final _that = this;
 switch (_that) {
 case _CurrentWeather():
-return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,_that.windDirection,_that.windDirectionText,_that.precipitationType,_that.precipitationAmount,_that.feelsLikeTemperature);case _:
+return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,_that.windDirection,_that.windDirectionText,_that.precipitationType,_that.precipitationAmount,_that.feelsLikeTemperature,_that.skyStatus);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +201,10 @@ return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime dateTime,  double temperature,  int humidity,  double windSpeed,  int windDirection,  String windDirectionText,  PrecipitationType precipitationType,  double precipitationAmount,  double feelsLikeTemperature)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime dateTime,  double temperature,  int humidity,  double windSpeed,  int windDirection,  String windDirectionText,  PrecipitationType precipitationType,  double precipitationAmount,  double feelsLikeTemperature,  SkyStatus? skyStatus)?  $default,) {final _that = this;
 switch (_that) {
 case _CurrentWeather() when $default != null:
-return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,_that.windDirection,_that.windDirectionText,_that.precipitationType,_that.precipitationAmount,_that.feelsLikeTemperature);case _:
+return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,_that.windDirection,_that.windDirectionText,_that.precipitationType,_that.precipitationAmount,_that.feelsLikeTemperature,_that.skyStatus);case _:
   return null;
 
 }
@@ -215,19 +216,20 @@ return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,
 
 
 class _CurrentWeather implements CurrentWeather {
-  const _CurrentWeather({required this.dateTime, this.temperature = 0.0, this.humidity = 0, this.windSpeed = 0.0, this.windDirection = 0, this.windDirectionText = '풍향 알 수 없음', this.precipitationType = PrecipitationType.none, this.precipitationAmount = 0.0, this.feelsLikeTemperature = 0.0});
+  const _CurrentWeather({required this.dateTime, required this.temperature, required this.humidity, required this.windSpeed, required this.windDirection, required this.windDirectionText, required this.precipitationType, required this.precipitationAmount, required this.feelsLikeTemperature, this.skyStatus});
   
 
 @override final  DateTime dateTime;
 // 관측 시각 (baseDate + baseTime)
-@override@JsonKey() final  double temperature;
-@override@JsonKey() final  int humidity;
-@override@JsonKey() final  double windSpeed;
-@override@JsonKey() final  int windDirection;
-@override@JsonKey() final  String windDirectionText;
-@override@JsonKey() final  PrecipitationType precipitationType;
-@override@JsonKey() final  double precipitationAmount;
-@override@JsonKey() final  double feelsLikeTemperature;
+@override final  double temperature;
+@override final  int humidity;
+@override final  double windSpeed;
+@override final  int windDirection;
+@override final  String windDirectionText;
+@override final  PrecipitationType precipitationType;
+@override final  double precipitationAmount;
+@override final  double feelsLikeTemperature;
+@override final  SkyStatus? skyStatus;
 
 /// Create a copy of CurrentWeather
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +241,16 @@ _$CurrentWeatherCopyWith<_CurrentWeather> get copyWith => __$CurrentWeatherCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentWeather&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&(identical(other.humidity, humidity) || other.humidity == humidity)&&(identical(other.windSpeed, windSpeed) || other.windSpeed == windSpeed)&&(identical(other.windDirection, windDirection) || other.windDirection == windDirection)&&(identical(other.windDirectionText, windDirectionText) || other.windDirectionText == windDirectionText)&&(identical(other.precipitationType, precipitationType) || other.precipitationType == precipitationType)&&(identical(other.precipitationAmount, precipitationAmount) || other.precipitationAmount == precipitationAmount)&&(identical(other.feelsLikeTemperature, feelsLikeTemperature) || other.feelsLikeTemperature == feelsLikeTemperature));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CurrentWeather&&(identical(other.dateTime, dateTime) || other.dateTime == dateTime)&&(identical(other.temperature, temperature) || other.temperature == temperature)&&(identical(other.humidity, humidity) || other.humidity == humidity)&&(identical(other.windSpeed, windSpeed) || other.windSpeed == windSpeed)&&(identical(other.windDirection, windDirection) || other.windDirection == windDirection)&&(identical(other.windDirectionText, windDirectionText) || other.windDirectionText == windDirectionText)&&(identical(other.precipitationType, precipitationType) || other.precipitationType == precipitationType)&&(identical(other.precipitationAmount, precipitationAmount) || other.precipitationAmount == precipitationAmount)&&(identical(other.feelsLikeTemperature, feelsLikeTemperature) || other.feelsLikeTemperature == feelsLikeTemperature)&&(identical(other.skyStatus, skyStatus) || other.skyStatus == skyStatus));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,dateTime,temperature,humidity,windSpeed,windDirection,windDirectionText,precipitationType,precipitationAmount,feelsLikeTemperature);
+int get hashCode => Object.hash(runtimeType,dateTime,temperature,humidity,windSpeed,windDirection,windDirectionText,precipitationType,precipitationAmount,feelsLikeTemperature,skyStatus);
 
 @override
 String toString() {
-  return 'CurrentWeather(dateTime: $dateTime, temperature: $temperature, humidity: $humidity, windSpeed: $windSpeed, windDirection: $windDirection, windDirectionText: $windDirectionText, precipitationType: $precipitationType, precipitationAmount: $precipitationAmount, feelsLikeTemperature: $feelsLikeTemperature)';
+  return 'CurrentWeather(dateTime: $dateTime, temperature: $temperature, humidity: $humidity, windSpeed: $windSpeed, windDirection: $windDirection, windDirectionText: $windDirectionText, precipitationType: $precipitationType, precipitationAmount: $precipitationAmount, feelsLikeTemperature: $feelsLikeTemperature, skyStatus: $skyStatus)';
 }
 
 
@@ -259,7 +261,7 @@ abstract mixin class _$CurrentWeatherCopyWith<$Res> implements $CurrentWeatherCo
   factory _$CurrentWeatherCopyWith(_CurrentWeather value, $Res Function(_CurrentWeather) _then) = __$CurrentWeatherCopyWithImpl;
 @override @useResult
 $Res call({
- DateTime dateTime, double temperature, int humidity, double windSpeed, int windDirection, String windDirectionText, PrecipitationType precipitationType, double precipitationAmount, double feelsLikeTemperature
+ DateTime dateTime, double temperature, int humidity, double windSpeed, int windDirection, String windDirectionText, PrecipitationType precipitationType, double precipitationAmount, double feelsLikeTemperature, SkyStatus? skyStatus
 });
 
 
@@ -276,7 +278,7 @@ class __$CurrentWeatherCopyWithImpl<$Res>
 
 /// Create a copy of CurrentWeather
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? dateTime = null,Object? temperature = null,Object? humidity = null,Object? windSpeed = null,Object? windDirection = null,Object? windDirectionText = null,Object? precipitationType = null,Object? precipitationAmount = null,Object? feelsLikeTemperature = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dateTime = null,Object? temperature = null,Object? humidity = null,Object? windSpeed = null,Object? windDirection = null,Object? windDirectionText = null,Object? precipitationType = null,Object? precipitationAmount = null,Object? feelsLikeTemperature = null,Object? skyStatus = freezed,}) {
   return _then(_CurrentWeather(
 dateTime: null == dateTime ? _self.dateTime : dateTime // ignore: cast_nullable_to_non_nullable
 as DateTime,temperature: null == temperature ? _self.temperature : temperature // ignore: cast_nullable_to_non_nullable
@@ -287,7 +289,8 @@ as int,windDirectionText: null == windDirectionText ? _self.windDirectionText : 
 as String,precipitationType: null == precipitationType ? _self.precipitationType : precipitationType // ignore: cast_nullable_to_non_nullable
 as PrecipitationType,precipitationAmount: null == precipitationAmount ? _self.precipitationAmount : precipitationAmount // ignore: cast_nullable_to_non_nullable
 as double,feelsLikeTemperature: null == feelsLikeTemperature ? _self.feelsLikeTemperature : feelsLikeTemperature // ignore: cast_nullable_to_non_nullable
-as double,
+as double,skyStatus: freezed == skyStatus ? _self.skyStatus : skyStatus // ignore: cast_nullable_to_non_nullable
+as SkyStatus?,
   ));
 }
 

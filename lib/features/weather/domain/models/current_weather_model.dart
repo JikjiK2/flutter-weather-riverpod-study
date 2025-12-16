@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:ai_weather/features/weather/utils/weather_enums.dart';
+import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
 
 part 'current_weather_model.freezed.dart';
 
@@ -7,13 +7,14 @@ part 'current_weather_model.freezed.dart';
 abstract class CurrentWeather with _$CurrentWeather {
   const factory CurrentWeather({
     required DateTime dateTime, // 관측 시각 (baseDate + baseTime)
-    double temperature,
-    int humidity,
-    double windSpeed,
-    int windDirection,
-    String windDirectionText,
-    PrecipitationType precipitationType,
-    double precipitationAmount,
-    double feelsLikeTemperature,
+    required double temperature,
+    required int humidity,
+    required double windSpeed,
+    required int windDirection,
+    required String windDirectionText,
+    required PrecipitationType precipitationType,
+    required double precipitationAmount,
+    required double feelsLikeTemperature,
+    SkyStatus? skyStatus,
   }) = _CurrentWeather;
 }

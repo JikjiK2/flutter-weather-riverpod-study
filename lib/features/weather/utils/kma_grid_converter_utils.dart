@@ -32,7 +32,7 @@ class PointToLatLng {
   static final double ro = re * sf / pow(_roTmp, sn);
 
   @pragma('vm:prefer-inline')
-  static gpsToGRID(double v1, double v2) {
+  static Map<String, int> gpsToGRID(double v1, double v2) {
     var xy = [0, 0];
     double theta;
 

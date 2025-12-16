@@ -1,4 +1,4 @@
-import 'package:ai_weather/features/weather/utils/weather_enums.dart';
+import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ai_weather/features/weather/data/models/kma_ultra_srt_fcst_response_models.dart';
 

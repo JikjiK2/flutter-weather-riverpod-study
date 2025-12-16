@@ -218,7 +218,7 @@ return $default(_that.dateTime,_that.temperature,_that.humidity,_that.windSpeed,
 
 
 class _HourlyShortTermWeather implements HourlyShortTermWeather {
-  const _HourlyShortTermWeather({required this.dateTime, required this.temperature, required this.humidity, required this.windSpeed, this.windDirection = 0, required this.skyStatus, required this.precipitationType, required this.precipitationAmount, required this.pop, this.snowAccumulation = 0.0, this.feelsLikeTemperature = 0.0});
+  const _HourlyShortTermWeather({required this.dateTime, required this.temperature, required this.humidity, required this.windSpeed, required this.windDirection, required this.skyStatus, required this.precipitationType, required this.precipitationAmount, required this.pop, required this.snowAccumulation, required this.feelsLikeTemperature});
   
 
 @override final  DateTime dateTime;
@@ -226,14 +226,14 @@ class _HourlyShortTermWeather implements HourlyShortTermWeather {
 @override final  double temperature;
 @override final  int humidity;
 @override final  double windSpeed;
-@override@JsonKey() final  int windDirection;
+@override final  int windDirection;
 @override final  SkyStatus skyStatus;
 @override final  PrecipitationType precipitationType;
 @override final  double precipitationAmount;
 @override final  int pop;
 // 강수확률
-@override@JsonKey() final  double snowAccumulation;
-@override@JsonKey() final  double feelsLikeTemperature;
+@override final  double snowAccumulation;
+@override final  double feelsLikeTemperature;
 
 /// Create a copy of HourlyShortTermWeather
 /// with the given fields replaced by the non-null parameter values.

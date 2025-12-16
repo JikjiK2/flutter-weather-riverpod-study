@@ -1,15 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_ce/hive.dart';
 
-@HiveType(typeId: 100)
 enum SkyStatus {
-  @HiveField(0)
   @JsonValue('1')
   sunny(1, '맑음'),
-  @HiveField(1)
+
   @JsonValue('3')
   partlyCloudy(3, '구름 많음'),
-  @HiveField(2)
+
   @JsonValue('4')
   cloudy(4, '흐림');
 
@@ -31,30 +29,21 @@ enum SkyStatus {
   }
 }
 
-@HiveType(typeId: 101)
 enum PrecipitationType {
-  @HiveField(0)
   @JsonValue('0')
   none(0, '없음'),
-  @HiveField(1)
   @JsonValue('1')
   rain(1, '비'),
-  @HiveField(2)
   @JsonValue('2')
   rainSnow(2, '비/눈'),
-  @HiveField(3)
   @JsonValue('3')
   snow(3, '눈'),
-  @HiveField(4)
   @JsonValue('4')
   shower(4, '소나기'),
-  @HiveField(5)
   @JsonValue('5')
   drizzle(5, '빗방울'),
-  @HiveField(6)
   @JsonValue('6')
   drizzleSnow(6, '빗방울눈날림'),
-  @HiveField(7)
   @JsonValue('7')
   snowFlurry(7, '눈날림');
 
@@ -86,12 +75,9 @@ enum PrecipitationType {
   }
 }
 
-@HiveType(typeId: 102)
 enum Thunderbolt {
-  @HiveField(0)
   @JsonValue('0')
   none(0, '없음'),
-  @HiveField(1)
   @JsonValue('1')
   exist(1, '있음');
 
@@ -111,16 +97,34 @@ enum Thunderbolt {
   }
 }
 
-// Enum에서 String code로 파싱하기 위한 확장 함수들
-extension SkyStatusExtension on SkyStatus {
-  static SkyStatus fromStringCode(String code) => SkyStatus.fromCode(code);
+String skyStatusToString(SkyStatus status) {
+  switch (status) {
+    case SkyStatus.sunny:
+      return '맑음';
+    case SkyStatus.partlyCloudy:
+      return '구름 많음';
+    case SkyStatus.cloudy:
+      return '흐림';
+  }
 }
 
-extension PrecipitationTypeExtension on PrecipitationType {
-  static PrecipitationType fromStringCode(String code) =>
-      PrecipitationType.fromCode(code);
-}
-
-extension ThunderboltExtension on Thunderbolt {
-  static Thunderbolt fromStringCode(String code) => Thunderbolt.fromCode(code);
+String precipitationTypeToString(PrecipitationType type) {
+  switch (type) {
+    case PrecipitationType.none:
+      return '없음';
+    case PrecipitationType.rain:
+      return '비';
+    case PrecipitationType.rainSnow:
+      return '비/눈';
+    case PrecipitationType.snow:
+      return '눈';
+    case PrecipitationType.shower:
+      return '소나기';
+    case PrecipitationType.drizzle:
+      return '빗방울';
+    case PrecipitationType.drizzleSnow:
+      return '빗방울/눈날림';
+    case PrecipitationType.snowFlurry:
+      return '눈날림';
+  }
 }

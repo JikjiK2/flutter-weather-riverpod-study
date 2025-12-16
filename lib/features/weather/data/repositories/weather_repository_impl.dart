@@ -1,3 +1,4 @@
+import 'package:ai_weather/features/location/utils/address_formatter_utils.dart';
 import 'package:ai_weather/features/weather/data/datasources/kma_mid_term_api_data_source.dart';
 import 'package:ai_weather/features/weather/data/datasources/kma_short_term_api_data_source.dart';
 import 'package:ai_weather/features/weather/domain/models/hourly_short_term_weather_model.dart';
@@ -10,7 +11,8 @@ import 'package:ai_weather/config/api_config.dart';
 import 'package:ai_weather/features/weather/domain/models/daily_mid_term_model.dart';
 import 'package:ai_weather/features/weather/domain/models/mid_term_weather_model.dart';
 import 'package:ai_weather/features/weather/data/repositories/weather_repository.dart';
-import 'package:ai_weather/features/weather/utils/weather_enums.dart';
+import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
+import 'package:ai_weather/features/weather/presentation/providers/weather_providers.dart';
 import 'package:ai_weather/features/weather/utils/weather_api_utils.dart';
 import 'package:ai_weather/features/weather/utils/weather_calculator_utils.dart';
 import 'package:ai_weather/features/weather/utils/weather_formatter_utils.dart';
@@ -24,7 +26,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
   WeatherRepositoryImpl(this._shortTermDataSource, this._midTermDataSource);
 
-  // KMA 초단기실황
+  // KMA 초단기 실황
   @override
   Future<CurrentWeather> getCurrentWeather({
     required int nx,
@@ -126,7 +128,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
     }
   }
 
-  // KMA 초단기 예보 가져오기
+  // KMA 초단기 예보
   @override
   Future<List<HourlyWeatherModel>> getUltraSrtForecastList({
     required int nx,
@@ -243,12 +245,29 @@ class WeatherRepositoryImpl implements WeatherRepository {
     }
   }
 
+  // 단기 예보 캐싱을 위한 변수
+  List<DailyShortTermWeather>? _cachedDailyForecast;
+  DateTime? _dailyForecastCacheTime;
+  String? _dailyForecastCacheKey;
+
   // KMA 단기 예보
   @override
   Future<List<DailyShortTermWeather>> getShortTermForecast({
     required int nx,
     required int ny,
   }) async {
+    final cacheKey = '$nx,$ny';
+    // 캐시 확인: 1시간 이내의 유효한 캐시가 있으면 즉시 반환
+    if (_cachedDailyForecast != null &&
+        _dailyForecastCacheKey == cacheKey &&
+        _dailyForecastCacheTime != null &&
+        DateTime.now().difference(_dailyForecastCacheTime!) <
+            const Duration(hours: 3)) {
+      appLogger.i('단기 예보 캐시 사용');
+      return _cachedDailyForecast!;
+    }
+
+    appLogger.i('단기 예보 API 호출');
     final now = DateTime.now();
     final baseInfo = WeatherApiUtils.getShortTermForecastBaseTime(now);
 
@@ -272,6 +291,8 @@ class WeatherRepositoryImpl implements WeatherRepository {
       if (items.isEmpty) {
         return [];
       }
+
+      // ... (기존 데이터 처리 로직은 그대로 유지) ...
 
       final Map<String, Map<String, double>> minMaxTempsByDate = {};
       final Map<String, Map<String, String>> groupedByDateTime = {};
@@ -355,6 +376,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
             pop: int.tryParse(categoryMap['POP'] ?? '0') ?? 0,
             snowAccumulation:
                 double.tryParse(categoryMap['SNO'] ?? '0.0') ?? 0.0,
+            feelsLikeTemperature: 0.0,
           ),
         );
       });
@@ -464,6 +486,11 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
       dailyForecastList.sort((a, b) => a.date.compareTo(b.date));
 
+      // 캐시 업데이트
+      _cachedDailyForecast = dailyForecastList;
+      _dailyForecastCacheTime = DateTime.now();
+      _dailyForecastCacheKey = cacheKey;
+
       return dailyForecastList;
     } catch (e, stack) {
       appLogger.e(
@@ -479,7 +506,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   Future<MidTermWeather> getMidTermWeather({
     required String regId, // 육상 예보와 기온 예보에 사용될 regId (도시 단위)
-    required String stnId, // 중기 전망에 사용될 stnId (광역 단위)
+    String? stnId, // 중기 전망에 사용될 stnId (광역 단위)
     required String tmFc, // 발표 시각 (공통)
   }) async {
     try {
@@ -504,15 +531,15 @@ class WeatherRepositoryImpl implements WeatherRepository {
         tmFc: tmFc,
       );
 
-      // 3. 중기 전망
-      final midOutlookResponse = await _midTermDataSource.getMidTermOutlook(
-        authKey: ApiConfig.kmaServiceKey!,
-        pageNo: 1,
-        numOfRows: 1,
-        dataType: 'JSON',
-        stnId: stnId,
-        tmFc: tmFc,
-      );
+      // // 3. 중기 전망
+      // final midOutlookResponse = await _midTermDataSource.getMidTermOutlook(
+      //   authKey: ApiConfig.kmaServiceKey!,
+      //   pageNo: 1,
+      //   numOfRows: 1,
+      //   dataType: 'JSON',
+      //   stnId: stnId,
+      //   tmFc: tmFc,
+      // );
 
       if (midTaResponse.response.header.resultCode != '00' ||
           midTaResponse.response.body.items.item.isEmpty) {
@@ -522,14 +549,14 @@ class WeatherRepositoryImpl implements WeatherRepository {
           midLandResponse.response.body.items.item.isEmpty) {
         appLogger.e("MidTermLandForecast API 실패 또는 데이터 없음");
       }
-      if (midOutlookResponse.response.header.resultCode != '00' ||
-          midOutlookResponse.response.body.items.item.isEmpty) {
-        appLogger.e("MidTermOutlook API 실패 또는 데이터 없음");
-      }
+      // if (midOutlookResponse.response.header.resultCode != '00' ||
+      //     midOutlookResponse.response.body.items.item.isEmpty) {
+      //   appLogger.e("MidTermOutlook API 실패 또는 데이터 없음");
+      // }
 
       final midTaItem = midTaResponse.response.body.items.item.first;
       final midLandItem = midLandResponse.response.body.items.item.first;
-      final midOutlookItem = midOutlookResponse.response.body.items.item.first;
+      // final midOutlookItem = midOutlookResponse.response.body.items.item.first;
 
       final List<DailyMidTermWeather> dailyForecasts = [];
       final DateTime baseDate = DateTime.parse(
@@ -651,7 +678,8 @@ class WeatherRepositoryImpl implements WeatherRepository {
         regionId: regId,
         regionName: regionName, // regId나 stnId를 기반으로 실제 지역명 조회 필요
         publishedTime: publishedTime,
-        overallOutlook: midOutlookItem.wfSv ?? '전망 정보 없음',
+        // overallOutlook: midOutlookItem.wfSv ?? '전망 정보 없음',
+        overallOutlook: '전망 정보 없음',
         dailyForecasts: dailyForecasts,
       );
     } on DioException catch (e, stack) {
