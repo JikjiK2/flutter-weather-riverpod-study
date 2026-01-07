@@ -56,6 +56,43 @@ class _GoogleGeocodingApiDataSource implements GoogleGeocodingApiDataSource {
     return _value;
   }
 
+  @override
+  Future<GoogleGeocodingResponse> searchAddress({
+    required String address,
+    required String apiKey,
+    String language = "ko",
+    String region = 'kr',
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'address': address,
+      r'key': apiKey,
+      r'language': language,
+      r'region': region,
+    };
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<GoogleGeocodingResponse>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            'json',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late GoogleGeocodingResponse _value;
+    try {
+      _value = GoogleGeocodingResponse.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, _result);
+      rethrow;
+    }
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

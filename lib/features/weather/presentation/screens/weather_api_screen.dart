@@ -1,7 +1,10 @@
-import 'package:ai_weather/core/router/utils/string_extensions.dart';
+import 'package:ai_weather/core/utils/string_extensions.dart';
+import 'package:ai_weather/features/info/presentation/info_screen.dart';
 import 'package:ai_weather/features/location/domain/models/address_model.dart';
+import 'package:ai_weather/features/location/presentation/screens/search_address.dart';
 import 'package:ai_weather/features/weather/presentation/widgets/current_weather_card.dart';
 import 'package:ai_weather/features/weather/presentation/widgets/daily_forecast_section.dart';
+
 import 'package:ai_weather/features/weather/presentation/widgets/hourly_forecast_section.dart';
 import 'package:ai_weather/features/weather/presentation/widgets/mid_term_forecast_section.dart';
 import 'package:flutter/material.dart';
@@ -9,23 +12,33 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
 import 'package:ai_weather/features/weather/presentation/providers/weather_providers.dart';
+import 'package:go_router/go_router.dart';
 
 class WeatherScreen extends ConsumerWidget {
   const WeatherScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final weatherLocationAsync = ref.watch(weatherLocationProvider);
+    final weatherLocationAsync = ref.watch(selectedWeatherLocationProvider);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('AI 날씨'),
-        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(Icons.search),
+          onPressed: () => context.push('/search_address'),
+
+          tooltip: '주소 검색',
+        ),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () => context.push('/info'),
+            tooltip: '정보',
+          ),
           IconButton(
             icon: const Icon(Icons.my_location),
             onPressed: () =>
-                ref.read(weatherLocationProvider.notifier).refresh(),
+                ref.read(selectedWeatherLocationProvider.notifier).refresh(),
             tooltip: '현재 위치로 날씨 새로고침',
           ),
         ],
@@ -48,7 +61,8 @@ class WeatherScreen extends ConsumerWidget {
             children: [
               const Text('초기 위치를 가져오는 데 실패했습니다.'),
               ElevatedButton(
-                onPressed: () => ref.invalidate(weatherLocationProvider),
+                onPressed: () =>
+                    ref.invalidate(selectedWeatherLocationProvider),
                 child: const Text('다시 시도'),
               ),
             ],
@@ -63,7 +77,8 @@ class WeatherScreen extends ConsumerWidget {
     final isGpsEnabledAsync = ref.watch(locationIsServiceEnabledProvider);
 
     return RefreshIndicator(
-      onRefresh: () => ref.read(weatherLocationProvider.notifier).refresh(),
+      onRefresh: () =>
+          ref.read(selectedWeatherLocationProvider.notifier).refresh(),
       child: SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Padding(
@@ -72,10 +87,9 @@ class WeatherScreen extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.start, // 자식들을 전체 가로 중앙에 배치
-                mainAxisSize: MainAxisSize.min, // 필요한 만큼만 공간 차지 (선택 사항)
+                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  // 1. GPS 아이콘 영역
                   isGpsEnabledAsync.when(
                     data: (isEnabled) => Icon(
                       isEnabled ? Icons.gps_fixed : Icons.gps_off,

@@ -59,38 +59,21 @@ abstract class KmaMidTmpFcstApiItems with _$KmaMidTmpFcstApiItems {
       _$KmaMidTmpFcstApiItemsFromJson(json);
 }
 
-// 개별 예보 아이템 모델 (핵심 데이터)
 @freezed
 abstract class KmaMidTmpFcstApiItem with _$KmaMidTmpFcstApiItem {
   const factory KmaMidTmpFcstApiItem({
     required String regId, // 지역 코드 (예: 11B10101)
-    @JsonKey(name: 'taMin4') int? taMin4,
-    @JsonKey(name: 'taMin4Low') int? taMin4Low,
-    @JsonKey(name: 'taMin4High') int? taMin4High,
-    @JsonKey(name: 'taMax4') int? taMax4,
-    @JsonKey(name: 'taMax4Low') int? taMax4Low,
-    @JsonKey(name: 'taMax4High') int? taMax4High,
+    @JsonKey(name: 'taMin4') double? taMin4,
+    @JsonKey(name: 'taMax4') double? taMax4,
 
-    @JsonKey(name: 'taMin5') int? taMin5,
-    @JsonKey(name: 'taMin5Low') int? taMin5Low,
-    @JsonKey(name: 'taMin5High') int? taMin5High,
-    @JsonKey(name: 'taMax5') int? taMax5,
-    @JsonKey(name: 'taMax5Low') int? taMax5Low,
-    @JsonKey(name: 'taMax5High') int? taMax5High,
+    @JsonKey(name: 'taMin5') double? taMin5,
+    @JsonKey(name: 'taMax5') double? taMax5,
 
-    @JsonKey(name: 'taMin6') int? taMin6,
-    @JsonKey(name: 'taMin6Low') int? taMin6Low,
-    @JsonKey(name: 'taMin6High') int? taMin6High,
-    @JsonKey(name: 'taMax6') int? taMax6,
-    @JsonKey(name: 'taMax6Low') int? taMax6Low,
-    @JsonKey(name: 'taMax6High') int? taMax6High,
+    @JsonKey(name: 'taMin6') double? taMin6,
+    @JsonKey(name: 'taMax6') double? taMax6,
 
-    @JsonKey(name: 'taMin7') int? taMin7,
-    @JsonKey(name: 'taMin7Low') int? taMin7Low,
-    @JsonKey(name: 'taMin7High') int? taMin7High,
-    @JsonKey(name: 'taMax7') int? taMax7,
-    @JsonKey(name: 'taMax7Low') int? taMax7Low,
-    @JsonKey(name: 'taMax7High') int? taMax7High,
+    @JsonKey(name: 'taMin7') double? taMin7,
+    @JsonKey(name: 'taMax7') double? taMax7,
   }) = _KmaMidTmpFcstApiItem;
 
   factory KmaMidTmpFcstApiItem.fromJson(Map<String, dynamic> json) =>

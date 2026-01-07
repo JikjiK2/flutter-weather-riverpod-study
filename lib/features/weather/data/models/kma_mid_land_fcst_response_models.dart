@@ -59,7 +59,6 @@ abstract class KmaMidLandFcstApiItems with _$KmaMidLandFcstApiItems {
       _$KmaMidLandFcstApiItemsFromJson(json);
 }
 
-// 개별 예보 아이템 모델 (핵심 데이터)
 @freezed
 abstract class KmaMidLandFcstApiItem with _$KmaMidLandFcstApiItem {
   const factory KmaMidLandFcstApiItem({

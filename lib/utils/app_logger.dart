@@ -1,6 +1,5 @@
 import 'package:logger/logger.dart';
 
-// 앱 전체에서 사용할 Logger 인스턴스
 final appLogger = Logger(
   printer: PrettyPrinter(
     methodCount: 2, // 표시할 호출 메서드 스택 수

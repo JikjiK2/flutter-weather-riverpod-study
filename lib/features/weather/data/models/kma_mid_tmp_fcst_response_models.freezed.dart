@@ -1441,7 +1441,7 @@ as List<KmaMidTmpFcstApiItem>,
 mixin _$KmaMidTmpFcstApiItem {
 
  String get regId;// 지역 코드 (예: 11B10101)
-@JsonKey(name: 'taMin4') int? get taMin4;@JsonKey(name: 'taMin4Low') int? get taMin4Low;@JsonKey(name: 'taMin4High') int? get taMin4High;@JsonKey(name: 'taMax4') int? get taMax4;@JsonKey(name: 'taMax4Low') int? get taMax4Low;@JsonKey(name: 'taMax4High') int? get taMax4High;@JsonKey(name: 'taMin5') int? get taMin5;@JsonKey(name: 'taMin5Low') int? get taMin5Low;@JsonKey(name: 'taMin5High') int? get taMin5High;@JsonKey(name: 'taMax5') int? get taMax5;@JsonKey(name: 'taMax5Low') int? get taMax5Low;@JsonKey(name: 'taMax5High') int? get taMax5High;@JsonKey(name: 'taMin6') int? get taMin6;@JsonKey(name: 'taMin6Low') int? get taMin6Low;@JsonKey(name: 'taMin6High') int? get taMin6High;@JsonKey(name: 'taMax6') int? get taMax6;@JsonKey(name: 'taMax6Low') int? get taMax6Low;@JsonKey(name: 'taMax6High') int? get taMax6High;@JsonKey(name: 'taMin7') int? get taMin7;@JsonKey(name: 'taMin7Low') int? get taMin7Low;@JsonKey(name: 'taMin7High') int? get taMin7High;@JsonKey(name: 'taMax7') int? get taMax7;@JsonKey(name: 'taMax7Low') int? get taMax7Low;@JsonKey(name: 'taMax7High') int? get taMax7High;
+@JsonKey(name: 'taMin4') double? get taMin4;@JsonKey(name: 'taMax4') double? get taMax4;@JsonKey(name: 'taMin5') double? get taMin5;@JsonKey(name: 'taMax5') double? get taMax5;@JsonKey(name: 'taMin6') double? get taMin6;@JsonKey(name: 'taMax6') double? get taMax6;@JsonKey(name: 'taMin7') double? get taMin7;@JsonKey(name: 'taMax7') double? get taMax7;
 /// Create a copy of KmaMidTmpFcstApiItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1454,16 +1454,16 @@ $KmaMidTmpFcstApiItemCopyWith<KmaMidTmpFcstApiItem> get copyWith => _$KmaMidTmpF
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaMidTmpFcstApiItem&&(identical(other.regId, regId) || other.regId == regId)&&(identical(other.taMin4, taMin4) || other.taMin4 == taMin4)&&(identical(other.taMin4Low, taMin4Low) || other.taMin4Low == taMin4Low)&&(identical(other.taMin4High, taMin4High) || other.taMin4High == taMin4High)&&(identical(other.taMax4, taMax4) || other.taMax4 == taMax4)&&(identical(other.taMax4Low, taMax4Low) || other.taMax4Low == taMax4Low)&&(identical(other.taMax4High, taMax4High) || other.taMax4High == taMax4High)&&(identical(other.taMin5, taMin5) || other.taMin5 == taMin5)&&(identical(other.taMin5Low, taMin5Low) || other.taMin5Low == taMin5Low)&&(identical(other.taMin5High, taMin5High) || other.taMin5High == taMin5High)&&(identical(other.taMax5, taMax5) || other.taMax5 == taMax5)&&(identical(other.taMax5Low, taMax5Low) || other.taMax5Low == taMax5Low)&&(identical(other.taMax5High, taMax5High) || other.taMax5High == taMax5High)&&(identical(other.taMin6, taMin6) || other.taMin6 == taMin6)&&(identical(other.taMin6Low, taMin6Low) || other.taMin6Low == taMin6Low)&&(identical(other.taMin6High, taMin6High) || other.taMin6High == taMin6High)&&(identical(other.taMax6, taMax6) || other.taMax6 == taMax6)&&(identical(other.taMax6Low, taMax6Low) || other.taMax6Low == taMax6Low)&&(identical(other.taMax6High, taMax6High) || other.taMax6High == taMax6High)&&(identical(other.taMin7, taMin7) || other.taMin7 == taMin7)&&(identical(other.taMin7Low, taMin7Low) || other.taMin7Low == taMin7Low)&&(identical(other.taMin7High, taMin7High) || other.taMin7High == taMin7High)&&(identical(other.taMax7, taMax7) || other.taMax7 == taMax7)&&(identical(other.taMax7Low, taMax7Low) || other.taMax7Low == taMax7Low)&&(identical(other.taMax7High, taMax7High) || other.taMax7High == taMax7High));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is KmaMidTmpFcstApiItem&&(identical(other.regId, regId) || other.regId == regId)&&(identical(other.taMin4, taMin4) || other.taMin4 == taMin4)&&(identical(other.taMax4, taMax4) || other.taMax4 == taMax4)&&(identical(other.taMin5, taMin5) || other.taMin5 == taMin5)&&(identical(other.taMax5, taMax5) || other.taMax5 == taMax5)&&(identical(other.taMin6, taMin6) || other.taMin6 == taMin6)&&(identical(other.taMax6, taMax6) || other.taMax6 == taMax6)&&(identical(other.taMin7, taMin7) || other.taMin7 == taMin7)&&(identical(other.taMax7, taMax7) || other.taMax7 == taMax7));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,regId,taMin4,taMin4Low,taMin4High,taMax4,taMax4Low,taMax4High,taMin5,taMin5Low,taMin5High,taMax5,taMax5Low,taMax5High,taMin6,taMin6Low,taMin6High,taMax6,taMax6Low,taMax6High,taMin7,taMin7Low,taMin7High,taMax7,taMax7Low,taMax7High]);
+int get hashCode => Object.hash(runtimeType,regId,taMin4,taMax4,taMin5,taMax5,taMin6,taMax6,taMin7,taMax7);
 
 @override
 String toString() {
-  return 'KmaMidTmpFcstApiItem(regId: $regId, taMin4: $taMin4, taMin4Low: $taMin4Low, taMin4High: $taMin4High, taMax4: $taMax4, taMax4Low: $taMax4Low, taMax4High: $taMax4High, taMin5: $taMin5, taMin5Low: $taMin5Low, taMin5High: $taMin5High, taMax5: $taMax5, taMax5Low: $taMax5Low, taMax5High: $taMax5High, taMin6: $taMin6, taMin6Low: $taMin6Low, taMin6High: $taMin6High, taMax6: $taMax6, taMax6Low: $taMax6Low, taMax6High: $taMax6High, taMin7: $taMin7, taMin7Low: $taMin7Low, taMin7High: $taMin7High, taMax7: $taMax7, taMax7Low: $taMax7Low, taMax7High: $taMax7High)';
+  return 'KmaMidTmpFcstApiItem(regId: $regId, taMin4: $taMin4, taMax4: $taMax4, taMin5: $taMin5, taMax5: $taMax5, taMin6: $taMin6, taMax6: $taMax6, taMin7: $taMin7, taMax7: $taMax7)';
 }
 
 
@@ -1474,7 +1474,7 @@ abstract mixin class $KmaMidTmpFcstApiItemCopyWith<$Res>  {
   factory $KmaMidTmpFcstApiItemCopyWith(KmaMidTmpFcstApiItem value, $Res Function(KmaMidTmpFcstApiItem) _then) = _$KmaMidTmpFcstApiItemCopyWithImpl;
 @useResult
 $Res call({
- String regId,@JsonKey(name: 'taMin4') int? taMin4,@JsonKey(name: 'taMin4Low') int? taMin4Low,@JsonKey(name: 'taMin4High') int? taMin4High,@JsonKey(name: 'taMax4') int? taMax4,@JsonKey(name: 'taMax4Low') int? taMax4Low,@JsonKey(name: 'taMax4High') int? taMax4High,@JsonKey(name: 'taMin5') int? taMin5,@JsonKey(name: 'taMin5Low') int? taMin5Low,@JsonKey(name: 'taMin5High') int? taMin5High,@JsonKey(name: 'taMax5') int? taMax5,@JsonKey(name: 'taMax5Low') int? taMax5Low,@JsonKey(name: 'taMax5High') int? taMax5High,@JsonKey(name: 'taMin6') int? taMin6,@JsonKey(name: 'taMin6Low') int? taMin6Low,@JsonKey(name: 'taMin6High') int? taMin6High,@JsonKey(name: 'taMax6') int? taMax6,@JsonKey(name: 'taMax6Low') int? taMax6Low,@JsonKey(name: 'taMax6High') int? taMax6High,@JsonKey(name: 'taMin7') int? taMin7,@JsonKey(name: 'taMin7Low') int? taMin7Low,@JsonKey(name: 'taMin7High') int? taMin7High,@JsonKey(name: 'taMax7') int? taMax7,@JsonKey(name: 'taMax7Low') int? taMax7Low,@JsonKey(name: 'taMax7High') int? taMax7High
+ String regId,@JsonKey(name: 'taMin4') double? taMin4,@JsonKey(name: 'taMax4') double? taMax4,@JsonKey(name: 'taMin5') double? taMin5,@JsonKey(name: 'taMax5') double? taMax5,@JsonKey(name: 'taMin6') double? taMin6,@JsonKey(name: 'taMax6') double? taMax6,@JsonKey(name: 'taMin7') double? taMin7,@JsonKey(name: 'taMax7') double? taMax7
 });
 
 
@@ -1491,34 +1491,18 @@ class _$KmaMidTmpFcstApiItemCopyWithImpl<$Res>
 
 /// Create a copy of KmaMidTmpFcstApiItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? regId = null,Object? taMin4 = freezed,Object? taMin4Low = freezed,Object? taMin4High = freezed,Object? taMax4 = freezed,Object? taMax4Low = freezed,Object? taMax4High = freezed,Object? taMin5 = freezed,Object? taMin5Low = freezed,Object? taMin5High = freezed,Object? taMax5 = freezed,Object? taMax5Low = freezed,Object? taMax5High = freezed,Object? taMin6 = freezed,Object? taMin6Low = freezed,Object? taMin6High = freezed,Object? taMax6 = freezed,Object? taMax6Low = freezed,Object? taMax6High = freezed,Object? taMin7 = freezed,Object? taMin7Low = freezed,Object? taMin7High = freezed,Object? taMax7 = freezed,Object? taMax7Low = freezed,Object? taMax7High = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? regId = null,Object? taMin4 = freezed,Object? taMax4 = freezed,Object? taMin5 = freezed,Object? taMax5 = freezed,Object? taMin6 = freezed,Object? taMax6 = freezed,Object? taMin7 = freezed,Object? taMax7 = freezed,}) {
   return _then(_self.copyWith(
 regId: null == regId ? _self.regId : regId // ignore: cast_nullable_to_non_nullable
 as String,taMin4: freezed == taMin4 ? _self.taMin4 : taMin4 // ignore: cast_nullable_to_non_nullable
-as int?,taMin4Low: freezed == taMin4Low ? _self.taMin4Low : taMin4Low // ignore: cast_nullable_to_non_nullable
-as int?,taMin4High: freezed == taMin4High ? _self.taMin4High : taMin4High // ignore: cast_nullable_to_non_nullable
-as int?,taMax4: freezed == taMax4 ? _self.taMax4 : taMax4 // ignore: cast_nullable_to_non_nullable
-as int?,taMax4Low: freezed == taMax4Low ? _self.taMax4Low : taMax4Low // ignore: cast_nullable_to_non_nullable
-as int?,taMax4High: freezed == taMax4High ? _self.taMax4High : taMax4High // ignore: cast_nullable_to_non_nullable
-as int?,taMin5: freezed == taMin5 ? _self.taMin5 : taMin5 // ignore: cast_nullable_to_non_nullable
-as int?,taMin5Low: freezed == taMin5Low ? _self.taMin5Low : taMin5Low // ignore: cast_nullable_to_non_nullable
-as int?,taMin5High: freezed == taMin5High ? _self.taMin5High : taMin5High // ignore: cast_nullable_to_non_nullable
-as int?,taMax5: freezed == taMax5 ? _self.taMax5 : taMax5 // ignore: cast_nullable_to_non_nullable
-as int?,taMax5Low: freezed == taMax5Low ? _self.taMax5Low : taMax5Low // ignore: cast_nullable_to_non_nullable
-as int?,taMax5High: freezed == taMax5High ? _self.taMax5High : taMax5High // ignore: cast_nullable_to_non_nullable
-as int?,taMin6: freezed == taMin6 ? _self.taMin6 : taMin6 // ignore: cast_nullable_to_non_nullable
-as int?,taMin6Low: freezed == taMin6Low ? _self.taMin6Low : taMin6Low // ignore: cast_nullable_to_non_nullable
-as int?,taMin6High: freezed == taMin6High ? _self.taMin6High : taMin6High // ignore: cast_nullable_to_non_nullable
-as int?,taMax6: freezed == taMax6 ? _self.taMax6 : taMax6 // ignore: cast_nullable_to_non_nullable
-as int?,taMax6Low: freezed == taMax6Low ? _self.taMax6Low : taMax6Low // ignore: cast_nullable_to_non_nullable
-as int?,taMax6High: freezed == taMax6High ? _self.taMax6High : taMax6High // ignore: cast_nullable_to_non_nullable
-as int?,taMin7: freezed == taMin7 ? _self.taMin7 : taMin7 // ignore: cast_nullable_to_non_nullable
-as int?,taMin7Low: freezed == taMin7Low ? _self.taMin7Low : taMin7Low // ignore: cast_nullable_to_non_nullable
-as int?,taMin7High: freezed == taMin7High ? _self.taMin7High : taMin7High // ignore: cast_nullable_to_non_nullable
-as int?,taMax7: freezed == taMax7 ? _self.taMax7 : taMax7 // ignore: cast_nullable_to_non_nullable
-as int?,taMax7Low: freezed == taMax7Low ? _self.taMax7Low : taMax7Low // ignore: cast_nullable_to_non_nullable
-as int?,taMax7High: freezed == taMax7High ? _self.taMax7High : taMax7High // ignore: cast_nullable_to_non_nullable
-as int?,
+as double?,taMax4: freezed == taMax4 ? _self.taMax4 : taMax4 // ignore: cast_nullable_to_non_nullable
+as double?,taMin5: freezed == taMin5 ? _self.taMin5 : taMin5 // ignore: cast_nullable_to_non_nullable
+as double?,taMax5: freezed == taMax5 ? _self.taMax5 : taMax5 // ignore: cast_nullable_to_non_nullable
+as double?,taMin6: freezed == taMin6 ? _self.taMin6 : taMin6 // ignore: cast_nullable_to_non_nullable
+as double?,taMax6: freezed == taMax6 ? _self.taMax6 : taMax6 // ignore: cast_nullable_to_non_nullable
+as double?,taMin7: freezed == taMin7 ? _self.taMin7 : taMin7 // ignore: cast_nullable_to_non_nullable
+as double?,taMax7: freezed == taMax7 ? _self.taMax7 : taMax7 // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 
@@ -1603,10 +1587,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String regId, @JsonKey(name: 'taMin4')  int? taMin4, @JsonKey(name: 'taMin4Low')  int? taMin4Low, @JsonKey(name: 'taMin4High')  int? taMin4High, @JsonKey(name: 'taMax4')  int? taMax4, @JsonKey(name: 'taMax4Low')  int? taMax4Low, @JsonKey(name: 'taMax4High')  int? taMax4High, @JsonKey(name: 'taMin5')  int? taMin5, @JsonKey(name: 'taMin5Low')  int? taMin5Low, @JsonKey(name: 'taMin5High')  int? taMin5High, @JsonKey(name: 'taMax5')  int? taMax5, @JsonKey(name: 'taMax5Low')  int? taMax5Low, @JsonKey(name: 'taMax5High')  int? taMax5High, @JsonKey(name: 'taMin6')  int? taMin6, @JsonKey(name: 'taMin6Low')  int? taMin6Low, @JsonKey(name: 'taMin6High')  int? taMin6High, @JsonKey(name: 'taMax6')  int? taMax6, @JsonKey(name: 'taMax6Low')  int? taMax6Low, @JsonKey(name: 'taMax6High')  int? taMax6High, @JsonKey(name: 'taMin7')  int? taMin7, @JsonKey(name: 'taMin7Low')  int? taMin7Low, @JsonKey(name: 'taMin7High')  int? taMin7High, @JsonKey(name: 'taMax7')  int? taMax7, @JsonKey(name: 'taMax7Low')  int? taMax7Low, @JsonKey(name: 'taMax7High')  int? taMax7High)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String regId, @JsonKey(name: 'taMin4')  double? taMin4, @JsonKey(name: 'taMax4')  double? taMax4, @JsonKey(name: 'taMin5')  double? taMin5, @JsonKey(name: 'taMax5')  double? taMax5, @JsonKey(name: 'taMin6')  double? taMin6, @JsonKey(name: 'taMax6')  double? taMax6, @JsonKey(name: 'taMin7')  double? taMin7, @JsonKey(name: 'taMax7')  double? taMax7)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _KmaMidTmpFcstApiItem() when $default != null:
-return $default(_that.regId,_that.taMin4,_that.taMin4Low,_that.taMin4High,_that.taMax4,_that.taMax4Low,_that.taMax4High,_that.taMin5,_that.taMin5Low,_that.taMin5High,_that.taMax5,_that.taMax5Low,_that.taMax5High,_that.taMin6,_that.taMin6Low,_that.taMin6High,_that.taMax6,_that.taMax6Low,_that.taMax6High,_that.taMin7,_that.taMin7Low,_that.taMin7High,_that.taMax7,_that.taMax7Low,_that.taMax7High);case _:
+return $default(_that.regId,_that.taMin4,_that.taMax4,_that.taMin5,_that.taMax5,_that.taMin6,_that.taMax6,_that.taMin7,_that.taMax7);case _:
   return orElse();
 
 }
@@ -1624,10 +1608,10 @@ return $default(_that.regId,_that.taMin4,_that.taMin4Low,_that.taMin4High,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String regId, @JsonKey(name: 'taMin4')  int? taMin4, @JsonKey(name: 'taMin4Low')  int? taMin4Low, @JsonKey(name: 'taMin4High')  int? taMin4High, @JsonKey(name: 'taMax4')  int? taMax4, @JsonKey(name: 'taMax4Low')  int? taMax4Low, @JsonKey(name: 'taMax4High')  int? taMax4High, @JsonKey(name: 'taMin5')  int? taMin5, @JsonKey(name: 'taMin5Low')  int? taMin5Low, @JsonKey(name: 'taMin5High')  int? taMin5High, @JsonKey(name: 'taMax5')  int? taMax5, @JsonKey(name: 'taMax5Low')  int? taMax5Low, @JsonKey(name: 'taMax5High')  int? taMax5High, @JsonKey(name: 'taMin6')  int? taMin6, @JsonKey(name: 'taMin6Low')  int? taMin6Low, @JsonKey(name: 'taMin6High')  int? taMin6High, @JsonKey(name: 'taMax6')  int? taMax6, @JsonKey(name: 'taMax6Low')  int? taMax6Low, @JsonKey(name: 'taMax6High')  int? taMax6High, @JsonKey(name: 'taMin7')  int? taMin7, @JsonKey(name: 'taMin7Low')  int? taMin7Low, @JsonKey(name: 'taMin7High')  int? taMin7High, @JsonKey(name: 'taMax7')  int? taMax7, @JsonKey(name: 'taMax7Low')  int? taMax7Low, @JsonKey(name: 'taMax7High')  int? taMax7High)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String regId, @JsonKey(name: 'taMin4')  double? taMin4, @JsonKey(name: 'taMax4')  double? taMax4, @JsonKey(name: 'taMin5')  double? taMin5, @JsonKey(name: 'taMax5')  double? taMax5, @JsonKey(name: 'taMin6')  double? taMin6, @JsonKey(name: 'taMax6')  double? taMax6, @JsonKey(name: 'taMin7')  double? taMin7, @JsonKey(name: 'taMax7')  double? taMax7)  $default,) {final _that = this;
 switch (_that) {
 case _KmaMidTmpFcstApiItem():
-return $default(_that.regId,_that.taMin4,_that.taMin4Low,_that.taMin4High,_that.taMax4,_that.taMax4Low,_that.taMax4High,_that.taMin5,_that.taMin5Low,_that.taMin5High,_that.taMax5,_that.taMax5Low,_that.taMax5High,_that.taMin6,_that.taMin6Low,_that.taMin6High,_that.taMax6,_that.taMax6Low,_that.taMax6High,_that.taMin7,_that.taMin7Low,_that.taMin7High,_that.taMax7,_that.taMax7Low,_that.taMax7High);case _:
+return $default(_that.regId,_that.taMin4,_that.taMax4,_that.taMin5,_that.taMax5,_that.taMin6,_that.taMax6,_that.taMin7,_that.taMax7);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -1644,10 +1628,10 @@ return $default(_that.regId,_that.taMin4,_that.taMin4Low,_that.taMin4High,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String regId, @JsonKey(name: 'taMin4')  int? taMin4, @JsonKey(name: 'taMin4Low')  int? taMin4Low, @JsonKey(name: 'taMin4High')  int? taMin4High, @JsonKey(name: 'taMax4')  int? taMax4, @JsonKey(name: 'taMax4Low')  int? taMax4Low, @JsonKey(name: 'taMax4High')  int? taMax4High, @JsonKey(name: 'taMin5')  int? taMin5, @JsonKey(name: 'taMin5Low')  int? taMin5Low, @JsonKey(name: 'taMin5High')  int? taMin5High, @JsonKey(name: 'taMax5')  int? taMax5, @JsonKey(name: 'taMax5Low')  int? taMax5Low, @JsonKey(name: 'taMax5High')  int? taMax5High, @JsonKey(name: 'taMin6')  int? taMin6, @JsonKey(name: 'taMin6Low')  int? taMin6Low, @JsonKey(name: 'taMin6High')  int? taMin6High, @JsonKey(name: 'taMax6')  int? taMax6, @JsonKey(name: 'taMax6Low')  int? taMax6Low, @JsonKey(name: 'taMax6High')  int? taMax6High, @JsonKey(name: 'taMin7')  int? taMin7, @JsonKey(name: 'taMin7Low')  int? taMin7Low, @JsonKey(name: 'taMin7High')  int? taMin7High, @JsonKey(name: 'taMax7')  int? taMax7, @JsonKey(name: 'taMax7Low')  int? taMax7Low, @JsonKey(name: 'taMax7High')  int? taMax7High)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String regId, @JsonKey(name: 'taMin4')  double? taMin4, @JsonKey(name: 'taMax4')  double? taMax4, @JsonKey(name: 'taMin5')  double? taMin5, @JsonKey(name: 'taMax5')  double? taMax5, @JsonKey(name: 'taMin6')  double? taMin6, @JsonKey(name: 'taMax6')  double? taMax6, @JsonKey(name: 'taMin7')  double? taMin7, @JsonKey(name: 'taMax7')  double? taMax7)?  $default,) {final _that = this;
 switch (_that) {
 case _KmaMidTmpFcstApiItem() when $default != null:
-return $default(_that.regId,_that.taMin4,_that.taMin4Low,_that.taMin4High,_that.taMax4,_that.taMax4Low,_that.taMax4High,_that.taMin5,_that.taMin5Low,_that.taMin5High,_that.taMax5,_that.taMax5Low,_that.taMax5High,_that.taMin6,_that.taMin6Low,_that.taMin6High,_that.taMax6,_that.taMax6Low,_that.taMax6High,_that.taMin7,_that.taMin7Low,_that.taMin7High,_that.taMax7,_that.taMax7Low,_that.taMax7High);case _:
+return $default(_that.regId,_that.taMin4,_that.taMax4,_that.taMin5,_that.taMax5,_that.taMin6,_that.taMax6,_that.taMin7,_that.taMax7);case _:
   return null;
 
 }
@@ -1659,35 +1643,19 @@ return $default(_that.regId,_that.taMin4,_that.taMin4Low,_that.taMin4High,_that.
 @JsonSerializable()
 
 class _KmaMidTmpFcstApiItem implements KmaMidTmpFcstApiItem {
-  const _KmaMidTmpFcstApiItem({required this.regId, @JsonKey(name: 'taMin4') this.taMin4, @JsonKey(name: 'taMin4Low') this.taMin4Low, @JsonKey(name: 'taMin4High') this.taMin4High, @JsonKey(name: 'taMax4') this.taMax4, @JsonKey(name: 'taMax4Low') this.taMax4Low, @JsonKey(name: 'taMax4High') this.taMax4High, @JsonKey(name: 'taMin5') this.taMin5, @JsonKey(name: 'taMin5Low') this.taMin5Low, @JsonKey(name: 'taMin5High') this.taMin5High, @JsonKey(name: 'taMax5') this.taMax5, @JsonKey(name: 'taMax5Low') this.taMax5Low, @JsonKey(name: 'taMax5High') this.taMax5High, @JsonKey(name: 'taMin6') this.taMin6, @JsonKey(name: 'taMin6Low') this.taMin6Low, @JsonKey(name: 'taMin6High') this.taMin6High, @JsonKey(name: 'taMax6') this.taMax6, @JsonKey(name: 'taMax6Low') this.taMax6Low, @JsonKey(name: 'taMax6High') this.taMax6High, @JsonKey(name: 'taMin7') this.taMin7, @JsonKey(name: 'taMin7Low') this.taMin7Low, @JsonKey(name: 'taMin7High') this.taMin7High, @JsonKey(name: 'taMax7') this.taMax7, @JsonKey(name: 'taMax7Low') this.taMax7Low, @JsonKey(name: 'taMax7High') this.taMax7High});
+  const _KmaMidTmpFcstApiItem({required this.regId, @JsonKey(name: 'taMin4') this.taMin4, @JsonKey(name: 'taMax4') this.taMax4, @JsonKey(name: 'taMin5') this.taMin5, @JsonKey(name: 'taMax5') this.taMax5, @JsonKey(name: 'taMin6') this.taMin6, @JsonKey(name: 'taMax6') this.taMax6, @JsonKey(name: 'taMin7') this.taMin7, @JsonKey(name: 'taMax7') this.taMax7});
   factory _KmaMidTmpFcstApiItem.fromJson(Map<String, dynamic> json) => _$KmaMidTmpFcstApiItemFromJson(json);
 
 @override final  String regId;
 // 지역 코드 (예: 11B10101)
-@override@JsonKey(name: 'taMin4') final  int? taMin4;
-@override@JsonKey(name: 'taMin4Low') final  int? taMin4Low;
-@override@JsonKey(name: 'taMin4High') final  int? taMin4High;
-@override@JsonKey(name: 'taMax4') final  int? taMax4;
-@override@JsonKey(name: 'taMax4Low') final  int? taMax4Low;
-@override@JsonKey(name: 'taMax4High') final  int? taMax4High;
-@override@JsonKey(name: 'taMin5') final  int? taMin5;
-@override@JsonKey(name: 'taMin5Low') final  int? taMin5Low;
-@override@JsonKey(name: 'taMin5High') final  int? taMin5High;
-@override@JsonKey(name: 'taMax5') final  int? taMax5;
-@override@JsonKey(name: 'taMax5Low') final  int? taMax5Low;
-@override@JsonKey(name: 'taMax5High') final  int? taMax5High;
-@override@JsonKey(name: 'taMin6') final  int? taMin6;
-@override@JsonKey(name: 'taMin6Low') final  int? taMin6Low;
-@override@JsonKey(name: 'taMin6High') final  int? taMin6High;
-@override@JsonKey(name: 'taMax6') final  int? taMax6;
-@override@JsonKey(name: 'taMax6Low') final  int? taMax6Low;
-@override@JsonKey(name: 'taMax6High') final  int? taMax6High;
-@override@JsonKey(name: 'taMin7') final  int? taMin7;
-@override@JsonKey(name: 'taMin7Low') final  int? taMin7Low;
-@override@JsonKey(name: 'taMin7High') final  int? taMin7High;
-@override@JsonKey(name: 'taMax7') final  int? taMax7;
-@override@JsonKey(name: 'taMax7Low') final  int? taMax7Low;
-@override@JsonKey(name: 'taMax7High') final  int? taMax7High;
+@override@JsonKey(name: 'taMin4') final  double? taMin4;
+@override@JsonKey(name: 'taMax4') final  double? taMax4;
+@override@JsonKey(name: 'taMin5') final  double? taMin5;
+@override@JsonKey(name: 'taMax5') final  double? taMax5;
+@override@JsonKey(name: 'taMin6') final  double? taMin6;
+@override@JsonKey(name: 'taMax6') final  double? taMax6;
+@override@JsonKey(name: 'taMin7') final  double? taMin7;
+@override@JsonKey(name: 'taMax7') final  double? taMax7;
 
 /// Create a copy of KmaMidTmpFcstApiItem
 /// with the given fields replaced by the non-null parameter values.
@@ -1702,16 +1670,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaMidTmpFcstApiItem&&(identical(other.regId, regId) || other.regId == regId)&&(identical(other.taMin4, taMin4) || other.taMin4 == taMin4)&&(identical(other.taMin4Low, taMin4Low) || other.taMin4Low == taMin4Low)&&(identical(other.taMin4High, taMin4High) || other.taMin4High == taMin4High)&&(identical(other.taMax4, taMax4) || other.taMax4 == taMax4)&&(identical(other.taMax4Low, taMax4Low) || other.taMax4Low == taMax4Low)&&(identical(other.taMax4High, taMax4High) || other.taMax4High == taMax4High)&&(identical(other.taMin5, taMin5) || other.taMin5 == taMin5)&&(identical(other.taMin5Low, taMin5Low) || other.taMin5Low == taMin5Low)&&(identical(other.taMin5High, taMin5High) || other.taMin5High == taMin5High)&&(identical(other.taMax5, taMax5) || other.taMax5 == taMax5)&&(identical(other.taMax5Low, taMax5Low) || other.taMax5Low == taMax5Low)&&(identical(other.taMax5High, taMax5High) || other.taMax5High == taMax5High)&&(identical(other.taMin6, taMin6) || other.taMin6 == taMin6)&&(identical(other.taMin6Low, taMin6Low) || other.taMin6Low == taMin6Low)&&(identical(other.taMin6High, taMin6High) || other.taMin6High == taMin6High)&&(identical(other.taMax6, taMax6) || other.taMax6 == taMax6)&&(identical(other.taMax6Low, taMax6Low) || other.taMax6Low == taMax6Low)&&(identical(other.taMax6High, taMax6High) || other.taMax6High == taMax6High)&&(identical(other.taMin7, taMin7) || other.taMin7 == taMin7)&&(identical(other.taMin7Low, taMin7Low) || other.taMin7Low == taMin7Low)&&(identical(other.taMin7High, taMin7High) || other.taMin7High == taMin7High)&&(identical(other.taMax7, taMax7) || other.taMax7 == taMax7)&&(identical(other.taMax7Low, taMax7Low) || other.taMax7Low == taMax7Low)&&(identical(other.taMax7High, taMax7High) || other.taMax7High == taMax7High));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _KmaMidTmpFcstApiItem&&(identical(other.regId, regId) || other.regId == regId)&&(identical(other.taMin4, taMin4) || other.taMin4 == taMin4)&&(identical(other.taMax4, taMax4) || other.taMax4 == taMax4)&&(identical(other.taMin5, taMin5) || other.taMin5 == taMin5)&&(identical(other.taMax5, taMax5) || other.taMax5 == taMax5)&&(identical(other.taMin6, taMin6) || other.taMin6 == taMin6)&&(identical(other.taMax6, taMax6) || other.taMax6 == taMax6)&&(identical(other.taMin7, taMin7) || other.taMin7 == taMin7)&&(identical(other.taMax7, taMax7) || other.taMax7 == taMax7));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hashAll([runtimeType,regId,taMin4,taMin4Low,taMin4High,taMax4,taMax4Low,taMax4High,taMin5,taMin5Low,taMin5High,taMax5,taMax5Low,taMax5High,taMin6,taMin6Low,taMin6High,taMax6,taMax6Low,taMax6High,taMin7,taMin7Low,taMin7High,taMax7,taMax7Low,taMax7High]);
+int get hashCode => Object.hash(runtimeType,regId,taMin4,taMax4,taMin5,taMax5,taMin6,taMax6,taMin7,taMax7);
 
 @override
 String toString() {
-  return 'KmaMidTmpFcstApiItem(regId: $regId, taMin4: $taMin4, taMin4Low: $taMin4Low, taMin4High: $taMin4High, taMax4: $taMax4, taMax4Low: $taMax4Low, taMax4High: $taMax4High, taMin5: $taMin5, taMin5Low: $taMin5Low, taMin5High: $taMin5High, taMax5: $taMax5, taMax5Low: $taMax5Low, taMax5High: $taMax5High, taMin6: $taMin6, taMin6Low: $taMin6Low, taMin6High: $taMin6High, taMax6: $taMax6, taMax6Low: $taMax6Low, taMax6High: $taMax6High, taMin7: $taMin7, taMin7Low: $taMin7Low, taMin7High: $taMin7High, taMax7: $taMax7, taMax7Low: $taMax7Low, taMax7High: $taMax7High)';
+  return 'KmaMidTmpFcstApiItem(regId: $regId, taMin4: $taMin4, taMax4: $taMax4, taMin5: $taMin5, taMax5: $taMax5, taMin6: $taMin6, taMax6: $taMax6, taMin7: $taMin7, taMax7: $taMax7)';
 }
 
 
@@ -1722,7 +1690,7 @@ abstract mixin class _$KmaMidTmpFcstApiItemCopyWith<$Res> implements $KmaMidTmpF
   factory _$KmaMidTmpFcstApiItemCopyWith(_KmaMidTmpFcstApiItem value, $Res Function(_KmaMidTmpFcstApiItem) _then) = __$KmaMidTmpFcstApiItemCopyWithImpl;
 @override @useResult
 $Res call({
- String regId,@JsonKey(name: 'taMin4') int? taMin4,@JsonKey(name: 'taMin4Low') int? taMin4Low,@JsonKey(name: 'taMin4High') int? taMin4High,@JsonKey(name: 'taMax4') int? taMax4,@JsonKey(name: 'taMax4Low') int? taMax4Low,@JsonKey(name: 'taMax4High') int? taMax4High,@JsonKey(name: 'taMin5') int? taMin5,@JsonKey(name: 'taMin5Low') int? taMin5Low,@JsonKey(name: 'taMin5High') int? taMin5High,@JsonKey(name: 'taMax5') int? taMax5,@JsonKey(name: 'taMax5Low') int? taMax5Low,@JsonKey(name: 'taMax5High') int? taMax5High,@JsonKey(name: 'taMin6') int? taMin6,@JsonKey(name: 'taMin6Low') int? taMin6Low,@JsonKey(name: 'taMin6High') int? taMin6High,@JsonKey(name: 'taMax6') int? taMax6,@JsonKey(name: 'taMax6Low') int? taMax6Low,@JsonKey(name: 'taMax6High') int? taMax6High,@JsonKey(name: 'taMin7') int? taMin7,@JsonKey(name: 'taMin7Low') int? taMin7Low,@JsonKey(name: 'taMin7High') int? taMin7High,@JsonKey(name: 'taMax7') int? taMax7,@JsonKey(name: 'taMax7Low') int? taMax7Low,@JsonKey(name: 'taMax7High') int? taMax7High
+ String regId,@JsonKey(name: 'taMin4') double? taMin4,@JsonKey(name: 'taMax4') double? taMax4,@JsonKey(name: 'taMin5') double? taMin5,@JsonKey(name: 'taMax5') double? taMax5,@JsonKey(name: 'taMin6') double? taMin6,@JsonKey(name: 'taMax6') double? taMax6,@JsonKey(name: 'taMin7') double? taMin7,@JsonKey(name: 'taMax7') double? taMax7
 });
 
 
@@ -1739,34 +1707,18 @@ class __$KmaMidTmpFcstApiItemCopyWithImpl<$Res>
 
 /// Create a copy of KmaMidTmpFcstApiItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? regId = null,Object? taMin4 = freezed,Object? taMin4Low = freezed,Object? taMin4High = freezed,Object? taMax4 = freezed,Object? taMax4Low = freezed,Object? taMax4High = freezed,Object? taMin5 = freezed,Object? taMin5Low = freezed,Object? taMin5High = freezed,Object? taMax5 = freezed,Object? taMax5Low = freezed,Object? taMax5High = freezed,Object? taMin6 = freezed,Object? taMin6Low = freezed,Object? taMin6High = freezed,Object? taMax6 = freezed,Object? taMax6Low = freezed,Object? taMax6High = freezed,Object? taMin7 = freezed,Object? taMin7Low = freezed,Object? taMin7High = freezed,Object? taMax7 = freezed,Object? taMax7Low = freezed,Object? taMax7High = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? regId = null,Object? taMin4 = freezed,Object? taMax4 = freezed,Object? taMin5 = freezed,Object? taMax5 = freezed,Object? taMin6 = freezed,Object? taMax6 = freezed,Object? taMin7 = freezed,Object? taMax7 = freezed,}) {
   return _then(_KmaMidTmpFcstApiItem(
 regId: null == regId ? _self.regId : regId // ignore: cast_nullable_to_non_nullable
 as String,taMin4: freezed == taMin4 ? _self.taMin4 : taMin4 // ignore: cast_nullable_to_non_nullable
-as int?,taMin4Low: freezed == taMin4Low ? _self.taMin4Low : taMin4Low // ignore: cast_nullable_to_non_nullable
-as int?,taMin4High: freezed == taMin4High ? _self.taMin4High : taMin4High // ignore: cast_nullable_to_non_nullable
-as int?,taMax4: freezed == taMax4 ? _self.taMax4 : taMax4 // ignore: cast_nullable_to_non_nullable
-as int?,taMax4Low: freezed == taMax4Low ? _self.taMax4Low : taMax4Low // ignore: cast_nullable_to_non_nullable
-as int?,taMax4High: freezed == taMax4High ? _self.taMax4High : taMax4High // ignore: cast_nullable_to_non_nullable
-as int?,taMin5: freezed == taMin5 ? _self.taMin5 : taMin5 // ignore: cast_nullable_to_non_nullable
-as int?,taMin5Low: freezed == taMin5Low ? _self.taMin5Low : taMin5Low // ignore: cast_nullable_to_non_nullable
-as int?,taMin5High: freezed == taMin5High ? _self.taMin5High : taMin5High // ignore: cast_nullable_to_non_nullable
-as int?,taMax5: freezed == taMax5 ? _self.taMax5 : taMax5 // ignore: cast_nullable_to_non_nullable
-as int?,taMax5Low: freezed == taMax5Low ? _self.taMax5Low : taMax5Low // ignore: cast_nullable_to_non_nullable
-as int?,taMax5High: freezed == taMax5High ? _self.taMax5High : taMax5High // ignore: cast_nullable_to_non_nullable
-as int?,taMin6: freezed == taMin6 ? _self.taMin6 : taMin6 // ignore: cast_nullable_to_non_nullable
-as int?,taMin6Low: freezed == taMin6Low ? _self.taMin6Low : taMin6Low // ignore: cast_nullable_to_non_nullable
-as int?,taMin6High: freezed == taMin6High ? _self.taMin6High : taMin6High // ignore: cast_nullable_to_non_nullable
-as int?,taMax6: freezed == taMax6 ? _self.taMax6 : taMax6 // ignore: cast_nullable_to_non_nullable
-as int?,taMax6Low: freezed == taMax6Low ? _self.taMax6Low : taMax6Low // ignore: cast_nullable_to_non_nullable
-as int?,taMax6High: freezed == taMax6High ? _self.taMax6High : taMax6High // ignore: cast_nullable_to_non_nullable
-as int?,taMin7: freezed == taMin7 ? _self.taMin7 : taMin7 // ignore: cast_nullable_to_non_nullable
-as int?,taMin7Low: freezed == taMin7Low ? _self.taMin7Low : taMin7Low // ignore: cast_nullable_to_non_nullable
-as int?,taMin7High: freezed == taMin7High ? _self.taMin7High : taMin7High // ignore: cast_nullable_to_non_nullable
-as int?,taMax7: freezed == taMax7 ? _self.taMax7 : taMax7 // ignore: cast_nullable_to_non_nullable
-as int?,taMax7Low: freezed == taMax7Low ? _self.taMax7Low : taMax7Low // ignore: cast_nullable_to_non_nullable
-as int?,taMax7High: freezed == taMax7High ? _self.taMax7High : taMax7High // ignore: cast_nullable_to_non_nullable
-as int?,
+as double?,taMax4: freezed == taMax4 ? _self.taMax4 : taMax4 // ignore: cast_nullable_to_non_nullable
+as double?,taMin5: freezed == taMin5 ? _self.taMin5 : taMin5 // ignore: cast_nullable_to_non_nullable
+as double?,taMax5: freezed == taMax5 ? _self.taMax5 : taMax5 // ignore: cast_nullable_to_non_nullable
+as double?,taMin6: freezed == taMin6 ? _self.taMin6 : taMin6 // ignore: cast_nullable_to_non_nullable
+as double?,taMax6: freezed == taMax6 ? _self.taMax6 : taMax6 // ignore: cast_nullable_to_non_nullable
+as double?,taMin7: freezed == taMin7 ? _self.taMin7 : taMin7 // ignore: cast_nullable_to_non_nullable
+as double?,taMax7: freezed == taMax7 ? _self.taMax7 : taMax7 // ignore: cast_nullable_to_non_nullable
+as double?,
   ));
 }
 

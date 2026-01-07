@@ -36,7 +36,7 @@ abstract class HourlyWeatherModel with _$HourlyWeatherModel {
     final forecastDateTime = DateTime(year, month, day, hour, minute);
 
     double temperature = 0.0;
-    SkyStatus skyStatus = SkyStatus.sunny;
+    SkyStatus skyStatus = SkyStatus.none;
     PrecipitationType precipitationType = PrecipitationType.none;
     double precipitationAmount = 0.0;
     int humidity = 0;

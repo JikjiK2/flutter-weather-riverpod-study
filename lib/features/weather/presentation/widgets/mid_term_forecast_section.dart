@@ -45,7 +45,6 @@ class MidTermForecastSection extends ConsumerWidget {
 
             return Column(
               children: forecasts
-                  .skip(1)
                   .map((f) => _MidTermItemTile(forecast: f))
                   .toList(),
             );
@@ -104,7 +103,6 @@ class _MidTermItemTile extends StatelessWidget {
               size: 20,
             ),
           ),
-          // 최저/최고 기온
           Expanded(
             flex: 2,
             child: Text(

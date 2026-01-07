@@ -14,9 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DailyShortTermWeather {
 
- DateTime get date;// 해당 날짜 (자정)
- double get minTemperature; double get maxTemperature; double get tempRange; SkyStatus get representativeSkyStatus; PrecipitationType get representativePrecipitationType; int get maxPop;// 그 날의 최대 강수확률
- List<HourlyShortTermWeather> get hourlyData;
+ DateTime get date;// 해당 날짜
+ double get minTemperature; double get maxTemperature; double get tempRange; SkyStatus get representativeSkyStatus; PrecipitationType get representativePrecipitationType; int get maxPop;
 /// Create a copy of DailyShortTermWeather
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,16 +26,16 @@ $DailyShortTermWeatherCopyWith<DailyShortTermWeather> get copyWith => _$DailySho
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DailyShortTermWeather&&(identical(other.date, date) || other.date == date)&&(identical(other.minTemperature, minTemperature) || other.minTemperature == minTemperature)&&(identical(other.maxTemperature, maxTemperature) || other.maxTemperature == maxTemperature)&&(identical(other.tempRange, tempRange) || other.tempRange == tempRange)&&(identical(other.representativeSkyStatus, representativeSkyStatus) || other.representativeSkyStatus == representativeSkyStatus)&&(identical(other.representativePrecipitationType, representativePrecipitationType) || other.representativePrecipitationType == representativePrecipitationType)&&(identical(other.maxPop, maxPop) || other.maxPop == maxPop)&&const DeepCollectionEquality().equals(other.hourlyData, hourlyData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DailyShortTermWeather&&(identical(other.date, date) || other.date == date)&&(identical(other.minTemperature, minTemperature) || other.minTemperature == minTemperature)&&(identical(other.maxTemperature, maxTemperature) || other.maxTemperature == maxTemperature)&&(identical(other.tempRange, tempRange) || other.tempRange == tempRange)&&(identical(other.representativeSkyStatus, representativeSkyStatus) || other.representativeSkyStatus == representativeSkyStatus)&&(identical(other.representativePrecipitationType, representativePrecipitationType) || other.representativePrecipitationType == representativePrecipitationType)&&(identical(other.maxPop, maxPop) || other.maxPop == maxPop));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,date,minTemperature,maxTemperature,tempRange,representativeSkyStatus,representativePrecipitationType,maxPop,const DeepCollectionEquality().hash(hourlyData));
+int get hashCode => Object.hash(runtimeType,date,minTemperature,maxTemperature,tempRange,representativeSkyStatus,representativePrecipitationType,maxPop);
 
 @override
 String toString() {
-  return 'DailyShortTermWeather(date: $date, minTemperature: $minTemperature, maxTemperature: $maxTemperature, tempRange: $tempRange, representativeSkyStatus: $representativeSkyStatus, representativePrecipitationType: $representativePrecipitationType, maxPop: $maxPop, hourlyData: $hourlyData)';
+  return 'DailyShortTermWeather(date: $date, minTemperature: $minTemperature, maxTemperature: $maxTemperature, tempRange: $tempRange, representativeSkyStatus: $representativeSkyStatus, representativePrecipitationType: $representativePrecipitationType, maxPop: $maxPop)';
 }
 
 
@@ -47,7 +46,7 @@ abstract mixin class $DailyShortTermWeatherCopyWith<$Res>  {
   factory $DailyShortTermWeatherCopyWith(DailyShortTermWeather value, $Res Function(DailyShortTermWeather) _then) = _$DailyShortTermWeatherCopyWithImpl;
 @useResult
 $Res call({
- DateTime date, double minTemperature, double maxTemperature, double tempRange, SkyStatus representativeSkyStatus, PrecipitationType representativePrecipitationType, int maxPop, List<HourlyShortTermWeather> hourlyData
+ DateTime date, double minTemperature, double maxTemperature, double tempRange, SkyStatus representativeSkyStatus, PrecipitationType representativePrecipitationType, int maxPop
 });
 
 
@@ -64,7 +63,7 @@ class _$DailyShortTermWeatherCopyWithImpl<$Res>
 
 /// Create a copy of DailyShortTermWeather
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? minTemperature = null,Object? maxTemperature = null,Object? tempRange = null,Object? representativeSkyStatus = null,Object? representativePrecipitationType = null,Object? maxPop = null,Object? hourlyData = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? date = null,Object? minTemperature = null,Object? maxTemperature = null,Object? tempRange = null,Object? representativeSkyStatus = null,Object? representativePrecipitationType = null,Object? maxPop = null,}) {
   return _then(_self.copyWith(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime,minTemperature: null == minTemperature ? _self.minTemperature : minTemperature // ignore: cast_nullable_to_non_nullable
@@ -73,8 +72,7 @@ as double,tempRange: null == tempRange ? _self.tempRange : tempRange // ignore: 
 as double,representativeSkyStatus: null == representativeSkyStatus ? _self.representativeSkyStatus : representativeSkyStatus // ignore: cast_nullable_to_non_nullable
 as SkyStatus,representativePrecipitationType: null == representativePrecipitationType ? _self.representativePrecipitationType : representativePrecipitationType // ignore: cast_nullable_to_non_nullable
 as PrecipitationType,maxPop: null == maxPop ? _self.maxPop : maxPop // ignore: cast_nullable_to_non_nullable
-as int,hourlyData: null == hourlyData ? _self.hourlyData : hourlyData // ignore: cast_nullable_to_non_nullable
-as List<HourlyShortTermWeather>,
+as int,
   ));
 }
 
@@ -159,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime date,  double minTemperature,  double maxTemperature,  double tempRange,  SkyStatus representativeSkyStatus,  PrecipitationType representativePrecipitationType,  int maxPop,  List<HourlyShortTermWeather> hourlyData)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( DateTime date,  double minTemperature,  double maxTemperature,  double tempRange,  SkyStatus representativeSkyStatus,  PrecipitationType representativePrecipitationType,  int maxPop)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DailyShortTermWeather() when $default != null:
-return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempRange,_that.representativeSkyStatus,_that.representativePrecipitationType,_that.maxPop,_that.hourlyData);case _:
+return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempRange,_that.representativeSkyStatus,_that.representativePrecipitationType,_that.maxPop);case _:
   return orElse();
 
 }
@@ -180,10 +178,10 @@ return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempR
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime date,  double minTemperature,  double maxTemperature,  double tempRange,  SkyStatus representativeSkyStatus,  PrecipitationType representativePrecipitationType,  int maxPop,  List<HourlyShortTermWeather> hourlyData)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( DateTime date,  double minTemperature,  double maxTemperature,  double tempRange,  SkyStatus representativeSkyStatus,  PrecipitationType representativePrecipitationType,  int maxPop)  $default,) {final _that = this;
 switch (_that) {
 case _DailyShortTermWeather():
-return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempRange,_that.representativeSkyStatus,_that.representativePrecipitationType,_that.maxPop,_that.hourlyData);case _:
+return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempRange,_that.representativeSkyStatus,_that.representativePrecipitationType,_that.maxPop);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +198,10 @@ return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempR
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime date,  double minTemperature,  double maxTemperature,  double tempRange,  SkyStatus representativeSkyStatus,  PrecipitationType representativePrecipitationType,  int maxPop,  List<HourlyShortTermWeather> hourlyData)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( DateTime date,  double minTemperature,  double maxTemperature,  double tempRange,  SkyStatus representativeSkyStatus,  PrecipitationType representativePrecipitationType,  int maxPop)?  $default,) {final _that = this;
 switch (_that) {
 case _DailyShortTermWeather() when $default != null:
-return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempRange,_that.representativeSkyStatus,_that.representativePrecipitationType,_that.maxPop,_that.hourlyData);case _:
+return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempRange,_that.representativeSkyStatus,_that.representativePrecipitationType,_that.maxPop);case _:
   return null;
 
 }
@@ -215,26 +213,17 @@ return $default(_that.date,_that.minTemperature,_that.maxTemperature,_that.tempR
 
 
 class _DailyShortTermWeather implements DailyShortTermWeather {
-  const _DailyShortTermWeather({required this.date, required this.minTemperature, required this.maxTemperature, required this.tempRange, required this.representativeSkyStatus, required this.representativePrecipitationType, required this.maxPop, required final  List<HourlyShortTermWeather> hourlyData}): _hourlyData = hourlyData;
+  const _DailyShortTermWeather({required this.date, required this.minTemperature, required this.maxTemperature, required this.tempRange, required this.representativeSkyStatus, required this.representativePrecipitationType, required this.maxPop});
   
 
 @override final  DateTime date;
-// 해당 날짜 (자정)
+// 해당 날짜
 @override final  double minTemperature;
 @override final  double maxTemperature;
 @override final  double tempRange;
 @override final  SkyStatus representativeSkyStatus;
 @override final  PrecipitationType representativePrecipitationType;
 @override final  int maxPop;
-// 그 날의 최대 강수확률
- final  List<HourlyShortTermWeather> _hourlyData;
-// 그 날의 최대 강수확률
-@override List<HourlyShortTermWeather> get hourlyData {
-  if (_hourlyData is EqualUnmodifiableListView) return _hourlyData;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_hourlyData);
-}
-
 
 /// Create a copy of DailyShortTermWeather
 /// with the given fields replaced by the non-null parameter values.
@@ -246,16 +235,16 @@ _$DailyShortTermWeatherCopyWith<_DailyShortTermWeather> get copyWith => __$Daily
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DailyShortTermWeather&&(identical(other.date, date) || other.date == date)&&(identical(other.minTemperature, minTemperature) || other.minTemperature == minTemperature)&&(identical(other.maxTemperature, maxTemperature) || other.maxTemperature == maxTemperature)&&(identical(other.tempRange, tempRange) || other.tempRange == tempRange)&&(identical(other.representativeSkyStatus, representativeSkyStatus) || other.representativeSkyStatus == representativeSkyStatus)&&(identical(other.representativePrecipitationType, representativePrecipitationType) || other.representativePrecipitationType == representativePrecipitationType)&&(identical(other.maxPop, maxPop) || other.maxPop == maxPop)&&const DeepCollectionEquality().equals(other._hourlyData, _hourlyData));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DailyShortTermWeather&&(identical(other.date, date) || other.date == date)&&(identical(other.minTemperature, minTemperature) || other.minTemperature == minTemperature)&&(identical(other.maxTemperature, maxTemperature) || other.maxTemperature == maxTemperature)&&(identical(other.tempRange, tempRange) || other.tempRange == tempRange)&&(identical(other.representativeSkyStatus, representativeSkyStatus) || other.representativeSkyStatus == representativeSkyStatus)&&(identical(other.representativePrecipitationType, representativePrecipitationType) || other.representativePrecipitationType == representativePrecipitationType)&&(identical(other.maxPop, maxPop) || other.maxPop == maxPop));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,date,minTemperature,maxTemperature,tempRange,representativeSkyStatus,representativePrecipitationType,maxPop,const DeepCollectionEquality().hash(_hourlyData));
+int get hashCode => Object.hash(runtimeType,date,minTemperature,maxTemperature,tempRange,representativeSkyStatus,representativePrecipitationType,maxPop);
 
 @override
 String toString() {
-  return 'DailyShortTermWeather(date: $date, minTemperature: $minTemperature, maxTemperature: $maxTemperature, tempRange: $tempRange, representativeSkyStatus: $representativeSkyStatus, representativePrecipitationType: $representativePrecipitationType, maxPop: $maxPop, hourlyData: $hourlyData)';
+  return 'DailyShortTermWeather(date: $date, minTemperature: $minTemperature, maxTemperature: $maxTemperature, tempRange: $tempRange, representativeSkyStatus: $representativeSkyStatus, representativePrecipitationType: $representativePrecipitationType, maxPop: $maxPop)';
 }
 
 
@@ -266,7 +255,7 @@ abstract mixin class _$DailyShortTermWeatherCopyWith<$Res> implements $DailyShor
   factory _$DailyShortTermWeatherCopyWith(_DailyShortTermWeather value, $Res Function(_DailyShortTermWeather) _then) = __$DailyShortTermWeatherCopyWithImpl;
 @override @useResult
 $Res call({
- DateTime date, double minTemperature, double maxTemperature, double tempRange, SkyStatus representativeSkyStatus, PrecipitationType representativePrecipitationType, int maxPop, List<HourlyShortTermWeather> hourlyData
+ DateTime date, double minTemperature, double maxTemperature, double tempRange, SkyStatus representativeSkyStatus, PrecipitationType representativePrecipitationType, int maxPop
 });
 
 
@@ -283,7 +272,7 @@ class __$DailyShortTermWeatherCopyWithImpl<$Res>
 
 /// Create a copy of DailyShortTermWeather
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? minTemperature = null,Object? maxTemperature = null,Object? tempRange = null,Object? representativeSkyStatus = null,Object? representativePrecipitationType = null,Object? maxPop = null,Object? hourlyData = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? date = null,Object? minTemperature = null,Object? maxTemperature = null,Object? tempRange = null,Object? representativeSkyStatus = null,Object? representativePrecipitationType = null,Object? maxPop = null,}) {
   return _then(_DailyShortTermWeather(
 date: null == date ? _self.date : date // ignore: cast_nullable_to_non_nullable
 as DateTime,minTemperature: null == minTemperature ? _self.minTemperature : minTemperature // ignore: cast_nullable_to_non_nullable
@@ -292,8 +281,7 @@ as double,tempRange: null == tempRange ? _self.tempRange : tempRange // ignore: 
 as double,representativeSkyStatus: null == representativeSkyStatus ? _self.representativeSkyStatus : representativeSkyStatus // ignore: cast_nullable_to_non_nullable
 as SkyStatus,representativePrecipitationType: null == representativePrecipitationType ? _self.representativePrecipitationType : representativePrecipitationType // ignore: cast_nullable_to_non_nullable
 as PrecipitationType,maxPop: null == maxPop ? _self.maxPop : maxPop // ignore: cast_nullable_to_non_nullable
-as int,hourlyData: null == hourlyData ? _self._hourlyData : hourlyData // ignore: cast_nullable_to_non_nullable
-as List<HourlyShortTermWeather>,
+as int,
   ));
 }
 

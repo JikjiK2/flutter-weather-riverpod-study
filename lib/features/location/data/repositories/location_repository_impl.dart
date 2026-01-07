@@ -3,7 +3,7 @@ import 'package:ai_weather/features/location/data/datasources/location_platform_
 import 'package:ai_weather/features/location/domain/enums/location_permission_enums.dart';
 import 'package:ai_weather/features/location/domain/models/address_model.dart';
 import 'package:ai_weather/features/location/data/models/google_geocoding_response_model.dart';
-import 'package:ai_weather/features/location/data/repositories/location_repository.dart';
+import 'package:ai_weather/features/location/domain/repositories/location_repository.dart';
 import 'package:ai_weather/utils/app_logger.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -23,13 +23,11 @@ class LocationRepositoryImpl implements LocationRepository {
     this._platformDataSource,
   );
 
-  // google reverse geocoding
   @override
   Future<Address> getAddressFromCoordinates({
     required double lat,
     required double lon,
   }) async {
-    // 1. API 키 검증 (기존 로직 유지)
     final googleApiKey = dotenv.env['GOOGLE_GEOCODING_API_KEY'];
     if (googleApiKey == null || googleApiKey.isEmpty) {
       throw Exception(
@@ -38,29 +36,24 @@ class LocationRepositoryImpl implements LocationRepository {
     }
 
     try {
-      // 2. Reverse Geocoding API 호출
       final response = await _googleGeocodingService.reverseGeocode(
         latlng: "$lat,$lon",
         apiKey: googleApiKey,
         language: "ko",
       );
 
-      // 3. 응답 상태 및 결과 확인
       if (response.status != 'OK' || response.results.isEmpty) {
         return const Address(administrativeArea: "위치", locality: "알 수 없음");
       }
 
-      // 4. 최적의 GeocodingResult 선택 (필터링 우선)
       final GeocodingResult resultToParse = _findBestGeocodingResult(
         response.results,
       );
 
-      // 5. 선택된 결과에서 주소 컴포넌트 파싱 로직
       final Map<String, String> addressComponentsMap = _parseAddressComponents(
         resultToParse,
       );
 
-      // 6. 최종 Address 객체 생성 및 반환
       return Address(
         country: addressComponentsMap['country'],
         administrativeArea: addressComponentsMap['administrative_area_level_1'],
@@ -70,6 +63,8 @@ class LocationRepositoryImpl implements LocationRepository {
         subLocalityLevel3: addressComponentsMap['sublocality_level_3'],
         subLocalityLevel4: addressComponentsMap['sublocality_level_4'],
         formattedAddress: resultToParse.formattedAddress,
+        latitude: lat,
+        longitude: lon,
       );
     } on DioException catch (e) {
       if (e.response != null) {
@@ -82,6 +77,81 @@ class LocationRepositoryImpl implements LocationRepository {
       appLogger.e("Google Geocoding API 호출 중 알 수 없는 오류: $e");
     }
     return const Address(administrativeArea: "위치", locality: "알 수 없음");
+  }
+
+  @override
+  Future<Map<String, List<Address>>> searchAddress({
+    required String query,
+  }) async {
+    final googleApiKey = dotenv.env['GOOGLE_GEOCODING_API_KEY'];
+    if (googleApiKey == null || googleApiKey.isEmpty) {
+      throw Exception(
+        'Google Geocoding API Key가 누락되었습니다. .env 파일과 설정이 올바른지 확인해주세요.',
+      );
+    }
+
+    try {
+      final response = await _googleGeocodingService.searchAddress(
+        address: query,
+        apiKey: googleApiKey,
+        language: 'ko',
+        region: 'kr',
+      );
+      if (response.status == 'OK') {
+        final Map<String, List<Address>> addressItems = {};
+        if (response.results.isEmpty) {
+          return {};
+        }
+
+        for (var result in response.results) {
+          final key = result.formattedAddress;
+
+          final Map<String, String> addressComponentsMap =
+              _parseAddressComponents(result);
+
+          addressItems
+              .putIfAbsent(key!, () => [])
+              .add(
+                Address(
+                  country: addressComponentsMap['country'],
+                  administrativeArea:
+                      addressComponentsMap['administrative_area_level_1'],
+                  locality: addressComponentsMap['locality'],
+                  subLocality: addressComponentsMap['sublocality_level_1'],
+                  subLocalityLevel2: _getBestSubLocalityLevel2(
+                    addressComponentsMap,
+                  ),
+                  subLocalityLevel3:
+                      addressComponentsMap['sublocality_level_3'],
+                  subLocalityLevel4:
+                      addressComponentsMap['sublocality_level_4'],
+                  formattedAddress: result.formattedAddress,
+                  latitude: result.geometry.geometryLocation?.lat,
+                  longitude: result.geometry.geometryLocation?.lng,
+                ),
+              );
+        }
+        return addressItems;
+      } else if (response.status == 'ZERO_RESULTS') {
+        appLogger.i("주소 검색 결과 없음: $query");
+        return {};
+      } else {
+        appLogger.e("Google Geocoding API Error: ${response.status}");
+        return {};
+      }
+    } on DioException catch (e) {
+      if (e.response != null) {
+        appLogger.e(
+          "Google Geocoding API DioError Response: ${e.response!.data}",
+        );
+      }
+      appLogger.e("Google Geocoding API DioException: ${e.message}");
+      return {};
+    } catch (e, stacktrace) {
+      appLogger.e("주소 검색 중 알 수 없는 오류 발생: $e");
+      appLogger.e('스택트레이스: $stacktrace');
+      return {};
+    }
   }
 
   /// Google Geocoding 결과 목록에서 'sublocality_level_2'를 가진 첫 번째 결과를 찾아 반환합니다. 헬퍼 함수

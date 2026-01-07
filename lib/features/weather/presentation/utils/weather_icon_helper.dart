@@ -27,6 +27,8 @@ class WeatherIconHelper {
     // 2. 강수 없을 때 하늘 상태 및 밤낮 구분
     final isNight = hour >= 18 || hour < 6;
     switch (sky) {
+      case SkyStatus.none:
+        return Icons.gps_fixed;
       case SkyStatus.sunny:
         return isNight ? Icons.nightlight_round : Icons.wb_sunny;
       case SkyStatus.partlyCloudy:
@@ -46,6 +48,8 @@ class WeatherIconHelper {
 
     final isNight = hour >= 18 || hour < 6;
     switch (sky) {
+      case SkyStatus.none:
+        return Colors.black;
       case SkyStatus.sunny:
         return isNight ? Colors.amberAccent : Color(0xffffcd27);
       case SkyStatus.partlyCloudy:

@@ -17,9 +17,6 @@ mixin _$MidTermWeather {
  String get regionId;// 예보 구역 코드 (예: 11B00000 또는 11B10101)
  String get regionName;// 예보 구역 이름 (예: 서울, 인천, 경기도)
  DateTime get publishedTime;// 예보 발표 시각 (tmFc)
-// 중기 전망 API의 wfSv 필드
- String get overallOutlook;// 전체적인 날씨 전망 텍스트
-// 일별 상세 예보 리스트
  List<DailyMidTermWeather> get dailyForecasts;
 /// Create a copy of MidTermWeather
 /// with the given fields replaced by the non-null parameter values.
@@ -31,16 +28,16 @@ $MidTermWeatherCopyWith<MidTermWeather> get copyWith => _$MidTermWeatherCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is MidTermWeather&&(identical(other.regionId, regionId) || other.regionId == regionId)&&(identical(other.regionName, regionName) || other.regionName == regionName)&&(identical(other.publishedTime, publishedTime) || other.publishedTime == publishedTime)&&(identical(other.overallOutlook, overallOutlook) || other.overallOutlook == overallOutlook)&&const DeepCollectionEquality().equals(other.dailyForecasts, dailyForecasts));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is MidTermWeather&&(identical(other.regionId, regionId) || other.regionId == regionId)&&(identical(other.regionName, regionName) || other.regionName == regionName)&&(identical(other.publishedTime, publishedTime) || other.publishedTime == publishedTime)&&const DeepCollectionEquality().equals(other.dailyForecasts, dailyForecasts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,regionId,regionName,publishedTime,overallOutlook,const DeepCollectionEquality().hash(dailyForecasts));
+int get hashCode => Object.hash(runtimeType,regionId,regionName,publishedTime,const DeepCollectionEquality().hash(dailyForecasts));
 
 @override
 String toString() {
-  return 'MidTermWeather(regionId: $regionId, regionName: $regionName, publishedTime: $publishedTime, overallOutlook: $overallOutlook, dailyForecasts: $dailyForecasts)';
+  return 'MidTermWeather(regionId: $regionId, regionName: $regionName, publishedTime: $publishedTime, dailyForecasts: $dailyForecasts)';
 }
 
 
@@ -51,7 +48,7 @@ abstract mixin class $MidTermWeatherCopyWith<$Res>  {
   factory $MidTermWeatherCopyWith(MidTermWeather value, $Res Function(MidTermWeather) _then) = _$MidTermWeatherCopyWithImpl;
 @useResult
 $Res call({
- String regionId, String regionName, DateTime publishedTime, String overallOutlook, List<DailyMidTermWeather> dailyForecasts
+ String regionId, String regionName, DateTime publishedTime, List<DailyMidTermWeather> dailyForecasts
 });
 
 
@@ -68,13 +65,12 @@ class _$MidTermWeatherCopyWithImpl<$Res>
 
 /// Create a copy of MidTermWeather
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? regionId = null,Object? regionName = null,Object? publishedTime = null,Object? overallOutlook = null,Object? dailyForecasts = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? regionId = null,Object? regionName = null,Object? publishedTime = null,Object? dailyForecasts = null,}) {
   return _then(_self.copyWith(
 regionId: null == regionId ? _self.regionId : regionId // ignore: cast_nullable_to_non_nullable
 as String,regionName: null == regionName ? _self.regionName : regionName // ignore: cast_nullable_to_non_nullable
 as String,publishedTime: null == publishedTime ? _self.publishedTime : publishedTime // ignore: cast_nullable_to_non_nullable
-as DateTime,overallOutlook: null == overallOutlook ? _self.overallOutlook : overallOutlook // ignore: cast_nullable_to_non_nullable
-as String,dailyForecasts: null == dailyForecasts ? _self.dailyForecasts : dailyForecasts // ignore: cast_nullable_to_non_nullable
+as DateTime,dailyForecasts: null == dailyForecasts ? _self.dailyForecasts : dailyForecasts // ignore: cast_nullable_to_non_nullable
 as List<DailyMidTermWeather>,
   ));
 }
@@ -160,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String regionId,  String regionName,  DateTime publishedTime,  String overallOutlook,  List<DailyMidTermWeather> dailyForecasts)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String regionId,  String regionName,  DateTime publishedTime,  List<DailyMidTermWeather> dailyForecasts)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MidTermWeather() when $default != null:
-return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.overallOutlook,_that.dailyForecasts);case _:
+return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.dailyForecasts);case _:
   return orElse();
 
 }
@@ -181,10 +177,10 @@ return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.overal
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String regionId,  String regionName,  DateTime publishedTime,  String overallOutlook,  List<DailyMidTermWeather> dailyForecasts)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String regionId,  String regionName,  DateTime publishedTime,  List<DailyMidTermWeather> dailyForecasts)  $default,) {final _that = this;
 switch (_that) {
 case _MidTermWeather():
-return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.overallOutlook,_that.dailyForecasts);case _:
+return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.dailyForecasts);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +197,10 @@ return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.overal
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String regionId,  String regionName,  DateTime publishedTime,  String overallOutlook,  List<DailyMidTermWeather> dailyForecasts)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String regionId,  String regionName,  DateTime publishedTime,  List<DailyMidTermWeather> dailyForecasts)?  $default,) {final _that = this;
 switch (_that) {
 case _MidTermWeather() when $default != null:
-return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.overallOutlook,_that.dailyForecasts);case _:
+return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.dailyForecasts);case _:
   return null;
 
 }
@@ -216,7 +212,7 @@ return $default(_that.regionId,_that.regionName,_that.publishedTime,_that.overal
 
 
 class _MidTermWeather implements MidTermWeather {
-  const _MidTermWeather({required this.regionId, required this.regionName, required this.publishedTime, required this.overallOutlook, required final  List<DailyMidTermWeather> dailyForecasts}): _dailyForecasts = dailyForecasts;
+  const _MidTermWeather({required this.regionId, required this.regionName, required this.publishedTime, required final  List<DailyMidTermWeather> dailyForecasts}): _dailyForecasts = dailyForecasts;
   
 
 @override final  String regionId;
@@ -225,13 +221,8 @@ class _MidTermWeather implements MidTermWeather {
 // 예보 구역 이름 (예: 서울, 인천, 경기도)
 @override final  DateTime publishedTime;
 // 예보 발표 시각 (tmFc)
-// 중기 전망 API의 wfSv 필드
-@override final  String overallOutlook;
-// 전체적인 날씨 전망 텍스트
-// 일별 상세 예보 리스트
  final  List<DailyMidTermWeather> _dailyForecasts;
-// 전체적인 날씨 전망 텍스트
-// 일별 상세 예보 리스트
+// 예보 발표 시각 (tmFc)
 @override List<DailyMidTermWeather> get dailyForecasts {
   if (_dailyForecasts is EqualUnmodifiableListView) return _dailyForecasts;
   // ignore: implicit_dynamic_type
@@ -249,16 +240,16 @@ _$MidTermWeatherCopyWith<_MidTermWeather> get copyWith => __$MidTermWeatherCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MidTermWeather&&(identical(other.regionId, regionId) || other.regionId == regionId)&&(identical(other.regionName, regionName) || other.regionName == regionName)&&(identical(other.publishedTime, publishedTime) || other.publishedTime == publishedTime)&&(identical(other.overallOutlook, overallOutlook) || other.overallOutlook == overallOutlook)&&const DeepCollectionEquality().equals(other._dailyForecasts, _dailyForecasts));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _MidTermWeather&&(identical(other.regionId, regionId) || other.regionId == regionId)&&(identical(other.regionName, regionName) || other.regionName == regionName)&&(identical(other.publishedTime, publishedTime) || other.publishedTime == publishedTime)&&const DeepCollectionEquality().equals(other._dailyForecasts, _dailyForecasts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,regionId,regionName,publishedTime,overallOutlook,const DeepCollectionEquality().hash(_dailyForecasts));
+int get hashCode => Object.hash(runtimeType,regionId,regionName,publishedTime,const DeepCollectionEquality().hash(_dailyForecasts));
 
 @override
 String toString() {
-  return 'MidTermWeather(regionId: $regionId, regionName: $regionName, publishedTime: $publishedTime, overallOutlook: $overallOutlook, dailyForecasts: $dailyForecasts)';
+  return 'MidTermWeather(regionId: $regionId, regionName: $regionName, publishedTime: $publishedTime, dailyForecasts: $dailyForecasts)';
 }
 
 
@@ -269,7 +260,7 @@ abstract mixin class _$MidTermWeatherCopyWith<$Res> implements $MidTermWeatherCo
   factory _$MidTermWeatherCopyWith(_MidTermWeather value, $Res Function(_MidTermWeather) _then) = __$MidTermWeatherCopyWithImpl;
 @override @useResult
 $Res call({
- String regionId, String regionName, DateTime publishedTime, String overallOutlook, List<DailyMidTermWeather> dailyForecasts
+ String regionId, String regionName, DateTime publishedTime, List<DailyMidTermWeather> dailyForecasts
 });
 
 
@@ -286,13 +277,12 @@ class __$MidTermWeatherCopyWithImpl<$Res>
 
 /// Create a copy of MidTermWeather
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? regionId = null,Object? regionName = null,Object? publishedTime = null,Object? overallOutlook = null,Object? dailyForecasts = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? regionId = null,Object? regionName = null,Object? publishedTime = null,Object? dailyForecasts = null,}) {
   return _then(_MidTermWeather(
 regionId: null == regionId ? _self.regionId : regionId // ignore: cast_nullable_to_non_nullable
 as String,regionName: null == regionName ? _self.regionName : regionName // ignore: cast_nullable_to_non_nullable
 as String,publishedTime: null == publishedTime ? _self.publishedTime : publishedTime // ignore: cast_nullable_to_non_nullable
-as DateTime,overallOutlook: null == overallOutlook ? _self.overallOutlook : overallOutlook // ignore: cast_nullable_to_non_nullable
-as String,dailyForecasts: null == dailyForecasts ? _self._dailyForecasts : dailyForecasts // ignore: cast_nullable_to_non_nullable
+as DateTime,dailyForecasts: null == dailyForecasts ? _self._dailyForecasts : dailyForecasts // ignore: cast_nullable_to_non_nullable
 as List<DailyMidTermWeather>,
   ));
 }

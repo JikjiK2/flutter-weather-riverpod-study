@@ -2,7 +2,6 @@ import 'package:ai_weather/features/location/domain/enums/location_permission_en
 import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
 
 class LocationScreen extends ConsumerWidget {
   const LocationScreen({super.key});
@@ -16,7 +15,6 @@ class LocationScreen extends ConsumerWidget {
       case LocationPermissionStatus.granted:
         return '허용됨';
       case LocationPermissionStatus.unknown:
-      default:
         return '알 수 없음';
     }
   }
@@ -46,15 +44,17 @@ class LocationScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('1. 위치 서비스 (GPS)',
-                style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              '1. 위치 서비스 (GPS)',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
             const SizedBox(height: 12),
             serviceStatusAsync.when(
               data: (isEnabled) => Text(
                 '상태: ${isEnabled ? '활성화' : '비활성화'}',
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: isEnabled ? Colors.green : Colors.red,
-                    ),
+                  color: isEnabled ? Colors.green : Colors.red,
+                ),
               ),
               loading: () => const Center(child: CircularProgressIndicator()),
               error: (err, stack) => Text('오류: $err'),
@@ -65,7 +65,8 @@ class LocationScreen extends ConsumerWidget {
               runSpacing: 8,
               children: [
                 ElevatedButton(
-                  onPressed: () => ref.refresh(locationIsServiceEnabledProvider),
+                  onPressed: () =>
+                      ref.refresh(locationIsServiceEnabledProvider),
                   child: const Text('상태 새로고침'),
                 ),
                 ElevatedButton(
@@ -73,7 +74,7 @@ class LocationScreen extends ConsumerWidget {
                   child: const Text('위치 설정 열기'),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -88,8 +89,7 @@ class LocationScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('2. 위치 권한',
-                style: Theme.of(context).textTheme.headlineSmall),
+            Text('2. 위치 권한', style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: 12),
             permissionStatusAsync.when(
               data: (status) => Text(
@@ -117,7 +117,7 @@ class LocationScreen extends ConsumerWidget {
                   child: const Text('앱 설정 열기'),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
@@ -132,14 +132,18 @@ class LocationScreen extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('3. 현재 위치 주소',
-                style: Theme.of(context).textTheme.headlineSmall),
+            Text(
+              '3. 현재 위치 주소',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
             const SizedBox(height: 12),
             addressAsync.when(
               data: (address) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('현재 주소: ${address.administrativeArea ?? ''} ${address.locality ?? ''} ${address.subLocality ?? ''}'),
+                  Text(
+                    '현재 주소: ${address.administrativeArea ?? ''} ${address.locality ?? ''} ${address.subLocality ?? ''}',
+                  ),
                   Text('(포맷팅된 주소: ${address.formattedAddress})'),
                 ],
               ),
@@ -152,7 +156,7 @@ class LocationScreen extends ConsumerWidget {
               ),
               error: (err, stack) => Text('위치 가져오기 오류: $err'),
             ),
-             const SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () => ref.refresh(currentLocationProvider),
               child: const Text('현재 위치/주소 새로고침'),

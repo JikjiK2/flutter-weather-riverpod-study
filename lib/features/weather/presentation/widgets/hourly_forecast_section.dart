@@ -10,7 +10,6 @@ class HourlyForecastSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 1. 시간별 예보 데이터를 watch 합니다.
     final hourlyForecastAsync = ref.watch(
       hourlyUltraSrtForecastByLocationProvider,
     );
@@ -18,7 +17,6 @@ class HourlyForecastSection extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // 섹션 타이틀
         Text(
           '시간별 예보',
           style: Theme.of(
@@ -27,7 +25,6 @@ class HourlyForecastSection extends ConsumerWidget {
         ),
         const SizedBox(height: 12),
 
-        // 2. 데이터 상태에 따른 분기 처리
         hourlyForecastAsync.when(
           data: (forecasts) {
             if (forecasts.isEmpty) {
@@ -38,7 +35,6 @@ class HourlyForecastSection extends ConsumerWidget {
                 ),
               );
             }
-            // 상위 6개 데이터만 표시
             return _buildHourlyList(forecasts.take(6).toList());
           },
           loading: () => const _HourlyLoadingSkeleton(),

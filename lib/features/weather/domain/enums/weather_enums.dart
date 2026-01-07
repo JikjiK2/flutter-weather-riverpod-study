@@ -1,7 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 enum SkyStatus {
+  @JsonValue('0')
+  none(0, '날씨 정보 없음'),
+
   @JsonValue('1')
   sunny(1, '맑음'),
 
@@ -17,6 +19,8 @@ enum SkyStatus {
 
   factory SkyStatus.fromCode(String code) {
     switch (int.parse(code)) {
+      case 0:
+        return SkyStatus.none;
       case 1:
         return SkyStatus.sunny;
       case 3:
@@ -24,7 +28,7 @@ enum SkyStatus {
       case 4:
         return SkyStatus.cloudy;
       default:
-        return SkyStatus.cloudy;
+        return SkyStatus.none;
     }
   }
 }
@@ -99,6 +103,8 @@ enum Thunderbolt {
 
 String skyStatusToString(SkyStatus status) {
   switch (status) {
+    case SkyStatus.none:
+      return '날씨 정보 없음';
     case SkyStatus.sunny:
       return '맑음';
     case SkyStatus.partlyCloudy:

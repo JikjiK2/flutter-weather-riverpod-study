@@ -25,4 +25,6 @@ abstract class LocationRepository {
   Future<Position?> getLastLocation();
 
   Future<String?> getLastLocationAddress();
+
+  Future<Map<String, List<Address>>> searchAddress({required String query});
 }

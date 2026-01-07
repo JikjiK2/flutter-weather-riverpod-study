@@ -178,7 +178,7 @@ class WeatherApiUtils {
       case 4:
         return SkyStatus.cloudy;
       default:
-        return SkyStatus.cloudy; // 기본값 또는 SkyStatus.fromCode 함수 사용
+        return SkyStatus.none; // 기본값 또는 SkyStatus.fromCode 함수 사용
     }
   }
 

@@ -6,17 +6,18 @@ import 'package:ai_weather/features/weather/data/datasources/kma_mid_term_api_da
 import 'package:ai_weather/features/weather/data/datasources/kma_short_term_api_data_source.dart';
 import 'package:ai_weather/features/weather/domain/models/mid_term_weather_model.dart';
 import 'package:ai_weather/features/weather/domain/usecases/get_current_weather_usecase.dart';
+import 'package:ai_weather/features/weather/domain/usecases/get_feels_like_temperature_usecase.dart';
+import 'package:ai_weather/features/weather/domain/usecases/get_unified_daily_forecast_usecase.dart';
 import 'package:ai_weather/features/weather/utils/weather_api_utils.dart';
 import 'package:ai_weather/utils/app_logger.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ai_weather/features/weather/utils/kma_grid_converter_utils.dart';
 import 'package:ai_weather/features/weather/data/repositories/weather_repository_impl.dart';
-import 'package:ai_weather/features/weather/data/repositories/weather_repository.dart';
+import 'package:ai_weather/features/weather/domain/repositories/weather_repository.dart';
 import 'package:ai_weather/features/weather/domain/models/current_weather_model.dart';
 import 'package:ai_weather/features/weather/domain/models/hourly_weather_model.dart';
 import 'package:ai_weather/features/weather/domain/models/daily_short_term_weather_model.dart';
-
 import 'package:ai_weather/app/providers/app_providers.dart';
 
 part 'weather_providers.g.dart';
@@ -40,7 +41,7 @@ WeatherRepository weatherRepository(Ref ref) {
 }
 
 @Riverpod(keepAlive: true)
-class WeatherLocation extends _$WeatherLocation {
+class SelectedWeatherLocation extends _$SelectedWeatherLocation {
   @override
   Future<Position> build() async => _determinePosition();
 
@@ -68,9 +69,13 @@ class WeatherLocation extends _$WeatherLocation {
     state = await AsyncValue.guard(() => _determinePosition());
   }
 
+  Future<void> updateLocation(Position newPosition) async {
+    state = AsyncData(newPosition);
+  }
+
   Position _defaultPosition() => Position(
     latitude: defaultLatitude,
-    longitude: defaultLongitude, // 서울
+    longitude: defaultLongitude,
     timestamp: DateTime.now(),
     accuracy: 0.0,
     altitude: 0.0,
@@ -82,16 +87,16 @@ class WeatherLocation extends _$WeatherLocation {
   );
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<(int nx, int ny)> weatherGridCoords(Ref ref) async {
-  final position = await ref.watch(weatherLocationProvider.future);
+  final position = await ref.watch(selectedWeatherLocationProvider.future);
   final grid = PointToLatLng.gpsToGRID(position.latitude, position.longitude);
   return (grid['nx']!, grid['ny']!);
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<Address> weatherAddress(Ref ref) async {
-  final position = await ref.watch(weatherLocationProvider.future);
+  final position = await ref.watch(selectedWeatherLocationProvider.future);
   final address = await ref
       .watch(locationRepositoryProvider)
       .getAddressFromCoordinates(
@@ -117,13 +122,7 @@ Future<MidTermWeather> midTermWeather(Ref ref, {required String city}) async {
       .getMidTermWeather(regId: detailedRegId, tmFc: tmFc);
 }
 
-@riverpod
-GetCurrentWeatherUseCase getCurrentWeatherUseCase(Ref ref) {
-  final repository = ref.watch(weatherRepositoryProvider);
-  return GetCurrentWeatherUseCase(repository);
-}
-
-@riverpod
+@Riverpod(keepAlive: true)
 Future<CurrentWeather> currentWeatherByLocation(Ref ref) async {
   final useCase = ref.watch(getCurrentWeatherUseCaseProvider);
   final coords = await ref.watch(weatherGridCoordsProvider.future);
@@ -131,7 +130,7 @@ Future<CurrentWeather> currentWeatherByLocation(Ref ref) async {
   return useCase.execute(nx: coords.$1, ny: coords.$2);
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<HourlyWeatherModel>> hourlyUltraSrtForecastByLocation(
   Ref ref,
 ) async {
@@ -141,17 +140,23 @@ Future<List<HourlyWeatherModel>> hourlyUltraSrtForecastByLocation(
       .getUltraSrtForecastList(nx: coords.$1, ny: coords.$2);
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<List<DailyShortTermWeather>> dailyShortTermForecastByLocation(
   Ref ref,
 ) async {
   final coords = await ref.watch(weatherGridCoordsProvider.future);
-  return ref
-      .watch(weatherRepositoryProvider)
-      .getShortTermForecast(nx: coords.$1, ny: coords.$2);
+  final address = await ref.watch(weatherAddressProvider.future);
+  final city = AddressFormatterUtils.extractKmaRegionName(address);
+  final targetCityData = MidTermApiUtils.detailedMidTermRegion.firstWhere(
+    (data) => data.city == city,
+    orElse: () => throw Exception('중기 예보를 위한 도시($city)의 상세 정보를 찾을 수 없습니다.'),
+  );
+  final String detailedRegId = targetCityData.regId;
+  final useCase = ref.watch(getUnifiedDailyForecastUseCaseProvider);
+  return useCase.execute(nx: coords.$1, ny: coords.$2, regId: detailedRegId);
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 Future<MidTermWeather> midTermWeatherByLocation(Ref ref) async {
   final address = await ref.watch(weatherAddressProvider.future);
   final city = AddressFormatterUtils.extractKmaRegionName(address);
@@ -160,4 +165,22 @@ Future<MidTermWeather> midTermWeatherByLocation(Ref ref) async {
   }
   appLogger.i('중기 예보 지역: $city');
   return ref.watch(midTermWeatherProvider(city: city).future);
+}
+
+@Riverpod(keepAlive: true)
+GetFeelsLikeTemperatureUseCase getFeelsLikeTemperatureUseCase(Ref ref) {
+  return GetFeelsLikeTemperatureUseCase();
+}
+
+@riverpod
+GetCurrentWeatherUseCase getCurrentWeatherUseCase(Ref ref) {
+  final repository = ref.watch(weatherRepositoryProvider);
+  final feelsLikeUseCase = ref.watch(getFeelsLikeTemperatureUseCaseProvider);
+  return GetCurrentWeatherUseCase(repository, feelsLikeUseCase);
+}
+
+@riverpod
+GetUnifiedDailyForecastUseCase getUnifiedDailyForecastUseCase(Ref ref) {
+  final repository = ref.watch(weatherRepositoryProvider);
+  return GetUnifiedDailyForecastUseCase(repository);
 }

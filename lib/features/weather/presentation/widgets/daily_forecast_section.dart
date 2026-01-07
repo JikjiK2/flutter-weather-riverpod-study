@@ -1,9 +1,7 @@
-import 'package:ai_weather/features/weather/presentation/utils/weather_icon_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_weather/features/weather/domain/models/daily_short_term_weather_model.dart';
 import 'package:ai_weather/features/weather/presentation/providers/weather_providers.dart';
-import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
 
 class DailyForecastSection extends ConsumerWidget {
   const DailyForecastSection({super.key});
@@ -30,7 +28,7 @@ class DailyForecastSection extends ConsumerWidget {
             if (forecasts.isEmpty) {
               return const Center(child: Text('일별 예보 데이터가 없습니다.'));
             }
-            return _buildDailyList(context, forecasts.take(6).toList());
+            return _buildDailyList(context, forecasts.take(9).toList());
           },
           loading: () => const _DailyLoadingSkeleton(),
           error: (err, stack) => _DailyErrorWidget(error: err),
@@ -55,6 +53,21 @@ class _DailyItemTile extends StatelessWidget {
   final DailyShortTermWeather forecast;
   const _DailyItemTile({required this.forecast});
 
+  String _getDayText(DateTime date) {
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final targetDate = DateTime(date.year, date.month, date.day);
+    final difference = targetDate.difference(today).inDays;
+
+    if (difference == 0) return '오늘';
+    if (difference == 1) return '내일';
+    if (difference == -1) return '어제';
+
+    const days = ['월', '화', '수', '목', '금', '토', '일'];
+    final dayOfWeek = days[date.weekday - 1];
+    return '${date.month}/${date.day} ($dayOfWeek)';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -69,47 +82,20 @@ class _DailyItemTile extends StatelessWidget {
         leading: SizedBox(
           width: 70,
           child: Text(
-            '${forecast.date.month}/${forecast.date.day} (${_getDayOfWeek(forecast.date)})',
+            _getDayText(forecast.date),
             style: const TextStyle(fontWeight: FontWeight.w500),
           ),
-        ),
-        title: Row(
-          children: [
-            Icon(
-              WeatherIconHelper.getIcon(
-                sky: forecast.representativeSkyStatus,
-                pty: forecast.representativePrecipitationType,
-                hour: 12,
-              ),
-              color: WeatherIconHelper.getColor(
-                sky: forecast.representativeSkyStatus,
-                pty: forecast.representativePrecipitationType,
-                hour: 12,
-              ),
-              size: 24,
-            ),
-            const SizedBox(width: 8),
-            Text(
-              skyStatusToString(forecast.representativeSkyStatus),
-              style: const TextStyle(fontSize: 14),
-            ),
-          ],
         ),
         trailing: SizedBox(
           width: 100,
           child: Text(
-            '${forecast.minTemperature}° / ${forecast.maxTemperature}°',
+            '${forecast.minTemperature.round()}° / ${forecast.maxTemperature.round()}°',
             textAlign: TextAlign.right,
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ),
       ),
     );
-  }
-
-  String _getDayOfWeek(DateTime date) {
-    const days = ['월', '화', '수', '목', '금', '토', '일'];
-    return days[date.weekday - 1];
   }
 }
 

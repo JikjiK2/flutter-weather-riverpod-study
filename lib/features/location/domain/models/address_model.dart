@@ -13,6 +13,8 @@ abstract class Address with _$Address {
     String? subLocalityLevel3,
     String? subLocalityLevel4,
     String? formattedAddress,
+    double? latitude,
+    double? longitude,
   }) = _Address;
 }
 

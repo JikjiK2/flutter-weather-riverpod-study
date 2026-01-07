@@ -152,33 +152,34 @@ final class WeatherRepositoryProvider
 
 String _$weatherRepositoryHash() => r'c064cc2e4e7654cbbf1718f403e04d4ba5b207c1';
 
-@ProviderFor(WeatherLocation)
-const weatherLocationProvider = WeatherLocationProvider._();
+@ProviderFor(SelectedWeatherLocation)
+const selectedWeatherLocationProvider = SelectedWeatherLocationProvider._();
 
-final class WeatherLocationProvider
-    extends $AsyncNotifierProvider<WeatherLocation, Position> {
-  const WeatherLocationProvider._()
+final class SelectedWeatherLocationProvider
+    extends $AsyncNotifierProvider<SelectedWeatherLocation, Position> {
+  const SelectedWeatherLocationProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'weatherLocationProvider',
+        name: r'selectedWeatherLocationProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$weatherLocationHash();
+  String debugGetCreateSourceHash() => _$selectedWeatherLocationHash();
 
   @$internal
   @override
-  WeatherLocation create() => WeatherLocation();
+  SelectedWeatherLocation create() => SelectedWeatherLocation();
 }
 
-String _$weatherLocationHash() => r'1509e8a1534a8392d5b00bd7e9d91f602fac48ee';
+String _$selectedWeatherLocationHash() =>
+    r'0f0e1d071280ec062dbaf80cc7f39a613934bb43';
 
-abstract class _$WeatherLocation extends $AsyncNotifier<Position> {
+abstract class _$SelectedWeatherLocation extends $AsyncNotifier<Position> {
   FutureOr<Position> build();
   @$mustCallSuper
   @override
@@ -214,7 +215,7 @@ final class WeatherGridCoordsProvider
         argument: null,
         retry: null,
         name: r'weatherGridCoordsProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -233,7 +234,7 @@ final class WeatherGridCoordsProvider
   }
 }
 
-String _$weatherGridCoordsHash() => r'101ab3d6d34d302b076dd67dc65a8a1c8c0d9cb9';
+String _$weatherGridCoordsHash() => r'8dbc67e352b4a278d4cda10916875b13c256505a';
 
 @ProviderFor(weatherAddress)
 const weatherAddressProvider = WeatherAddressProvider._();
@@ -247,7 +248,7 @@ final class WeatherAddressProvider
         argument: null,
         retry: null,
         name: r'weatherAddressProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -266,7 +267,7 @@ final class WeatherAddressProvider
   }
 }
 
-String _$weatherAddressHash() => r'0bd279fa4c3ea448fe5447e918561813ec5f4493';
+String _$weatherAddressHash() => r'fd319b7002d0e3940c276d7d3b27a914aa030336';
 
 @ProviderFor(midTermWeather)
 const midTermWeatherProvider = MidTermWeatherFamily._();
@@ -343,6 +344,223 @@ final class MidTermWeatherFamily extends $Family
   String toString() => r'midTermWeatherProvider';
 }
 
+@ProviderFor(currentWeatherByLocation)
+const currentWeatherByLocationProvider = CurrentWeatherByLocationProvider._();
+
+final class CurrentWeatherByLocationProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<CurrentWeather>,
+          CurrentWeather,
+          FutureOr<CurrentWeather>
+        >
+    with $FutureModifier<CurrentWeather>, $FutureProvider<CurrentWeather> {
+  const CurrentWeatherByLocationProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'currentWeatherByLocationProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$currentWeatherByLocationHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<CurrentWeather> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<CurrentWeather> create(Ref ref) {
+    return currentWeatherByLocation(ref);
+  }
+}
+
+String _$currentWeatherByLocationHash() =>
+    r'0482ca44809abc3a8c9ef1c1314ab51fd59a1b84';
+
+@ProviderFor(hourlyUltraSrtForecastByLocation)
+const hourlyUltraSrtForecastByLocationProvider =
+    HourlyUltraSrtForecastByLocationProvider._();
+
+final class HourlyUltraSrtForecastByLocationProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<HourlyWeatherModel>>,
+          List<HourlyWeatherModel>,
+          FutureOr<List<HourlyWeatherModel>>
+        >
+    with
+        $FutureModifier<List<HourlyWeatherModel>>,
+        $FutureProvider<List<HourlyWeatherModel>> {
+  const HourlyUltraSrtForecastByLocationProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'hourlyUltraSrtForecastByLocationProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$hourlyUltraSrtForecastByLocationHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<HourlyWeatherModel>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<HourlyWeatherModel>> create(Ref ref) {
+    return hourlyUltraSrtForecastByLocation(ref);
+  }
+}
+
+String _$hourlyUltraSrtForecastByLocationHash() =>
+    r'6c97007296956f7cf69eab7ada655d90a2a7563c';
+
+@ProviderFor(dailyShortTermForecastByLocation)
+const dailyShortTermForecastByLocationProvider =
+    DailyShortTermForecastByLocationProvider._();
+
+final class DailyShortTermForecastByLocationProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<DailyShortTermWeather>>,
+          List<DailyShortTermWeather>,
+          FutureOr<List<DailyShortTermWeather>>
+        >
+    with
+        $FutureModifier<List<DailyShortTermWeather>>,
+        $FutureProvider<List<DailyShortTermWeather>> {
+  const DailyShortTermForecastByLocationProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dailyShortTermForecastByLocationProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$dailyShortTermForecastByLocationHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<List<DailyShortTermWeather>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<DailyShortTermWeather>> create(Ref ref) {
+    return dailyShortTermForecastByLocation(ref);
+  }
+}
+
+String _$dailyShortTermForecastByLocationHash() =>
+    r'69b83428f23014a3d9c2967a694a8f918ceba534';
+
+@ProviderFor(midTermWeatherByLocation)
+const midTermWeatherByLocationProvider = MidTermWeatherByLocationProvider._();
+
+final class MidTermWeatherByLocationProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<MidTermWeather>,
+          MidTermWeather,
+          FutureOr<MidTermWeather>
+        >
+    with $FutureModifier<MidTermWeather>, $FutureProvider<MidTermWeather> {
+  const MidTermWeatherByLocationProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'midTermWeatherByLocationProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$midTermWeatherByLocationHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<MidTermWeather> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<MidTermWeather> create(Ref ref) {
+    return midTermWeatherByLocation(ref);
+  }
+}
+
+String _$midTermWeatherByLocationHash() =>
+    r'd235ef2bd254b27d41e77c02ff618cb37ba62455';
+
+@ProviderFor(getFeelsLikeTemperatureUseCase)
+const getFeelsLikeTemperatureUseCaseProvider =
+    GetFeelsLikeTemperatureUseCaseProvider._();
+
+final class GetFeelsLikeTemperatureUseCaseProvider
+    extends
+        $FunctionalProvider<
+          GetFeelsLikeTemperatureUseCase,
+          GetFeelsLikeTemperatureUseCase,
+          GetFeelsLikeTemperatureUseCase
+        >
+    with $Provider<GetFeelsLikeTemperatureUseCase> {
+  const GetFeelsLikeTemperatureUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'getFeelsLikeTemperatureUseCaseProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$getFeelsLikeTemperatureUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<GetFeelsLikeTemperatureUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  GetFeelsLikeTemperatureUseCase create(Ref ref) {
+    return getFeelsLikeTemperatureUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetFeelsLikeTemperatureUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetFeelsLikeTemperatureUseCase>(
+        value,
+      ),
+    );
+  }
+}
+
+String _$getFeelsLikeTemperatureUseCaseHash() =>
+    r'fa900fa312f257d65d895056571e5e1a12df133c';
+
 @ProviderFor(getCurrentWeatherUseCase)
 const getCurrentWeatherUseCaseProvider = GetCurrentWeatherUseCaseProvider._();
 
@@ -389,170 +607,55 @@ final class GetCurrentWeatherUseCaseProvider
 }
 
 String _$getCurrentWeatherUseCaseHash() =>
-    r'58052653dceb42990a27cdf179f3a646a49e6add';
+    r'be77d55124ccb48e1784c99159e891dd6794a37a';
 
-@ProviderFor(currentWeatherByLocation)
-const currentWeatherByLocationProvider = CurrentWeatherByLocationProvider._();
+@ProviderFor(getUnifiedDailyForecastUseCase)
+const getUnifiedDailyForecastUseCaseProvider =
+    GetUnifiedDailyForecastUseCaseProvider._();
 
-final class CurrentWeatherByLocationProvider
+final class GetUnifiedDailyForecastUseCaseProvider
     extends
         $FunctionalProvider<
-          AsyncValue<CurrentWeather>,
-          CurrentWeather,
-          FutureOr<CurrentWeather>
+          GetUnifiedDailyForecastUseCase,
+          GetUnifiedDailyForecastUseCase,
+          GetUnifiedDailyForecastUseCase
         >
-    with $FutureModifier<CurrentWeather>, $FutureProvider<CurrentWeather> {
-  const CurrentWeatherByLocationProvider._()
+    with $Provider<GetUnifiedDailyForecastUseCase> {
+  const GetUnifiedDailyForecastUseCaseProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'currentWeatherByLocationProvider',
+        name: r'getUnifiedDailyForecastUseCaseProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$currentWeatherByLocationHash();
+  String debugGetCreateSourceHash() => _$getUnifiedDailyForecastUseCaseHash();
 
   @$internal
   @override
-  $FutureProviderElement<CurrentWeather> $createElement(
+  $ProviderElement<GetUnifiedDailyForecastUseCase> $createElement(
     $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
+  ) => $ProviderElement(pointer);
 
   @override
-  FutureOr<CurrentWeather> create(Ref ref) {
-    return currentWeatherByLocation(ref);
+  GetUnifiedDailyForecastUseCase create(Ref ref) {
+    return getUnifiedDailyForecastUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(GetUnifiedDailyForecastUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<GetUnifiedDailyForecastUseCase>(
+        value,
+      ),
+    );
   }
 }
 
-String _$currentWeatherByLocationHash() =>
-    r'f89ac9e2e681b392109ee368c2518949ffde1bb4';
-
-@ProviderFor(hourlyUltraSrtForecastByLocation)
-const hourlyUltraSrtForecastByLocationProvider =
-    HourlyUltraSrtForecastByLocationProvider._();
-
-final class HourlyUltraSrtForecastByLocationProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<List<HourlyWeatherModel>>,
-          List<HourlyWeatherModel>,
-          FutureOr<List<HourlyWeatherModel>>
-        >
-    with
-        $FutureModifier<List<HourlyWeatherModel>>,
-        $FutureProvider<List<HourlyWeatherModel>> {
-  const HourlyUltraSrtForecastByLocationProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'hourlyUltraSrtForecastByLocationProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$hourlyUltraSrtForecastByLocationHash();
-
-  @$internal
-  @override
-  $FutureProviderElement<List<HourlyWeatherModel>> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<List<HourlyWeatherModel>> create(Ref ref) {
-    return hourlyUltraSrtForecastByLocation(ref);
-  }
-}
-
-String _$hourlyUltraSrtForecastByLocationHash() =>
-    r'c0cbbab932c656be83732186323f52855f640969';
-
-@ProviderFor(dailyShortTermForecastByLocation)
-const dailyShortTermForecastByLocationProvider =
-    DailyShortTermForecastByLocationProvider._();
-
-final class DailyShortTermForecastByLocationProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<List<DailyShortTermWeather>>,
-          List<DailyShortTermWeather>,
-          FutureOr<List<DailyShortTermWeather>>
-        >
-    with
-        $FutureModifier<List<DailyShortTermWeather>>,
-        $FutureProvider<List<DailyShortTermWeather>> {
-  const DailyShortTermForecastByLocationProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'dailyShortTermForecastByLocationProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$dailyShortTermForecastByLocationHash();
-
-  @$internal
-  @override
-  $FutureProviderElement<List<DailyShortTermWeather>> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<List<DailyShortTermWeather>> create(Ref ref) {
-    return dailyShortTermForecastByLocation(ref);
-  }
-}
-
-String _$dailyShortTermForecastByLocationHash() =>
-    r'd2a815cdeb8c4791941c3f25da171790dea95235';
-
-@ProviderFor(midTermWeatherByLocation)
-const midTermWeatherByLocationProvider = MidTermWeatherByLocationProvider._();
-
-final class MidTermWeatherByLocationProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<MidTermWeather>,
-          MidTermWeather,
-          FutureOr<MidTermWeather>
-        >
-    with $FutureModifier<MidTermWeather>, $FutureProvider<MidTermWeather> {
-  const MidTermWeatherByLocationProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'midTermWeatherByLocationProvider',
-        isAutoDispose: true,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$midTermWeatherByLocationHash();
-
-  @$internal
-  @override
-  $FutureProviderElement<MidTermWeather> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<MidTermWeather> create(Ref ref) {
-    return midTermWeatherByLocation(ref);
-  }
-}
-
-String _$midTermWeatherByLocationHash() =>
-    r'463b6840f35039a69b1ad482e108794837ee6cec';
+String _$getUnifiedDailyForecastUseCaseHash() =>
+    r'803d06168df35f1cb74b7039d1de9acd0c8e50c9';

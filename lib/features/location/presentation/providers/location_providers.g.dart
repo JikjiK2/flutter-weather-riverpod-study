@@ -404,3 +404,186 @@ final class OpenLocationSettingsProvider
 
 String _$openLocationSettingsHash() =>
     r'7ced4b25c0ebb852fb23584f6f38673c4c851055';
+
+@ProviderFor(searchAddressUseCase)
+const searchAddressUseCaseProvider = SearchAddressUseCaseProvider._();
+
+final class SearchAddressUseCaseProvider
+    extends
+        $FunctionalProvider<
+          SearchAddressUseCase,
+          SearchAddressUseCase,
+          SearchAddressUseCase
+        >
+    with $Provider<SearchAddressUseCase> {
+  const SearchAddressUseCaseProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'searchAddressUseCaseProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$searchAddressUseCaseHash();
+
+  @$internal
+  @override
+  $ProviderElement<SearchAddressUseCase> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  SearchAddressUseCase create(Ref ref) {
+    return searchAddressUseCase(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(SearchAddressUseCase value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<SearchAddressUseCase>(value),
+    );
+  }
+}
+
+String _$searchAddressUseCaseHash() =>
+    r'86d5f92f942e6b2ee9ce2aded365f2c0c0ae33d7';
+
+@ProviderFor(searchAddress)
+const searchAddressProvider = SearchAddressFamily._();
+
+final class SearchAddressProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<Map<String, List<Address>>>,
+          Map<String, List<Address>>,
+          FutureOr<Map<String, List<Address>>>
+        >
+    with
+        $FutureModifier<Map<String, List<Address>>>,
+        $FutureProvider<Map<String, List<Address>>> {
+  const SearchAddressProvider._({
+    required SearchAddressFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'searchAddressProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$searchAddressHash();
+
+  @override
+  String toString() {
+    return r'searchAddressProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<Map<String, List<Address>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Map<String, List<Address>>> create(Ref ref) {
+    final argument = this.argument as String;
+    return searchAddress(ref, argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is SearchAddressProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$searchAddressHash() => r'949da332f5be23a68011bf8ed81fb22ee431dd7e';
+
+final class SearchAddressFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          FutureOr<Map<String, List<Address>>>,
+          String
+        > {
+  const SearchAddressFamily._()
+    : super(
+        retry: null,
+        name: r'searchAddressProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  SearchAddressProvider call(String query) =>
+      SearchAddressProvider._(argument: query, from: this);
+
+  @override
+  String toString() => r'searchAddressProvider';
+}
+
+@ProviderFor(LocationSearchNotifier)
+const locationSearchProvider = LocationSearchNotifierProvider._();
+
+final class LocationSearchNotifierProvider
+    extends $NotifierProvider<LocationSearchNotifier, LocationSearchState> {
+  const LocationSearchNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'locationSearchProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$locationSearchNotifierHash();
+
+  @$internal
+  @override
+  LocationSearchNotifier create() => LocationSearchNotifier();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(LocationSearchState value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<LocationSearchState>(value),
+    );
+  }
+}
+
+String _$locationSearchNotifierHash() =>
+    r'0d20ce03e34dde7cf6039aa14a543cee42c5e634';
+
+abstract class _$LocationSearchNotifier extends $Notifier<LocationSearchState> {
+  LocationSearchState build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<LocationSearchState, LocationSearchState>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<LocationSearchState, LocationSearchState>,
+              LocationSearchState,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}

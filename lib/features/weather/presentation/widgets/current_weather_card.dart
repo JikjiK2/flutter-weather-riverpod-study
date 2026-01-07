@@ -9,7 +9,6 @@ class CurrentWeatherCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // 합성된 현재 날씨 정보를 구독합니다.
     final currentWeatherAsync = ref.watch(currentWeatherByLocationProvider);
 
     return currentWeatherAsync.when(
@@ -26,7 +25,6 @@ class CurrentWeatherCard extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // 왼쪽: 날씨 아이콘과 상태 메시지
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -52,7 +50,6 @@ class CurrentWeatherCard extends ConsumerWidget {
                       ),
                     ],
                   ),
-                  // 오른쪽: 큰 기온 표시
                   Text(
                     '${weather.temperature}°',
                     style: Theme.of(context).textTheme.displayMedium?.copyWith(
@@ -63,7 +60,6 @@ class CurrentWeatherCard extends ConsumerWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              // 하단: 습도 등 상세 정보
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -80,9 +76,8 @@ class CurrentWeatherCard extends ConsumerWidget {
           ),
         ),
       ),
-      loading: () => const _LoadingCard(), // 이전에 만든 스켈레톤 적용
-      error: (err, stack) =>
-          _ErrorCard(error: err.toString()), // 이전에 만든 에러 위젯 적용
+      loading: () => const _LoadingCard(),
+      error: (err, stack) => _ErrorCard(error: err.toString()),
     );
   }
 }
@@ -168,7 +163,7 @@ class _ErrorCard extends ConsumerWidget {
             ),
             TextButton.icon(
               onPressed: () {
-                ref.invalidate(weatherLocationProvider);
+                ref.invalidate(selectedWeatherLocationProvider);
               },
               icon: const Icon(Icons.refresh, size: 18),
               label: const Text('다시 시도'),

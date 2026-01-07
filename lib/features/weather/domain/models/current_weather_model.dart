@@ -6,7 +6,7 @@ part 'current_weather_model.freezed.dart';
 @freezed
 abstract class CurrentWeather with _$CurrentWeather {
   const factory CurrentWeather({
-    required DateTime dateTime, // 관측 시각 (baseDate + baseTime)
+    required DateTime dateTime,
     required double temperature,
     required int humidity,
     required double windSpeed,

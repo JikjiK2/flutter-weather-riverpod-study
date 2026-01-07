@@ -61,7 +61,6 @@ class GeolocatorDataSourceImpl implements LocationPlatformDataSource {
       case LocationPermission.always:
         return LocationPermissionStatus.granted;
       case LocationPermission.unableToDetermine:
-      default:
         return LocationPermissionStatus.unknown;
     }
   }

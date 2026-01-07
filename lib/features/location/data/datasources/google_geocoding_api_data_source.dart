@@ -15,4 +15,12 @@ abstract class GoogleGeocodingApiDataSource {
     @Query("key") required String apiKey,
     @Query("language") String language = "ko",
   });
+
+  @GET("json")
+  Future<GoogleGeocodingResponse> searchAddress({
+    @Query("address") required String address,
+    @Query("key") required String apiKey,
+    @Query("language") String language = "ko",
+    @Query("region") String region = 'kr',
+  });
 }
