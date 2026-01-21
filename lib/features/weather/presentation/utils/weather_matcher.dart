@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class MidTermWeatherMatcher {
-  /// 중기 예보 문자열을 분석하여 가장 적합한 아이콘을 반환합니다.
   static IconData getIcon(String weatherText) {
     // 1. 강수 조건 우선 체크 (우선순위: 비/눈 > 비 > 눈 > 소나기)
     if (weatherText.contains('비/눈')) return Icons.cloudy_snowing;
@@ -18,7 +17,6 @@ class MidTermWeatherMatcher {
     return Icons.wb_cloudy;
   }
 
-  /// 날씨 상태에 어울리는 대표 색상을 반환합니다.
   static Color getColor(String weatherText) {
     if (weatherText.contains('비') ||
         weatherText.contains('눈') ||

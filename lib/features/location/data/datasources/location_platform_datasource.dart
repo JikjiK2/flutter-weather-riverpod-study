@@ -1,12 +1,17 @@
-import 'package:ai_weather/features/location/domain/enums/location_permission_enums.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:ai_weather/features/location/domain/enums/location_permission_enums.dart';
 
 abstract class LocationPlatformDataSource {
   Future<LocationPermissionStatus> checkPermission();
+
   Future<LocationPermissionStatus> requestPermission();
+
   Future<bool> isLocationServiceEnabled();
+
   Future<void> openAppSettings();
+
   Future<void> openLocationSettings();
+
   Future<Position> getCurrentPosition();
 }
 
@@ -57,7 +62,7 @@ class GeolocatorDataSourceImpl implements LocationPlatformDataSource {
       case LocationPermission.deniedForever:
         return LocationPermissionStatus.deniedForever;
       case LocationPermission.whileInUse:
-        return LocationPermissionStatus.granted; // 사용 중 허용도 granted로 간주
+        return LocationPermissionStatus.granted;
       case LocationPermission.always:
         return LocationPermissionStatus.granted;
       case LocationPermission.unableToDetermine:

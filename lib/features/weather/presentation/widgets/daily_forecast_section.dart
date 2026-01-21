@@ -1,150 +1,168 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ai_weather/features/weather/domain/models/daily_short_term_weather_model.dart';
-import 'package:ai_weather/features/weather/presentation/providers/weather_providers.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
+import 'package:ai_weather/features/weather/presentation/utils/weather_icon_helper.dart';
+import 'package:ai_weather/features/weather/domain/entities/daily_short_term_weather_entity.dart';
+import 'package:ai_weather/features/weather/presentation/providers/weather_state_providers.dart';
+import 'package:ai_weather/features/weather/presentation/widgets/section_error_widget.dart';
 
 class DailyForecastSection extends ConsumerWidget {
   const DailyForecastSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final dailyForecastAsync = ref.watch(
-      dailyShortTermForecastByLocationProvider,
-    );
+    final dailyForecastAsync = ref.watch(dailyShortTermForecastByLocationProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          '일별 예보',
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        const Padding(
+          padding: EdgeInsets.only(left: 4, bottom: 12),
+          child: Text(
+            '일별 예보',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
         ),
-        const SizedBox(height: 12),
-
-        dailyForecastAsync.when(
-          data: (forecasts) {
-            if (forecasts.isEmpty) {
-              return const Center(child: Text('일별 예보 데이터가 없습니다.'));
-            }
-            return _buildDailyList(context, forecasts.take(9).toList());
-          },
-          loading: () => const _DailyLoadingSkeleton(),
-          error: (err, stack) => _DailyErrorWidget(error: err),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          child: dailyForecastAsync.when(
+            data: (forecasts) => _buildUnifiedCard(context, forecasts, false),
+            loading: () => Skeletonizer(
+              enabled: true,
+              child: _buildUnifiedCard(
+                  context,
+                  List.generate(7, (_) => DailyShortTermWeather.dummy),
+                  true
+              ),
+            ),
+            error: (err, stack) => SectionErrorWidget(
+              message: '일별 예보 로드 실패',
+              onRetry: () => ref.invalidate(dailyShortTermForecastByLocationProvider),
+            ),
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildDailyList(
-    BuildContext context,
-    List<DailyShortTermWeather> forecasts,
-  ) {
-    return Column(
-      children: forecasts
-          .map((forecast) => _DailyItemTile(forecast: forecast))
-          .toList(),
-    );
-  }
-}
-
-class _DailyItemTile extends StatelessWidget {
-  final DailyShortTermWeather forecast;
-  const _DailyItemTile({required this.forecast});
-
-  String _getDayText(DateTime date) {
-    final now = DateTime.now();
-    final today = DateTime(now.year, now.month, now.day);
-    final targetDate = DateTime(date.year, date.month, date.day);
-    final difference = targetDate.difference(today).inDays;
-
-    if (difference == 0) return '오늘';
-    if (difference == 1) return '내일';
-    if (difference == -1) return '어제';
-
-    const days = ['월', '화', '수', '목', '금', '토', '일'];
-    final dayOfWeek = days[date.weekday - 1];
-    return '${date.month}/${date.day} ($dayOfWeek)';
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildUnifiedCard(BuildContext context, List<DailyShortTermWeather> forecasts, bool isLoading) {
     return Card(
+      key: ValueKey(isLoading),
       elevation: 0,
-      margin: const EdgeInsets.symmetric(vertical: 4),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-        side: BorderSide(color: Colors.grey.shade100),
+        borderRadius: BorderRadius.circular(16),
+        side: BorderSide(color: Colors.grey.shade200),
       ),
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        leading: SizedBox(
-          width: 70,
-          child: Text(
-            _getDayText(forecast.date),
-            style: const TextStyle(fontWeight: FontWeight.w500),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8.0),
+        child: ListView.separated(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: forecasts.length,
+          separatorBuilder: (context, index) => Divider(
+            height: 1,
+            indent: 16,
+            endIndent: 16,
+            color: Colors.grey.shade100,
           ),
-        ),
-        trailing: SizedBox(
-          width: 100,
-          child: Text(
-            '${forecast.minTemperature.round()}° / ${forecast.maxTemperature.round()}°',
-            textAlign: TextAlign.right,
-            style: const TextStyle(fontWeight: FontWeight.bold),
-          ),
+          itemBuilder: (context, index) {
+            return _DailyItemRow(forecast: forecasts[index]);
+          },
         ),
       ),
     );
   }
 }
 
-class _DailyLoadingSkeleton extends StatelessWidget {
-  const _DailyLoadingSkeleton();
+class _DailyItemRow extends StatelessWidget {
+  final DailyShortTermWeather forecast;
+  const _DailyItemRow({required this.forecast});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: List.generate(
-        4,
-        (index) => Card(
-          elevation: 0,
-          margin: const EdgeInsets.symmetric(vertical: 4),
-          color: Colors.grey[50],
-          child: ListTile(
-            leading: Container(width: 40, height: 16, color: Colors.grey[200]),
-            title: Container(width: 60, height: 16, color: Colors.grey[100]),
-            trailing: Container(width: 50, height: 16, color: Colors.grey[200]),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _DailyErrorWidget extends ConsumerWidget {
-  final Object error;
-  const _DailyErrorWidget({required this.error});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.grey[50],
-        borderRadius: BorderRadius.circular(12),
-      ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text('일별 예보 로드 실패', style: TextStyle(fontSize: 13)),
-          TextButton(
-            onPressed: () =>
-                ref.invalidate(dailyShortTermForecastByLocationProvider),
-            child: const Text('재시도'),
+          SizedBox(
+            width: 65,
+            child: Text(
+              forecast.getDisplayDate(DateTime.now()),
+              style: const TextStyle(fontWeight: FontWeight.w500),
+            ),
+          ),
+
+          Expanded(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _WeatherSmallIcon(
+                  sky: forecast.morningSkyStatus,
+                  pty: forecast.morningPrecipitationType,
+                  hour: 9,
+                ),
+                const SizedBox(width: 12),
+                // 오후 아이콘
+                _WeatherSmallIcon(
+                  sky: forecast.afternoonSkyStatus,
+                  pty: forecast.afternoonPrecipitationType,
+                  hour: 15,
+                ),
+              ],
+            ),
+          ),
+
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              SizedBox(
+                width: 30,
+                child: Text(
+                  '${forecast.maxTemperature.round()}°',
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.redAccent,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 30,
+                child: Text(
+                  '${forecast.minTemperature.round()}°',
+                  textAlign: TextAlign.right,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.blueAccent,
+                  ),
+                ),
+              ),
+            ],
           ),
         ],
       ),
+    );
+  }
+}
+
+class _WeatherSmallIcon extends StatelessWidget {
+  final SkyStatus sky;
+  final PrecipitationType pty;
+  final int hour;
+
+  const _WeatherSmallIcon({
+    required this.sky,
+    required this.pty,
+    required this.hour,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      WeatherIconHelper.getIcon(sky: sky, pty: pty, hour: hour),
+      size: 18,
+      color: WeatherIconHelper.getColor(sky: sky, pty: pty, hour: hour),
     );
   }
 }

@@ -11,10 +11,7 @@ part of 'kma_short_term_api_data_source.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter,avoid_unused_constructor_parameters,unreachable_from_main
 
 class _KmaShortTermApiDataSource implements KmaShortTermApiDataSource {
-  _KmaShortTermApiDataSource(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??=
-        'https://apihub.kma.go.kr/api/typ02/openApi/VilageFcstInfoService_2.0/';
-  }
+  _KmaShortTermApiDataSource(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -24,7 +21,6 @@ class _KmaShortTermApiDataSource implements KmaShortTermApiDataSource {
 
   @override
   Future<KmaUltraSrtFcstApiResponse> getUltraSrtFcst({
-    required String authKey,
     int numOfRows = 60,
     int pageNo = 1,
     String dataType = "JSON",
@@ -35,7 +31,6 @@ class _KmaShortTermApiDataSource implements KmaShortTermApiDataSource {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'authKey': authKey,
       r'numOfRows': numOfRows,
       r'pageNo': pageNo,
       r'dataType': dataType,
@@ -69,7 +64,6 @@ class _KmaShortTermApiDataSource implements KmaShortTermApiDataSource {
 
   @override
   Future<KmaUltraSrtNcstApiResponse> getUltraSrtNcst({
-    required String authKey,
     int numOfRows = 60,
     int pageNo = 1,
     String dataType = "JSON",
@@ -80,7 +74,6 @@ class _KmaShortTermApiDataSource implements KmaShortTermApiDataSource {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'authKey': authKey,
       r'numOfRows': numOfRows,
       r'pageNo': pageNo,
       r'dataType': dataType,
@@ -114,7 +107,6 @@ class _KmaShortTermApiDataSource implements KmaShortTermApiDataSource {
 
   @override
   Future<KmaSrtFcstApiResponse> getShortTermForecast({
-    required String authKey,
     int numOfRows = 60,
     int pageNo = 1,
     String dataType = "JSON",
@@ -125,7 +117,6 @@ class _KmaShortTermApiDataSource implements KmaShortTermApiDataSource {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'authKey': authKey,
       r'numOfRows': numOfRows,
       r'pageNo': pageNo,
       r'dataType': dataType,

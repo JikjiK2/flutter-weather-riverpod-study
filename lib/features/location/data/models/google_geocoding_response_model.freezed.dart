@@ -210,8 +210,8 @@ return $default(_that.results,_that.status,_that.errorMessage);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _GoogleGeocodingResponse implements GoogleGeocodingResponse {
-  const _GoogleGeocodingResponse({@JsonKey(name: 'results') final  List<GeocodingResult> results = const [], @JsonKey(name: 'status') required this.status, @JsonKey(name: 'error_message') this.errorMessage}): _results = results;
+class _GoogleGeocodingResponse extends GoogleGeocodingResponse {
+  const _GoogleGeocodingResponse({@JsonKey(name: 'results') final  List<GeocodingResult> results = const [], @JsonKey(name: 'status') required this.status, @JsonKey(name: 'error_message') this.errorMessage}): _results = results,super._();
   factory _GoogleGeocodingResponse.fromJson(Map<String, dynamic> json) => _$GoogleGeocodingResponseFromJson(json);
 
  final  List<GeocodingResult> _results;
@@ -494,8 +494,8 @@ return $default(_that.addressComponents,_that.formattedAddress,_that.geometry);c
 /// @nodoc
 @JsonSerializable()
 
-class _GeocodingResult implements GeocodingResult {
-  const _GeocodingResult({@JsonKey(name: 'address_components') final  List<AddressComponent> addressComponents = const [], @JsonKey(name: 'formatted_address') this.formattedAddress, @JsonKey(name: 'geometry') required this.geometry}): _addressComponents = addressComponents;
+class _GeocodingResult extends GeocodingResult {
+  const _GeocodingResult({@JsonKey(name: 'address_components') final  List<AddressComponent> addressComponents = const [], @JsonKey(name: 'formatted_address') this.formattedAddress, @JsonKey(name: 'geometry') required this.geometry}): _addressComponents = addressComponents,super._();
   factory _GeocodingResult.fromJson(Map<String, dynamic> json) => _$GeocodingResultFromJson(json);
 
  final  List<AddressComponent> _addressComponents;

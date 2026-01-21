@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'kma_mid_tmp_fcst_response_models.freezed.dart';
+
 part 'kma_mid_tmp_fcst_response_models.g.dart';
 
 @freezed
@@ -78,4 +79,15 @@ abstract class KmaMidTmpFcstApiItem with _$KmaMidTmpFcstApiItem {
 
   factory KmaMidTmpFcstApiItem.fromJson(Map<String, dynamic> json) =>
       _$KmaMidTmpFcstApiItemFromJson(json);
+}
+
+extension KmaMidTmpFcstApiItemX on KmaMidTmpFcstApiItem {
+  Map<int, ({double min, double max})> toTempMap() {
+    return {
+      4: (min: taMin4 ?? 0.0, max: taMax4 ?? 0.0),
+      5: (min: taMin5 ?? 0.0, max: taMax5 ?? 0.0),
+      6: (min: taMin6 ?? 0.0, max: taMax6 ?? 0.0),
+      7: (min: taMin7 ?? 0.0, max: taMax7 ?? 0.0),
+    };
+  }
 }

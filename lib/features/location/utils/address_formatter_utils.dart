@@ -1,4 +1,4 @@
-import 'package:ai_weather/features/location/domain/models/address_model.dart';
+import 'package:ai_weather/features/location/domain/entities/address_entity.dart';
 
 class AddressFormatterUtils {
   // 내부 헬퍼 함수: 지역명에서 불필요한 접미사를 제거
@@ -52,7 +52,7 @@ class AddressFormatterUtils {
       ); // '파주시' -> '파주', '수원시' -> '수원'
     }
 
-    // 최종 정리: KMA regId 매핑을 위해 특정 도(道)는 단축명 사용
+    // KMA regId 매핑을 위해 특정 도(道)는 단축명 사용
     // ex: 경기도, 강원도 등... (regId 맵핑 테이블에 맞춰 조정)
     if (resultRegionName != null) {
       // 예를 들어 '경기' 로 통칭해야 하는 경우

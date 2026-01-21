@@ -217,8 +217,8 @@ return $default(_that.response);case _:
 /// @nodoc
 @JsonSerializable()
 
-class _KmaUltraSrtFcstApiResponse implements KmaUltraSrtFcstApiResponse {
-  const _KmaUltraSrtFcstApiResponse({@JsonKey(name: 'response') required this.response});
+class _KmaUltraSrtFcstApiResponse extends KmaUltraSrtFcstApiResponse {
+  const _KmaUltraSrtFcstApiResponse({@JsonKey(name: 'response') required this.response}): super._();
   factory _KmaUltraSrtFcstApiResponse.fromJson(Map<String, dynamic> json) => _$KmaUltraSrtFcstApiResponseFromJson(json);
 
 @override@JsonKey(name: 'response') final  KmaUltraSrtFcstApiResult response;

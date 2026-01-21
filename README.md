@@ -24,19 +24,10 @@
 3.  **날씨 데이터 요청 및 가공 (UseCases)**
     -   격자 좌표와 주소 정보가 준비되면, 각 `UseCase`가 비즈니스 로직을 수행합니다.
     -   '초단기 실황'과 '초단기 예보' API 데이터를 조합하여 '현재 날씨' 정보를 완성합니다. 체감온도 계산 로직도 포함합니다.
-    -   단기 예보(\~3일)와 중기 예보 (4~7일) API 결과를 합쳐 끊김 없는 **주간 예보** 데이터를 생성합니다.
+    -   단기 예보와 중기 예보 API 결과를 합쳐 끊김 없는 **주간 예보** 데이터를 생성합니다.
 
-### 주요 라이브러리
 
--   **State Management**: `flutter_riverpod`, `riverpod_annotation`
--   **Networking**: `dio` (HTTP Client), `retrofit` (Type-safe API Client)
--   **Data Class/Serialization**: `freezed` (Immutable Data Classes), `json_serializable`
--   **Location**: `geolocator` (기기 위치 정보)
--   **Environment Variables**: `flutter_dotenv` (API 키 관리)
--   **Local Storage**: `shared_preferences`
--   **Logging**: `logger`, `pretty_dio_logger`
-
-## 📂 프로젝트 구조
+## 📂 프로젝트 주요 디렉토리 구조
 
 ```
 lib
@@ -47,13 +38,12 @@ lib
 │       │   ├── models      # API 응답 모델 (DTO)
 │       │   └── repositories # Data Layer Repository 구현체
 │       ├── domain
-│       │   ├── models      # 핵심 비즈니스 모델
+│       │   ├── entities      # 핵심 비즈니스 모델
 │       │   ├── repositories # Domain Layer Repository 인터페이스
 │       │   └── usecases    # 비즈니스 로직
 │       └── presentation
 │           ├── providers   # Riverpod Provider 정의
 │           ├── screens     # 화면 UI
-│           ├── widgets     # 화면에 사용되는 위젯
-│           └── utils       # 유틸리티
+│           └── widgets     # 화면에 사용되는 위젯│            
 ...
 ```

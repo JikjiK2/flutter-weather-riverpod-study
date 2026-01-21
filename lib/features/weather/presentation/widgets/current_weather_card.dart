@@ -1,8 +1,12 @@
-import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
-import 'package:ai_weather/features/weather/presentation/providers/weather_providers.dart';
-import 'package:ai_weather/features/weather/presentation/utils/weather_icon_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+import 'package:ai_weather/features/weather/domain/entities/current_weather_entity.dart';
+import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
+import 'package:ai_weather/features/weather/presentation/providers/location_state_providers.dart';
+import 'package:ai_weather/features/weather/presentation/providers/weather_state_providers.dart';
+import 'package:ai_weather/features/weather/presentation/utils/weather_icon_helper.dart';
+
 
 class CurrentWeatherCard extends ConsumerWidget {
   const CurrentWeatherCard({super.key});
@@ -11,76 +15,89 @@ class CurrentWeatherCard extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final currentWeatherAsync = ref.watch(currentWeatherByLocationProvider);
 
-    return currentWeatherAsync.when(
-      data: (weather) => Card(
-        elevation: 4,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500),
+      child: currentWeatherAsync.when(
+        data: (weather) => _buildCard(context, weather, false),
+        loading: () => Skeletonizer(
+          enabled: true,
+      child: _buildCard(context, CurrentWeather.dummy, true),
+        ),
+        error: (err, stack) => _ErrorCard(error: err.toString()),
+      ),
+    );
+  }
+}
+
+Widget _buildCard(BuildContext context, CurrentWeather weather, bool isLoading) {
+  final currentHour = DateTime.now().hour;
+  return Card(
+    key: ValueKey(isLoading ? 'loading' : 'data'),
+    elevation: 4,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    child: Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('현재 날씨', style: Theme.of(context).textTheme.titleMedium),
+          const Divider(height: 24),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('현재 날씨', style: Theme.of(context).textTheme.titleMedium),
-              const Divider(height: 24),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Icon(
-                        WeatherIconHelper.getIcon(
-                          sky: weather.skyStatus!,
-                          pty: weather.precipitationType,
-                          hour: DateTime.now().hour,
-                        ),
-                        color: WeatherIconHelper.getColor(
-                          sky: weather.skyStatus!,
-                          pty: weather.precipitationType,
-                          hour: DateTime.now().hour,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        skyStatusToString(weather.skyStatus!),
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                  Icon(
+                    WeatherIconHelper.getIcon(
+                      sky: weather.skyStatus!,
+                      pty: weather.precipitationType,
+                      hour: currentHour,
+                    ),
+                    color: WeatherIconHelper.getColor(
+                      sky: weather.skyStatus!,
+                      pty: weather.precipitationType,
+                      hour: currentHour,
+                    ),
                   ),
+                  const SizedBox(height: 8),
                   Text(
-                    '${weather.temperature}°',
-                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                    skyStatusToString(weather.skyStatus!),
+                    style: const TextStyle(
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _InfoItem(label: '습도', value: '${weather.humidity}%'),
-                  _InfoItem(
-                    label: '체감',
-                    value:
-                        '${weather.feelsLikeTemperature.toStringAsFixed(1)}°',
-                  ),
-                  _InfoItem(label: '풍속', value: '${weather.windSpeed}m/s'),
-                ],
+              Text(
+                '${weather.temperature}°',
+                style: Theme.of(context).textTheme.displayMedium?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black87,
+                ),
               ),
             ],
           ),
-        ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _InfoItem(label: '습도', value: '${weather.humidity}%'),
+              _InfoItem(
+                label: '체감',
+                value:
+                '${weather.feelsLikeTemperature.toStringAsFixed(1)}°',
+              ),
+              _InfoItem(label: '풍속', value: '${weather.windSpeed}m/s'),
+            ],
+          ),
+        ],
       ),
-      loading: () => const _LoadingCard(),
-      error: (err, stack) => _ErrorCard(error: err.toString()),
-    );
-  }
+    ),
+  );
 }
+
 
 class _InfoItem extends StatelessWidget {
   final String label;
@@ -95,41 +112,6 @@ class _InfoItem extends StatelessWidget {
         const SizedBox(height: 4),
         Text(value, style: const TextStyle(fontWeight: FontWeight.w600)),
       ],
-    );
-  }
-}
-
-class _LoadingCard extends StatelessWidget {
-  const _LoadingCard();
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(width: 80, height: 20, color: Colors.grey[300]),
-            const Divider(height: 20),
-            Container(width: 150, height: 40, color: Colors.grey[200]),
-            const SizedBox(height: 16),
-
-            ...List.generate(
-              4,
-              (index) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Container(
-                  width: double.infinity,
-                  height: 14,
-                  color: Colors.grey[100],
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

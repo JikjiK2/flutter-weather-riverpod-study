@@ -11,10 +11,7 @@ part of 'kma_mid_term_api_data_source.dart';
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter,avoid_unused_constructor_parameters,unreachable_from_main
 
 class _KmaMidTermApiDataSource implements KmaMidTermApiDataSource {
-  _KmaMidTermApiDataSource(this._dio, {this.baseUrl, this.errorLogger}) {
-    baseUrl ??=
-        'https://apihub.kma.go.kr/api/typ02/openApi/MidFcstInfoService/';
-  }
+  _KmaMidTermApiDataSource(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -24,7 +21,6 @@ class _KmaMidTermApiDataSource implements KmaMidTermApiDataSource {
 
   @override
   Future<KmaMidTmpFcstApiResponse> getMidTermTemperatureForecast({
-    required String authKey,
     int numOfRows = 10,
     int pageNo = 1,
     String dataType = "JSON",
@@ -33,7 +29,6 @@ class _KmaMidTermApiDataSource implements KmaMidTermApiDataSource {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'authKey': authKey,
       r'numOfRows': numOfRows,
       r'pageNo': pageNo,
       r'dataType': dataType,
@@ -65,7 +60,6 @@ class _KmaMidTermApiDataSource implements KmaMidTermApiDataSource {
 
   @override
   Future<KmaMidLandFcstApiResponse> getMidTermLandForecast({
-    required String authKey,
     int numOfRows = 10,
     int pageNo = 1,
     String dataType = "JSON",
@@ -74,7 +68,6 @@ class _KmaMidTermApiDataSource implements KmaMidTermApiDataSource {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'authKey': authKey,
       r'numOfRows': numOfRows,
       r'pageNo': pageNo,
       r'dataType': dataType,
@@ -106,7 +99,6 @@ class _KmaMidTermApiDataSource implements KmaMidTermApiDataSource {
 
   @override
   Future<KmaMidOutlookApiResponse> getMidTermOutlook({
-    required String authKey,
     int numOfRows = 10,
     int pageNo = 1,
     String dataType = "JSON",
@@ -115,7 +107,6 @@ class _KmaMidTermApiDataSource implements KmaMidTermApiDataSource {
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
-      r'authKey': authKey,
       r'numOfRows': numOfRows,
       r'pageNo': pageNo,
       r'dataType': dataType,

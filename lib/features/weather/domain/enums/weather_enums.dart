@@ -1,26 +1,17 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
 enum SkyStatus {
-  @JsonValue('0')
   none(0, '날씨 정보 없음'),
-
-  @JsonValue('1')
   sunny(1, '맑음'),
-
-  @JsonValue('3')
   partlyCloudy(3, '구름 많음'),
-
-  @JsonValue('4')
   cloudy(4, '흐림');
 
   final int code;
   final String description;
+
   const SkyStatus(this.code, this.description);
 
   factory SkyStatus.fromCode(String code) {
-    switch (int.parse(code)) {
-      case 0:
-        return SkyStatus.none;
+    final cleanCode = code.replaceAll('0', '');
+    switch (int.tryParse(cleanCode)) {
       case 1:
         return SkyStatus.sunny;
       case 3:
@@ -31,28 +22,28 @@ enum SkyStatus {
         return SkyStatus.none;
     }
   }
+
+  static SkyStatus fromDescription(String description) {
+    if (description.contains('맑음')) return SkyStatus.sunny;
+    if (description.contains('구름많음')) return SkyStatus.partlyCloudy;
+    if (description.contains('흐림')) return SkyStatus.cloudy;
+    return SkyStatus.none;
+  }
 }
 
 enum PrecipitationType {
-  @JsonValue('0')
   none(0, '없음'),
-  @JsonValue('1')
   rain(1, '비'),
-  @JsonValue('2')
   rainSnow(2, '비/눈'),
-  @JsonValue('3')
   snow(3, '눈'),
-  @JsonValue('4')
   shower(4, '소나기'),
-  @JsonValue('5')
   drizzle(5, '빗방울'),
-  @JsonValue('6')
   drizzleSnow(6, '빗방울눈날림'),
-  @JsonValue('7')
   snowFlurry(7, '눈날림');
 
   final int code;
   final String description;
+
   const PrecipitationType(this.code, this.description);
 
   factory PrecipitationType.fromCode(String code) {
@@ -77,16 +68,23 @@ enum PrecipitationType {
         return PrecipitationType.none;
     }
   }
+
+  static PrecipitationType fromDescription(String description) {
+    if (description.contains('비/눈')) return PrecipitationType.rainSnow;
+    if (description.contains('소나기')) return PrecipitationType.shower;
+    if (description.contains('비')) return PrecipitationType.rain;
+    if (description.contains('눈')) return PrecipitationType.snow;
+    return PrecipitationType.none;
+  }
 }
 
 enum Thunderbolt {
-  @JsonValue('0')
   none(0, '없음'),
-  @JsonValue('1')
   exist(1, '있음');
 
   final int code;
   final String description;
+
   const Thunderbolt(this.code, this.description);
 
   factory Thunderbolt.fromCode(String code) {

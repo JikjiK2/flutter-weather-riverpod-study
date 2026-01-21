@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'kma_mid_land_fcst_response_models.freezed.dart';
+
 part 'kma_mid_land_fcst_response_models.g.dart';
 
 @freezed
@@ -86,4 +87,16 @@ abstract class KmaMidLandFcstApiItem with _$KmaMidLandFcstApiItem {
 
   factory KmaMidLandFcstApiItem.fromJson(Map<String, dynamic> json) =>
       _$KmaMidLandFcstApiItemFromJson(json);
+}
+
+extension KmaMidLandFcstApiItemX on KmaMidLandFcstApiItem {
+  Map<int, ({int? probAm, int? probPm, String? descAm, String? descPm})>
+  toLandMap() {
+    return {
+      4: (probAm: rnSt4Am, probPm: rnSt4Pm, descAm: wf4Am, descPm: wf4Pm),
+      5: (probAm: rnSt5Am, probPm: rnSt5Pm, descAm: wf5Am, descPm: wf5Pm),
+      6: (probAm: rnSt6Am, probPm: rnSt6Pm, descAm: wf6Am, descPm: wf6Pm),
+      7: (probAm: rnSt7Am, probPm: rnSt7Pm, descAm: wf7Am, descPm: wf7Pm),
+    };
+  }
 }

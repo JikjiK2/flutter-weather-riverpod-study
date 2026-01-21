@@ -1,7 +1,7 @@
-import 'package:ai_weather/features/location/domain/enums/location_permission_enums.dart';
-import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ai_weather/features/location/domain/enums/location_permission_enums.dart';
+import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
 
 class LocationScreen extends ConsumerWidget {
   const LocationScreen({super.key});

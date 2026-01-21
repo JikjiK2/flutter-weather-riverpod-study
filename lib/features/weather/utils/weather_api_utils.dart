@@ -1,6 +1,6 @@
-import 'package:ai_weather/features/weather/domain/models/mid_term_region_model.dart';
+import 'package:ai_weather/features/weather/domain/entities/mid_term_region_entity.dart';
 import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
-import 'package:ai_weather/utils/app_logger.dart';
+import 'package:ai_weather/core/logger/app_logger_interface.dart';
 import 'package:intl/intl.dart';
 
 class WeatherApiUtils {
@@ -15,6 +15,7 @@ class WeatherApiUtils {
     20,
     23,
   ];
+
 
   // formatDateToYYYYMMDD 헬퍼 메서드 추가
   static String formatDateToYYYYMMDD(DateTime date) {
@@ -32,63 +33,43 @@ class WeatherApiUtils {
   }
 
   // 특정 날짜(targetDate)의 TMN/TMX를 찾기 위한 최적의 base_date와 base_time을 반환하는 함수
-  // (단기 예보 시간표에 따라 0200/0500 발표가 최저기온, 0800/1100 발표가 최고기온 포함)
-  // 편의상 TMN과 TMX를 한 번의 호출로 가져오기 위해 '이른 시간' 발표 (0200)을 선호합니다.
-  // 만약 0200 이전에 호출하는 경우 전날 2300으로 넘어갑니다.
   static (String baseDate, String baseTime) getOptimalBaseTimeForDailyTMN_TMX(
     DateTime targetDate,
     DateTime currentQueryTime,
   ) {
     String baseDateStr = formatDateToYYYYMMDD(targetDate);
-    String baseTimeStr = '0200'; // 최저기온 포함 발표 (오전 2시)
+    String baseTimeStr = '0200';
 
-    // 만약 targetDate가 오늘이고, 현재 시각이 오전 2시보다 빠르다면, 전날 2300 발표를 확인해야 합니다.
-    // 이는 '오늘'의 TMN/TMX가 2300 발표에서 fcstDate가 '오늘'로 나오는 경우를 위함입니다.
     if (targetDate.year == currentQueryTime.year &&
         targetDate.month == currentQueryTime.month &&
         targetDate.day == currentQueryTime.day &&
         currentQueryTime.hour < 2) {
       final prevDay = targetDate.subtract(const Duration(days: 1));
       baseDateStr = formatDateToYYYYMMDD(prevDay);
-      baseTimeStr = '2300'; // 전날 23시 발표 데이터 확인
+      baseTimeStr = '2300';
     }
-
-    // 또는, KMA 시간표를 보고 더 복잡한 로직을 구성할 수도 있습니다.
-    // 예를 들어, targetDate가 오늘인데 현재 시간이 0200~0500 사이라면 0200 사용,
-    // 0500~0800 사이라면 0500 사용 (이 경우 TMN만 있을 확률 높음)
-    // 그러나 가장 보편적인 것은 0200 발표에서 오늘, 내일, 모레의 TMN/TMX를 찾는 것입니다.
-    // 그리고 오늘 0200 이전에 조회한다면 전날 2300 발표를 찾는 것이 좋습니다.
 
     return (baseDateStr, baseTimeStr);
   }
 
-  /// 현재 시각을 기준으로 기상청 단기예보의 가장 최신 baseDate와 baseTime을 계산합니다.
-  /// (매 3시간마다 발표: 02, 05, 08, 11, 14, 17, 20, 23시)
-  /// API 제공 시간: 발표 시각 + 10분 이후 (예: 02:00 발표 -> 02:10 이후 데이터 유효)
-  /// -> 따라서 현재 시각에서 '10분'을 빼서 API 제공 시간보다 과거 시점으로 맞춘 후 계산
   static (String, String) getShortTermForecastBaseTime(DateTime now) {
-    // API 제공 시간(발표시각 + 10분)을 기준으로 하므로,
-    // 현재 시각에서 10분을 뺀 시점을 기준으로 발표 시각을 계산합니다.
     DateTime targetTime = now.subtract(const Duration(minutes: 10));
 
     int currentHour = targetTime.hour;
     int currentMinute = targetTime.minute;
 
     String baseDate = DateFormat('yyyyMMdd').format(targetTime);
-    int baseHour = shortTermForecastBaseTimes.last; // 기본값은 마지막 발표 시각 (23시)
+    int baseHour = shortTermForecastBaseTimes.last;
 
     for (int i = shortTermForecastBaseTimes.length - 1; i >= 0; i--) {
       int apiBaseHour = shortTermForecastBaseTimes[i];
-      // 현재 시각이 발표 시각과 같거나 더 이후라면 해당 발표 시각 사용
-      // 분(minute)은 0부터 시작하므로 `currentMinute >= 0`은 항상 참이지만 가독성을 위해 남겨둠
       if (currentHour > apiBaseHour ||
           (currentHour == apiBaseHour && currentMinute >= 0)) {
         baseHour = apiBaseHour;
         break;
       }
       if (i == 0 && currentHour < apiBaseHour) {
-        // 자정 이후 첫 발표 시각(02시) 전이라면 이전 날짜의 마지막 발표 시각(23시)을 사용
-        baseHour = shortTermForecastBaseTimes.last; // 23시
+        baseHour = shortTermForecastBaseTimes.last;
         baseDate = DateFormat(
           'yyyyMMdd',
         ).format(targetTime.subtract(const Duration(days: 1)));
@@ -100,17 +81,9 @@ class WeatherApiUtils {
     return (baseDate, baseTimeString);
   }
 
-  /// 현재 시각을 기준으로 기상청 초단기실황의 가장 최신 baseDate와 baseTime을 계산합니다.
-  /// (매 시간 정시에 생성, 10분마다 업데이트, API 제공 시간: 기준 시각 + 10분 이후)
-  /// -> 현재 시각에서 '10분'을 빼서 API 제공 시간보다 과거 시점으로 맞춘 후 계산
   static (String, String) getUltraSrtNcstBaseTime(DateTime now) {
-    // API 제공 시간(기준 시각 + 10분)을 기준으로 하므로,
-    // 현재 시각에서 10분을 뺀 시점을 기준으로 base_time을 계산합니다.
     DateTime targetTime = now.subtract(const Duration(minutes: 10));
 
-    // 초단기실황의 base_time은 매시간 '00분'에 생성됩니다.
-    // targetTime이 12:15 이면 12:00, 12:05 이면 12:00
-    // 즉, targetTime의 시간과 00분을 base_time으로 사용하면 됩니다.
     DateTime baseDateTime = DateTime(
       targetTime.year,
       targetTime.month,
@@ -120,29 +93,18 @@ class WeatherApiUtils {
     );
 
     String baseDate = DateFormat('yyyyMMdd').format(baseDateTime);
-    String baseTime = DateFormat(
-      'HHmm',
-    ).format(baseDateTime); // 항상 'HH00' 형태가 될 것입니다.
+    String baseTime = DateFormat('HHmm').format(baseDateTime);
 
     return (baseDate, baseTime);
   }
 
-  /// 현재 시각을 기준으로 기상청 초단기예보의 가장 최신 baseDate와 baseTime을 계산합니다.
-  /// (매시간 30분에 생성, 10분마다 업데이트, API 제공 시간: 생성 시각 + 15분 이후)
-  /// -> 현재 시각에서 '15분'을 빼서 API 제공 시간보다 과거 시점으로 맞춘 후 계산
   static (String, String) getUltraSrtForecastBaseTime(DateTime now) {
-    // API 제공 시간(생성 시각 + 15분, 즉 'XX시 45분')을 기준으로 하므로,
-    // 현재 시각에서 15분을 뺀 시점을 기준으로 base_time을 계산합니다.
     DateTime targetTime = now.subtract(const Duration(minutes: 15));
 
-    // `targetTime`의 시각을 기준으로 가장 가까운 과거의 ':30분' 시각을 찾습니다.
-    // 예를 들어, targetTime이 12:55 이면 12:30
-    // targetTime이 12:25 이면 11:30
-    int minute = 30; // 초단기예보 base_time은 'XX30'으로 고정
+    int minute = 30;
 
     DateTime baseDateTime;
     if (targetTime.minute < minute) {
-      // 00분~29분 사이라면 이전 시간의 30분
       baseDateTime = DateTime(
         targetTime.year,
         targetTime.month,
@@ -151,7 +113,6 @@ class WeatherApiUtils {
         minute,
       );
     } else {
-      // 30분~59분 사이라면 현재 시간의 30분
       baseDateTime = DateTime(
         targetTime.year,
         targetTime.month,
@@ -162,9 +123,7 @@ class WeatherApiUtils {
     }
 
     String baseDate = DateFormat('yyyyMMdd').format(baseDateTime);
-    String baseTime = DateFormat(
-      'HHmm',
-    ).format(baseDateTime); // 항상 'HH30' 형태가 될 것입니다.
+    String baseTime = DateFormat('HHmm').format(baseDateTime);
 
     return (baseDate, baseTime);
   }
@@ -178,7 +137,7 @@ class WeatherApiUtils {
       case 4:
         return SkyStatus.cloudy;
       default:
-        return SkyStatus.none; // 기본값 또는 SkyStatus.fromCode 함수 사용
+        return SkyStatus.none;
     }
   }
 
@@ -201,8 +160,7 @@ class WeatherApiUtils {
       case 7:
         return PrecipitationType.snowFlurry;
       default:
-        return PrecipitationType
-            .none; // 기본값 또는 PrecipitationType.fromCode 함수 사용
+        return PrecipitationType.none;
     }
   }
 }
@@ -224,7 +182,6 @@ enum MidTermOutlookRegion {
   const MidTermOutlookRegion({required this.regionCode, required this.name});
 }
 
-// 중기 육상 예보 구역 코드 정보
 enum MidTermLandForecastRegion {
   seoulIncheonGyeonggi(regionCode: '11B00000', name: '서울, 인천, 경기도'),
   gangwonYeongseo(regionCode: '11D10000', name: '강원도영서'),
@@ -243,39 +200,22 @@ enum MidTermLandForecastRegion {
     required this.regionCode,
     required this.name,
   });
-
-  // 위도/경도를 받아 해당 MidTermLandForecastRegion 객체를 반환하는 헬퍼 함수 (추후 구현)
-  // static MidTermLandForecastRegion fromCoordinates(double latitude, double longitude) {
-  //   // TODO: 위도/경도와 행정구역 매핑 로직 구현 (역지오코딩 필요)
-  //   // 예를 들어, 어떤 시/도에 속하는지에 따라 해당 지역 코드 반환
-  //   // 현재는 예시로 서울-경기 지역을 반환
-  //   return MidTermLandForecastRegion.seoulIncheonGyeonggi;
-  // }
 }
 
 class MidTermApiUtils {
-  // 중기 예보의 baseDate와 baseTime을 계산하는 함수
   static ({String baseDate, String baseTime}) getMidTermBaseTime(DateTime now) {
-    // 중기 예보는 일 2회(06:00, 18:00) 생성되며 발표시각을 입력
-    // 최근 24시간 자료만 제공
-
     String baseDate;
     String baseTime;
 
-    // 현재 시간이 18시 00분 이후라면 오늘 18시 예보를 요청 (내일부터 예보)
     if (now.hour >= 18) {
       baseDate =
           '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}';
       baseTime = '1800';
-    }
-    // 현재 시간이 06시 00분 이후이고 18시 이전이라면 오늘 06시 예보를 요청 (내일부터 예보)
-    else if (now.hour >= 6) {
+    } else if (now.hour >= 6) {
       baseDate =
           '${now.year}${now.month.toString().padLeft(2, '0')}${now.day.toString().padLeft(2, '0')}';
       baseTime = '0600';
-    }
-    // 현재 시간이 06시 이전이라면 전날 18시 예보를 요청 (오늘부터 예보)
-    else {
+    } else {
       final yesterday = now.subtract(const Duration(days: 1));
       baseDate =
           '${yesterday.year}${yesterday.month.toString().padLeft(2, '0')}${yesterday.day.toString().padLeft(2, '0')}';
@@ -285,7 +225,6 @@ class MidTermApiUtils {
     return (baseDate: baseDate, baseTime: baseTime);
   }
 
-  // 상세 도시별 중기 기온/육상 예보 코드 리스트
   static final List<MidTermRegion> detailedMidTermRegion = [
     MidTermRegion(
       region: '서울·인천·경기도',
@@ -667,7 +606,6 @@ class MidTermApiUtils {
     MidTermRegion(region: '제주도', city: '추자도', regId: '11G00800'),
   ];
 
-  // 도시명으로 regId를 찾는 헬퍼 함수
   static String? getRegIdByCityName(String cityName) {
     try {
       final regionData = detailedMidTermRegion.firstWhere(
@@ -679,52 +617,44 @@ class MidTermApiUtils {
     }
   }
 
-  static String? getRegionNameFromRegId(String regId) {
+  static String? getRegionNameFromRegId(String regId, [IAppLogger? logger]) {
     try {
       final regionData = detailedMidTermRegion.firstWhere(
         (data) => data.regId == regId,
       );
-      // 가장 상세한 이름을 반환 (보통 city 이름이 될 것임)
-      // 만약 city 이름이 없으면 region 이름을 반환
       return regionData.city.isNotEmpty ? regionData.city : regionData.region;
     } catch (e) {
-      // 해당 regId를 찾을 수 없는 경우 null 반환
-      appLogger.w('RegId $regId 에 해당하는 지역 이름을 찾을 수 없습니다: $e');
+      logger?.w('RegId $regId 에 해당하는 지역 이름을 찾을 수 없습니다: $e');
       return null;
     }
   }
 
-  // 상세 RegId를 통해 광역 중기 육상 예보 RegId를 찾는 헬퍼 함수
-  static String getBroadAreaRegIdForLandForecast(String detailedRegId) {
-    // 상세 RegId에 해당하는 MidTermRegion 객체를 찾음
+  static String getBroadAreaRegIdForLandForecast(
+    String detailedRegId, [
+    IAppLogger? logger,
+  ]) {
     final targetData = detailedMidTermRegion.firstWhere(
       (data) => data.regId == detailedRegId,
       orElse: () {
-        appLogger.w('상세 RegId $detailedRegId 에 해당하는 지역 데이터를 찾을 수 없습니다.');
-        // 찾지 못하면 일단 상세 RegId를 그대로 반환하거나, 에러 처리
-        // API가 올바른 광역 RegId를 요구하므로 이 경우는 실제 오류로 이어질 수 있음.
-        // 여기서는 임시로 throw Exception 처리
+        logger?.w('상세 RegId $detailedRegId 에 해당하는 지역 데이터를 찾을 수 없습니다.');
         throw Exception(
           '상세 RegId ($detailedRegId)에 매핑되는 광역 육상 예보 지역 코드를 찾을 수 없습니다.',
         );
       },
     );
 
-    // MidTermRegion의 'region' 필드를 기반으로 MidTermLandForecastRegion enum에서 광역 regId를 찾음
     switch (targetData.region) {
       case '서울·인천·경기도':
         return MidTermLandForecastRegion.seoulIncheonGyeonggi.regionCode;
-      case '강원도': // 강원도는 영서/영동으로 나뉘지만, 육상 예보에서 '강원도'라는 광역 단위를 사용한다면
-        // 둘 중 하나를 대표로 쓰거나 API 문서에 따른 적절한 광역 코드를 사용해야 합니다.
-        // 중기 육상 예보의 '강원도영서' (11D10000) '강원도영동' (11D20000)처럼 나뉘어 있다면
-        // 상세 도시의 regId 앞부분(11D10XXX)을 보고 영서인지 영동인지 판단하여 매핑
-        if (detailedRegId.startsWith('11D1'))
+      case '강원도':
+        if (detailedRegId.startsWith('11D1')) {
           return MidTermLandForecastRegion.gangwonYeongseo.regionCode;
-        if (detailedRegId.startsWith('11D2'))
+        }
+        if (detailedRegId.startsWith('11D2')) {
           return MidTermLandForecastRegion.gangwonYeongdong.regionCode;
-        // 예외 처리
-        appLogger.w('상세 RegId $detailedRegId 에 대한 정확한 강원도 광역 RegId 매핑 실패.');
-        return MidTermLandForecastRegion.gangwonYeongseo.regionCode; // 혹은 에러
+        }
+        logger?.w('상세 RegId $detailedRegId 에 대한 정확한 강원도 광역 RegId 매핑 실패.');
+        return MidTermLandForecastRegion.gangwonYeongseo.regionCode;
       case '충청북도':
         return MidTermLandForecastRegion.chungcheongbuk.regionCode;
       case '대전.세종.충청남도':
@@ -740,7 +670,7 @@ class MidTermApiUtils {
       case '제주도':
         return MidTermLandForecastRegion.jeju.regionCode;
       default:
-        appLogger.e(
+        logger?.e(
           'RegId $detailedRegId 에 대한 광역 육상 예보 RegId를 매핑할 수 없습니다. ${targetData.region}',
         );
         throw Exception(

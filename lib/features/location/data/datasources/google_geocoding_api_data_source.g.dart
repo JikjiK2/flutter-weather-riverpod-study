@@ -24,13 +24,11 @@ class _GoogleGeocodingApiDataSource implements GoogleGeocodingApiDataSource {
   @override
   Future<GoogleGeocodingResponse> reverseGeocode({
     required String latlng,
-    required String apiKey,
     String language = "ko",
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'latlng': latlng,
-      r'key': apiKey,
       r'language': language,
     };
     final _headers = <String, dynamic>{};
@@ -59,14 +57,12 @@ class _GoogleGeocodingApiDataSource implements GoogleGeocodingApiDataSource {
   @override
   Future<GoogleGeocodingResponse> searchAddress({
     required String address,
-    required String apiKey,
     String language = "ko",
     String region = 'kr',
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'address': address,
-      r'key': apiKey,
       r'language': language,
       r'region': region,
     };

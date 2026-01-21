@@ -1,11 +1,10 @@
-import 'package:ai_weather/features/weather/domain/models/daily_short_term_weather_model.dart';
-import 'package:ai_weather/features/weather/domain/models/hourly_short_term_weather_model.dart';
-import 'package:ai_weather/features/weather/domain/models/hourly_weather_model.dart';
-import 'package:ai_weather/features/weather/domain/models/current_weather_model.dart';
-import 'package:ai_weather/features/weather/domain/models/mid_term_weather_model.dart';
+import 'package:ai_weather/features/weather/domain/entities/daily_short_term_weather_entity.dart';
+import 'package:ai_weather/features/weather/domain/entities/hourly_weather_entity.dart';
+import 'package:ai_weather/features/weather/domain/entities/current_weather_entity.dart';
+import 'package:ai_weather/features/weather/domain/entities/mid_term_weather_entity.dart';
 
 abstract class WeatherRepository {
-  Future<List<HourlyWeatherModel>> getUltraSrtForecastList({
+  Future<List<HourlyWeather>> getUltraSrtForecastList({
     required int nx,
     required int ny,
   });

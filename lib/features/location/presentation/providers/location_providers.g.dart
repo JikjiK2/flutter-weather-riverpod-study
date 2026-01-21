@@ -9,104 +9,6 @@ part of 'location_providers.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(googleGeocodingApiDataSource)
-const googleGeocodingApiDataSourceProvider =
-    GoogleGeocodingApiDataSourceProvider._();
-
-final class GoogleGeocodingApiDataSourceProvider
-    extends
-        $FunctionalProvider<
-          GoogleGeocodingApiDataSource,
-          GoogleGeocodingApiDataSource,
-          GoogleGeocodingApiDataSource
-        >
-    with $Provider<GoogleGeocodingApiDataSource> {
-  const GoogleGeocodingApiDataSourceProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'googleGeocodingApiDataSourceProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$googleGeocodingApiDataSourceHash();
-
-  @$internal
-  @override
-  $ProviderElement<GoogleGeocodingApiDataSource> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  GoogleGeocodingApiDataSource create(Ref ref) {
-    return googleGeocodingApiDataSource(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(GoogleGeocodingApiDataSource value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<GoogleGeocodingApiDataSource>(value),
-    );
-  }
-}
-
-String _$googleGeocodingApiDataSourceHash() =>
-    r'85ec38170650b1b152e6b1b61a75fb7376bdca66';
-
-@ProviderFor(locationPlatformDataSource)
-const locationPlatformDataSourceProvider =
-    LocationPlatformDataSourceProvider._();
-
-final class LocationPlatformDataSourceProvider
-    extends
-        $FunctionalProvider<
-          LocationPlatformDataSource,
-          LocationPlatformDataSource,
-          LocationPlatformDataSource
-        >
-    with $Provider<LocationPlatformDataSource> {
-  const LocationPlatformDataSourceProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'locationPlatformDataSourceProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$locationPlatformDataSourceHash();
-
-  @$internal
-  @override
-  $ProviderElement<LocationPlatformDataSource> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  LocationPlatformDataSource create(Ref ref) {
-    return locationPlatformDataSource(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(LocationPlatformDataSource value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<LocationPlatformDataSource>(value),
-    );
-  }
-}
-
-String _$locationPlatformDataSourceHash() =>
-    r'a6b8b6db2c16fa6ef94ce794ed8c92ea5e4450a2';
-
 @ProviderFor(locationRepository)
 const locationRepositoryProvider = LocationRepositoryProvider._();
 
@@ -153,7 +55,7 @@ final class LocationRepositoryProvider
 }
 
 String _$locationRepositoryHash() =>
-    r'46ce75710d88b87835797d3563576270f30a8c61';
+    r'76e76484cc5e9f85dc26383801675dd2771f7e60';
 
 @ProviderFor(currentLocation)
 const currentLocationProvider = CurrentLocationProvider._();
@@ -187,7 +89,7 @@ final class CurrentLocationProvider
   }
 }
 
-String _$currentLocationHash() => r'1cefb044cd39b493234d1f76590f36d76da23f5f';
+String _$currentLocationHash() => r'7d8625bdad40c2bd7acd4021c032cd870934b68d';
 
 @ProviderFor(currentAddress)
 const currentAddressProvider = CurrentAddressProvider._();
@@ -220,7 +122,7 @@ final class CurrentAddressProvider
   }
 }
 
-String _$currentAddressHash() => r'4525cdb92c8e642f479e167d9fe065dd1a778730';
+String _$currentAddressHash() => r'c2380f696c2990eeead9b137756de16a9d6322b3';
 
 @ProviderFor(locationIsServiceEnabled)
 const locationIsServiceEnabledProvider = LocationIsServiceEnabledProvider._();
@@ -254,7 +156,7 @@ final class LocationIsServiceEnabledProvider
 }
 
 String _$locationIsServiceEnabledHash() =>
-    r'ffaa52b23d8a9de979fb6acc1afb62d23e6df210';
+    r'b7a288dc28252a9f001d99e60d77cc52b3d82abc';
 
 @ProviderFor(checkPermission)
 const checkPermissionProvider = CheckPermissionProvider._();
@@ -295,7 +197,7 @@ final class CheckPermissionProvider
   }
 }
 
-String _$checkPermissionHash() => r'12690bb6b8456946278ec8bcc3d3390ebdb536cb';
+String _$checkPermissionHash() => r'7c53cba3be8df09630cdf505230a36f41b3e46e7';
 
 @ProviderFor(requestPermission)
 const requestPermissionProvider = RequestPermissionProvider._();
@@ -336,7 +238,7 @@ final class RequestPermissionProvider
   }
 }
 
-String _$requestPermissionHash() => r'87e18b458e37011de86f6a0c1bcd16e78bba18ee';
+String _$requestPermissionHash() => r'7999fb9f3f3e13a1504ae98bc33fea952cc74038';
 
 @ProviderFor(openAppSettings)
 const openAppSettingsProvider = OpenAppSettingsProvider._();
@@ -369,7 +271,7 @@ final class OpenAppSettingsProvider
   }
 }
 
-String _$openAppSettingsHash() => r'90d4595402e6de0e3739f9850eea1c085fc2f1c2';
+String _$openAppSettingsHash() => r'72f72dbbe012af6da4689551767c67832cd8ed5f';
 
 @ProviderFor(openLocationSettings)
 const openLocationSettingsProvider = OpenLocationSettingsProvider._();
@@ -403,7 +305,7 @@ final class OpenLocationSettingsProvider
 }
 
 String _$openLocationSettingsHash() =>
-    r'7ced4b25c0ebb852fb23584f6f38673c4c851055';
+    r'15a345b6fe01d5aba4a4e2dcb891a879483d5c0b';
 
 @ProviderFor(searchAddressUseCase)
 const searchAddressUseCaseProvider = SearchAddressUseCaseProvider._();
@@ -453,134 +355,110 @@ final class SearchAddressUseCaseProvider
 String _$searchAddressUseCaseHash() =>
     r'86d5f92f942e6b2ee9ce2aded365f2c0c0ae33d7';
 
-@ProviderFor(searchAddress)
-const searchAddressProvider = SearchAddressFamily._();
+/// ✅ [개선] 주소 검색 기록을 관리하는 독립적인 프로바이더
+/// SharedPreferences와의 동기화를 AsyncValue로 처리합니다.
 
-final class SearchAddressProvider
-    extends
-        $FunctionalProvider<
-          AsyncValue<Map<String, List<Address>>>,
-          Map<String, List<Address>>,
-          FutureOr<Map<String, List<Address>>>
-        >
-    with
-        $FutureModifier<Map<String, List<Address>>>,
-        $FutureProvider<Map<String, List<Address>>> {
-  const SearchAddressProvider._({
-    required SearchAddressFamily super.from,
-    required String super.argument,
-  }) : super(
-         retry: null,
-         name: r'searchAddressProvider',
-         isAutoDispose: true,
-         dependencies: null,
-         $allTransitiveDependencies: null,
-       );
+@ProviderFor(LocationSearchHistory)
+const locationSearchHistoryProvider = LocationSearchHistoryProvider._();
 
-  @override
-  String debugGetCreateSourceHash() => _$searchAddressHash();
-
-  @override
-  String toString() {
-    return r'searchAddressProvider'
-        ''
-        '($argument)';
-  }
-
-  @$internal
-  @override
-  $FutureProviderElement<Map<String, List<Address>>> $createElement(
-    $ProviderPointer pointer,
-  ) => $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<Map<String, List<Address>>> create(Ref ref) {
-    final argument = this.argument as String;
-    return searchAddress(ref, argument);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return other is SearchAddressProvider && other.argument == argument;
-  }
-
-  @override
-  int get hashCode {
-    return argument.hashCode;
-  }
-}
-
-String _$searchAddressHash() => r'949da332f5be23a68011bf8ed81fb22ee431dd7e';
-
-final class SearchAddressFamily extends $Family
-    with
-        $FunctionalFamilyOverride<
-          FutureOr<Map<String, List<Address>>>,
-          String
-        > {
-  const SearchAddressFamily._()
-    : super(
-        retry: null,
-        name: r'searchAddressProvider',
-        dependencies: null,
-        $allTransitiveDependencies: null,
-        isAutoDispose: true,
-      );
-
-  SearchAddressProvider call(String query) =>
-      SearchAddressProvider._(argument: query, from: this);
-
-  @override
-  String toString() => r'searchAddressProvider';
-}
-
-@ProviderFor(LocationSearchNotifier)
-const locationSearchProvider = LocationSearchNotifierProvider._();
-
-final class LocationSearchNotifierProvider
-    extends $NotifierProvider<LocationSearchNotifier, LocationSearchState> {
-  const LocationSearchNotifierProvider._()
+/// ✅ [개선] 주소 검색 기록을 관리하는 독립적인 프로바이더
+/// SharedPreferences와의 동기화를 AsyncValue로 처리합니다.
+final class LocationSearchHistoryProvider
+    extends $AsyncNotifierProvider<LocationSearchHistory, List<String>> {
+  /// ✅ [개선] 주소 검색 기록을 관리하는 독립적인 프로바이더
+  /// SharedPreferences와의 동기화를 AsyncValue로 처리합니다.
+  const LocationSearchHistoryProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'locationSearchProvider',
+        name: r'locationSearchHistoryProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$locationSearchNotifierHash();
+  String debugGetCreateSourceHash() => _$locationSearchHistoryHash();
 
   @$internal
   @override
-  LocationSearchNotifier create() => LocationSearchNotifier();
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(LocationSearchState value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<LocationSearchState>(value),
-    );
-  }
+  LocationSearchHistory create() => LocationSearchHistory();
 }
 
-String _$locationSearchNotifierHash() =>
-    r'0d20ce03e34dde7cf6039aa14a543cee42c5e634';
+String _$locationSearchHistoryHash() =>
+    r'f1473be46837981c17fff78434550d0836448daa';
 
-abstract class _$LocationSearchNotifier extends $Notifier<LocationSearchState> {
-  LocationSearchState build();
+/// ✅ [개선] 주소 검색 기록을 관리하는 독립적인 프로바이더
+/// SharedPreferences와의 동기화를 AsyncValue로 처리합니다.
+
+abstract class _$LocationSearchHistory extends $AsyncNotifier<List<String>> {
+  FutureOr<List<String>> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<LocationSearchState, LocationSearchState>;
+    final ref = this.ref as $Ref<AsyncValue<List<String>>, List<String>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<LocationSearchState, LocationSearchState>,
-              LocationSearchState,
+              AnyNotifier<AsyncValue<List<String>>, List<String>>,
+              AsyncValue<List<String>>,
+              Object?,
+              Object?
+            >;
+    element.handleValue(ref, created);
+  }
+}
+
+/// ✅ [개선] 주소 검색 결과를 관리하는 프로바이더
+/// 기존의 isLoading, errorMessage 필드 대신 AsyncValue를 직접 사용합니다.
+
+@ProviderFor(AddressSearch)
+const addressSearchProvider = AddressSearchProvider._();
+
+/// ✅ [개선] 주소 검색 결과를 관리하는 프로바이더
+/// 기존의 isLoading, errorMessage 필드 대신 AsyncValue를 직접 사용합니다.
+final class AddressSearchProvider
+    extends $AsyncNotifierProvider<AddressSearch, List<Address>> {
+  /// ✅ [개선] 주소 검색 결과를 관리하는 프로바이더
+  /// 기존의 isLoading, errorMessage 필드 대신 AsyncValue를 직접 사용합니다.
+  const AddressSearchProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'addressSearchProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$addressSearchHash();
+
+  @$internal
+  @override
+  AddressSearch create() => AddressSearch();
+}
+
+String _$addressSearchHash() => r'821386a468d7042e4916175d469b5ef643f4c0e3';
+
+/// ✅ [개선] 주소 검색 결과를 관리하는 프로바이더
+/// 기존의 isLoading, errorMessage 필드 대신 AsyncValue를 직접 사용합니다.
+
+abstract class _$AddressSearch extends $AsyncNotifier<List<Address>> {
+  FutureOr<List<Address>> build();
+  @$mustCallSuper
+  @override
+  void runBuild() {
+    final created = build();
+    final ref = this.ref as $Ref<AsyncValue<List<Address>>, List<Address>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<List<Address>>, List<Address>>,
+              AsyncValue<List<Address>>,
               Object?,
               Object?
             >;

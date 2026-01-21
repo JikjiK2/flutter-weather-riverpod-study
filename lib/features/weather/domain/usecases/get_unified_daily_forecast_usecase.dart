@@ -1,7 +1,5 @@
-import 'dart:math';
-import 'package:ai_weather/features/weather/domain/models/daily_mid_term_model.dart';
-import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
-import 'package:ai_weather/features/weather/domain/models/daily_short_term_weather_model.dart';
+import 'package:ai_weather/features/weather/domain/entities/mid_term_weather_entity.dart';
+import 'package:ai_weather/features/weather/domain/entities/daily_short_term_weather_entity.dart';
 import 'package:ai_weather/features/weather/domain/repositories/weather_repository.dart';
 import 'package:ai_weather/features/weather/utils/weather_api_utils.dart';
 
@@ -13,107 +11,54 @@ class GetUnifiedDailyForecastUseCase {
   Future<List<DailyShortTermWeather>> execute({
     required int nx,
     required int ny,
-    required String regId, // 중기 예보 구역 코드
+    required String regId,
   }) async {
     final now = DateTime.now();
     final todayOnly = DateTime(now.year, now.month, now.day);
-    final yesterdayOnly = todayOnly.subtract(Duration(days: 1));
+    final yesterdayOnly = todayOnly.subtract(const Duration(days: 1));
+
     final midBaseDate = MidTermApiUtils.getMidTermBaseTime(now);
     final midTmFc = midBaseDate.baseDate + midBaseDate.baseTime;
 
-    final shortTermCalls = Future.wait([
-      _repository.getShortTermMinMaxTemps(
-        nx: nx,
-        ny: ny,
-        targetDate: todayOnly,
-      ),
-      _repository.getShortTermMinMaxTemps(
-        nx: nx,
-        ny: ny,
-        targetDate: yesterdayOnly,
-      ),
+    final results = await Future.wait([
+      _repository.getShortTermMinMaxTemps(nx: nx, ny: ny, targetDate: todayOnly),
+      _repository.getShortTermMinMaxTemps(nx: nx, ny: ny, targetDate: yesterdayOnly),
       _repository.getShortTermForecast(nx: nx, ny: ny),
+      _repository.getMidTermWeather(regId: regId, tmFc: midTmFc),
     ]);
-    final results = await shortTermCalls;
 
     final todayOnlyForecast = results[0] as DailyShortTermWeather;
     final yesterdayOnlyForecast = results[1] as DailyShortTermWeather;
-    final dailyForecasts = results[2] as List<DailyShortTermWeather>;
-    final normalizedTodayForecast = todayOnlyForecast.copyWith(
-      date: DateTime(
-        todayOnlyForecast.date.year,
-        todayOnlyForecast.date.month,
-        todayOnlyForecast.date.day,
-      ),
-    );
-    final normalizedYesterdayForecast = yesterdayOnlyForecast.copyWith(
-      date: DateTime(
-        yesterdayOnlyForecast.date.year,
-        yesterdayOnlyForecast.date.month,
-        yesterdayOnlyForecast.date.day,
-      ),
-    );
+    final shortTermDailyList = results[2] as List<DailyShortTermWeather>;
+    final midTermWeather = results[3] as MidTermWeather;
 
-    final shortTermDailyForecasts = [...dailyForecasts];
-    shortTermDailyForecasts.add(normalizedYesterdayForecast);
-    shortTermDailyForecasts.add(normalizedTodayForecast);
+    final Map<DateTime, DailyShortTermWeather> unifiedMap = {};
 
-    final midTermForecasts = await _repository.getMidTermWeather(
-      regId: regId,
-      tmFc: midTmFc,
-    );
+    unifiedMap[yesterdayOnly] = yesterdayOnlyForecast;
+    unifiedMap[todayOnly] = todayOnlyForecast;
 
-    midTermForecasts.dailyForecasts;
-
-    final unifiedForecasts = _unifyForecasts(
-      shortTermDailyForecasts,
-      midTermForecasts.dailyForecasts,
-    );
-
-    unifiedForecasts.sort((a, b) => a.date.compareTo(b.date));
-
-    return unifiedForecasts;
-  }
-
-  List<DailyShortTermWeather> _unifyForecasts(
-    List<DailyShortTermWeather> shortTerm,
-    List<DailyMidTermWeather> midTerm,
-  ) {
-    final Map<DateTime, DailyShortTermWeather> unifiedMap = {
-      for (var daily in shortTerm) daily.date: daily,
-    };
-
-    for (var midTermData in midTerm) {
-      final date = midTermData.date;
-
-      if (!unifiedMap.containsKey(date)) {
-        final dailyFromMidTerm = _mapMidTermToDaily(midTermData);
-        unifiedMap[date] = dailyFromMidTerm;
+    for (var daily in shortTermDailyList) {
+      final dateKey = DateTime(daily.date.year, daily.date.month, daily.date.day);
+      if (!unifiedMap.containsKey(dateKey)) {
+        unifiedMap[dateKey] = daily;
       }
     }
 
-    return unifiedMap.values.toList();
+    for (var midTermData in midTermWeather.dailyForecasts) {
+      final dateKey = DateTime(midTermData.date.year, midTermData.date.month, midTermData.date.day);
+
+      if (!unifiedMap.containsKey(dateKey) || _isDataIncomplete(unifiedMap[dateKey]!)) {
+        unifiedMap[dateKey] = DailyShortTermWeather.fromMidTerm(midTermData);
+      }
+    }
+
+    final finalResult = unifiedMap.values.toList()
+      ..sort((a, b) => a.date.compareTo(b.date));
+
+    return finalResult;
   }
 
-  /// DailyMidTermWeather 모델을 DailyShortTermWeather 모델로 매핑합니다.
-  DailyShortTermWeather _mapMidTermToDaily(DailyMidTermWeather midTermData) {
-    final minTemp = midTermData.minTemperature;
-    final maxTemp = midTermData.maxTemperature;
-
-    final morningPop = midTermData.precipitationProbMorning ?? 0;
-    final afternoonPop = midTermData.precipitationProbAfternoon ?? 0;
-    final maxPop = max(morningPop, afternoonPop);
-    final representativeSkyStatus = SkyStatus.none;
-    final representativePrecipitationType = PrecipitationType.none;
-
-    return DailyShortTermWeather(
-      date: midTermData.date,
-      minTemperature: minTemp,
-      maxTemperature: maxTemp,
-      tempRange: maxTemp - minTemp,
-      representativeSkyStatus: representativeSkyStatus,
-      representativePrecipitationType: representativePrecipitationType,
-      maxPop: maxPop,
-    );
+  bool _isDataIncomplete(DailyShortTermWeather data) {
+    return data.maxTemperature == 0 && data.minTemperature == 0;
   }
 }

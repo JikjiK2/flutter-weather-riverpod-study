@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'kma_mid_outlook_response_models.freezed.dart';
+
 part 'kma_mid_outlook_response_models.g.dart';
 
 @freezed
