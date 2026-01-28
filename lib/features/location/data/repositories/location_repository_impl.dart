@@ -40,7 +40,12 @@ class LocationRepositoryImpl implements LocationRepository {
       );
       return response.toBestAddress(lat, lon);
     } on DioException catch (e) {
-      throw NetworkFailure();
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.connectionError ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw NetworkFailure('인터넷 연결이 원활하지 않습니다. 네트워크 설정을 확인해주세요.');
+      }
+      throw ServerFailure('주소 서비스에 연결할 수 없습니다.');
     } catch (e) {
       throw ServerFailure('주소 변환에 실패했습니다.');
     }
@@ -111,11 +116,20 @@ class LocationRepositoryImpl implements LocationRepository {
   }
 
   @override
-  Future<String?> getLastLocationAddress() async {
+  Future<Address?> getLastAddress() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      return prefs.getString(_lastLocationAddressKey);
+      final lat = prefs.getDouble(_lastLatitudeKey);
+      final lon = prefs.getDouble(_lastLongitudeKey);
+
+      if (lat != null && lon != null) {
+        return Address(latitude: lat,
+          longitude: lon,
+        );
+      }
+      return null;
     } catch (e) {
+      _logger.e("마지막 주소 로드 오류: $e");
       return null;
     }
   }

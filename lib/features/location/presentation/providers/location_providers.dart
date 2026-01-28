@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -24,25 +25,12 @@ LocationRepository locationRepository(Ref ref) {
   );
 }
 
-@Riverpod(keepAlive: true)
-Future<Position> currentLocation(Ref ref) async {
-  return ref.watch(locationRepositoryProvider).getCurrentPosition();
-}
 
 @Riverpod(keepAlive: true)
-Future<Address> currentAddress(Ref ref) async {
-  final currentPosition = await ref.watch(currentLocationProvider.future);
-  return ref
-      .watch(locationRepositoryProvider)
-      .getAddressFromCoordinates(
-    lat: currentPosition.latitude,
-    lon: currentPosition.longitude,
-  );
-}
-
-@Riverpod(keepAlive: true)
-Future<bool> locationIsServiceEnabled(Ref ref) async {
-  return ref.watch(locationRepositoryProvider).isLocationServiceEnabled();
+Stream<bool> locationIsServiceEnabled(Ref ref) async* {
+  yield await Geolocator.isLocationServiceEnabled();
+  yield* Geolocator.getServiceStatusStream()
+      .map((status) => status == ServiceStatus.enabled);
 }
 
 @Riverpod(keepAlive: true)
@@ -74,28 +62,31 @@ SearchAddressUseCase searchAddressUseCase(Ref ref) {
 @Riverpod(keepAlive: true)
 class LocationSearchHistory extends _$LocationSearchHistory {
   @override
-  FutureOr<List<String>> build() async {
+  FutureOr<List<Address>> build() async {
     final prefs = await SharedPreferences.getInstance();
-    return prefs.getStringList(_searchHistoryKey) ?? [];
+    final jsonList = prefs.getStringList(_searchHistoryKey) ?? [];
+    return jsonList.map((e) => Address.fromJson(json.decode(e))).toList();
   }
 
-  Future<void> addTerm(String term) async {
-    if (term.trim().isEmpty) return;
+  Future<void> addAddress(Address address) async {
     final current = state.value ?? [];
-    final next = [term, ...current.where((t) => t != term)].take(10).toList();
+    final next = [address, ...current.where((a) => a.displayAddress != address.displayAddress)]
+        .take(10).toList();
 
     state = AsyncValue.data(next);
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(_searchHistoryKey, next);
+    final jsonList = next.map((e) => json.encode(e.toJson())).toList();
+    await prefs.setStringList(_searchHistoryKey, jsonList);
   }
 
-  Future<void> removeTerm(String term) async {
+  Future<void> removeAddress(Address address) async {
     final current = state.value ?? [];
-    final next = current.where((t) => t != term).toList();
+    final next = current.where((a) => a.displayAddress != address.displayAddress).toList();
 
     state = AsyncValue.data(next);
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList(_searchHistoryKey, next);
+    final jsonList = next.map((e) => json.encode(e.toJson())).toList();
+    await prefs.setStringList(_searchHistoryKey, jsonList);
   }
 
   Future<void> clearHistory() async {

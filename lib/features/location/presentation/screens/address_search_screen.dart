@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ai_weather/features/location/domain/entities/address_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
@@ -35,7 +36,6 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
     if (value.isNotEmpty) {
       _debounce?.cancel();
       ref.read(addressSearchProvider.notifier).search(value);
-      ref.read(locationSearchHistoryProvider.notifier).addTerm(value);
     }
   }
 
@@ -87,7 +87,7 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
     );
   }
 
-  Widget _buildHistoryView(AsyncValue<List<String>> historyAsync) {
+  Widget _buildHistoryView(AsyncValue<List<Address>> historyAsync) {
     return historyAsync.when(
       data: (history) => history.isEmpty
           ? const Center(child: Text('최근 검색 기록이 없습니다.'))
@@ -108,18 +108,25 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
             child: ListView.builder(
               itemCount: history.length,
               itemBuilder: (context, index) {
-                final term = history[index];
+                final address = history[index];
                 return ListTile(
                   leading: const Icon(Icons.history),
-                  title: Text(term),
+                  title: Text(address.displayAddress),
                   onTap: () {
-                    _searchController.text = term;
-                    _onSearchSubmitted(term);
+                    final position = Position(
+                      latitude: address.latitude!,
+                      longitude: address.longitude!,
+                      timestamp: DateTime.now(),
+                      accuracy: 0, altitude: 0, altitudeAccuracy: 0,
+                      heading: 0, headingAccuracy: 0, speed: 0, speedAccuracy: 0,
+                    );
+                    ref.read(selectedWeatherLocationProvider.notifier)
+                        .updateLocation(position, address: address.displayAddress);
+                    context.pop();
                   },
                   trailing: IconButton(
                     icon: const Icon(Icons.close),
-                    onPressed: () => ref.read(locationSearchHistoryProvider.notifier).removeTerm(term),
-                  ),
+                    onPressed: () => ref.read(locationSearchHistoryProvider.notifier).removeAddress(address),                  ),
                 );
               },
             ),
@@ -131,7 +138,7 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
     );
   }
 
-  Widget _buildSearchResults(List<dynamic> suggestions) {
+  Widget _buildSearchResults(List<Address> suggestions) {
     if (suggestions.isEmpty) {
       return const Center(child: Text('검색 결과가 없습니다.'));
     }
@@ -149,8 +156,8 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
               timestamp: DateTime.now(),
               accuracy: 0, altitude: 0, altitudeAccuracy: 0, heading: 0, headingAccuracy: 0, speed: 0, speedAccuracy: 0,
             );
-            ref.read(selectedWeatherLocationProvider.notifier).updateLocation(position);
-            ref.read(locationSearchHistoryProvider.notifier).addTerm(address.formattedAddress ?? '');
+            ref.read(selectedWeatherLocationProvider.notifier).updateLocation(position, address: address.displayAddress);
+            ref.read(locationSearchHistoryProvider.notifier).addAddress(address);
             context.pop();
           },
         );

@@ -31,18 +31,6 @@ class HourlyForecastSection extends ConsumerWidget {
       ),
     );
   }
-
-  Widget _buildHourlyList(List<HourlyWeather> forecasts) {
-    return SizedBox(
-      height: 130,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: forecasts.length,
-        itemBuilder: (context, index) =>
-            _HourlyItemCard(forecast: forecasts[index]),
-      ),
-    );
-  }
 }
 
 Widget _buildContent(

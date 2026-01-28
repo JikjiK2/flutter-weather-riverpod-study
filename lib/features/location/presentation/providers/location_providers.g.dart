@@ -57,79 +57,12 @@ final class LocationRepositoryProvider
 String _$locationRepositoryHash() =>
     r'76e76484cc5e9f85dc26383801675dd2771f7e60';
 
-@ProviderFor(currentLocation)
-const currentLocationProvider = CurrentLocationProvider._();
-
-final class CurrentLocationProvider
-    extends
-        $FunctionalProvider<AsyncValue<Position>, Position, FutureOr<Position>>
-    with $FutureModifier<Position>, $FutureProvider<Position> {
-  const CurrentLocationProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'currentLocationProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$currentLocationHash();
-
-  @$internal
-  @override
-  $FutureProviderElement<Position> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<Position> create(Ref ref) {
-    return currentLocation(ref);
-  }
-}
-
-String _$currentLocationHash() => r'7d8625bdad40c2bd7acd4021c032cd870934b68d';
-
-@ProviderFor(currentAddress)
-const currentAddressProvider = CurrentAddressProvider._();
-
-final class CurrentAddressProvider
-    extends $FunctionalProvider<AsyncValue<Address>, Address, FutureOr<Address>>
-    with $FutureModifier<Address>, $FutureProvider<Address> {
-  const CurrentAddressProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'currentAddressProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$currentAddressHash();
-
-  @$internal
-  @override
-  $FutureProviderElement<Address> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
-
-  @override
-  FutureOr<Address> create(Ref ref) {
-    return currentAddress(ref);
-  }
-}
-
-String _$currentAddressHash() => r'c2380f696c2990eeead9b137756de16a9d6322b3';
-
 @ProviderFor(locationIsServiceEnabled)
 const locationIsServiceEnabledProvider = LocationIsServiceEnabledProvider._();
 
 final class LocationIsServiceEnabledProvider
-    extends $FunctionalProvider<AsyncValue<bool>, bool, FutureOr<bool>>
-    with $FutureModifier<bool>, $FutureProvider<bool> {
+    extends $FunctionalProvider<AsyncValue<bool>, bool, Stream<bool>>
+    with $FutureModifier<bool>, $StreamProvider<bool> {
   const LocationIsServiceEnabledProvider._()
     : super(
         from: null,
@@ -146,17 +79,17 @@ final class LocationIsServiceEnabledProvider
 
   @$internal
   @override
-  $FutureProviderElement<bool> $createElement($ProviderPointer pointer) =>
-      $FutureProviderElement(pointer);
+  $StreamProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $StreamProviderElement(pointer);
 
   @override
-  FutureOr<bool> create(Ref ref) {
+  Stream<bool> create(Ref ref) {
     return locationIsServiceEnabled(ref);
   }
 }
 
 String _$locationIsServiceEnabledHash() =>
-    r'b7a288dc28252a9f001d99e60d77cc52b3d82abc';
+    r'd3dbe7db373ccbfac3742c15cbc1a9bc2af52313';
 
 @ProviderFor(checkPermission)
 const checkPermissionProvider = CheckPermissionProvider._();
@@ -355,18 +288,11 @@ final class SearchAddressUseCaseProvider
 String _$searchAddressUseCaseHash() =>
     r'86d5f92f942e6b2ee9ce2aded365f2c0c0ae33d7';
 
-/// ✅ [개선] 주소 검색 기록을 관리하는 독립적인 프로바이더
-/// SharedPreferences와의 동기화를 AsyncValue로 처리합니다.
-
 @ProviderFor(LocationSearchHistory)
 const locationSearchHistoryProvider = LocationSearchHistoryProvider._();
 
-/// ✅ [개선] 주소 검색 기록을 관리하는 독립적인 프로바이더
-/// SharedPreferences와의 동기화를 AsyncValue로 처리합니다.
 final class LocationSearchHistoryProvider
-    extends $AsyncNotifierProvider<LocationSearchHistory, List<String>> {
-  /// ✅ [개선] 주소 검색 기록을 관리하는 독립적인 프로바이더
-  /// SharedPreferences와의 동기화를 AsyncValue로 처리합니다.
+    extends $AsyncNotifierProvider<LocationSearchHistory, List<Address>> {
   const LocationSearchHistoryProvider._()
     : super(
         from: null,
@@ -387,23 +313,20 @@ final class LocationSearchHistoryProvider
 }
 
 String _$locationSearchHistoryHash() =>
-    r'f1473be46837981c17fff78434550d0836448daa';
+    r'4d800882a13d3180e4731acaa2ca4a93151a152d';
 
-/// ✅ [개선] 주소 검색 기록을 관리하는 독립적인 프로바이더
-/// SharedPreferences와의 동기화를 AsyncValue로 처리합니다.
-
-abstract class _$LocationSearchHistory extends $AsyncNotifier<List<String>> {
-  FutureOr<List<String>> build();
+abstract class _$LocationSearchHistory extends $AsyncNotifier<List<Address>> {
+  FutureOr<List<Address>> build();
   @$mustCallSuper
   @override
   void runBuild() {
     final created = build();
-    final ref = this.ref as $Ref<AsyncValue<List<String>>, List<String>>;
+    final ref = this.ref as $Ref<AsyncValue<List<Address>>, List<Address>>;
     final element =
         ref.element
             as $ClassProviderElement<
-              AnyNotifier<AsyncValue<List<String>>, List<String>>,
-              AsyncValue<List<String>>,
+              AnyNotifier<AsyncValue<List<Address>>, List<Address>>,
+              AsyncValue<List<Address>>,
               Object?,
               Object?
             >;
@@ -411,18 +334,11 @@ abstract class _$LocationSearchHistory extends $AsyncNotifier<List<String>> {
   }
 }
 
-/// ✅ [개선] 주소 검색 결과를 관리하는 프로바이더
-/// 기존의 isLoading, errorMessage 필드 대신 AsyncValue를 직접 사용합니다.
-
 @ProviderFor(AddressSearch)
 const addressSearchProvider = AddressSearchProvider._();
 
-/// ✅ [개선] 주소 검색 결과를 관리하는 프로바이더
-/// 기존의 isLoading, errorMessage 필드 대신 AsyncValue를 직접 사용합니다.
 final class AddressSearchProvider
     extends $AsyncNotifierProvider<AddressSearch, List<Address>> {
-  /// ✅ [개선] 주소 검색 결과를 관리하는 프로바이더
-  /// 기존의 isLoading, errorMessage 필드 대신 AsyncValue를 직접 사용합니다.
   const AddressSearchProvider._()
     : super(
         from: null,
@@ -443,9 +359,6 @@ final class AddressSearchProvider
 }
 
 String _$addressSearchHash() => r'821386a468d7042e4916175d469b5ef643f4c0e3';
-
-/// ✅ [개선] 주소 검색 결과를 관리하는 프로바이더
-/// 기존의 isLoading, errorMessage 필드 대신 AsyncValue를 직접 사용합니다.
 
 abstract class _$AddressSearch extends $AsyncNotifier<List<Address>> {
   FutureOr<List<Address>> build();

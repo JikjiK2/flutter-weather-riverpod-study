@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_weather/core/utils/string_extensions.dart';
+import 'package:ai_weather/core/error/failures.dart';
+import 'package:ai_weather/core/network/network_status_provider.dart';
+import 'package:ai_weather/features/weather/presentation/screens/network_error_screen.dart';
 import 'package:ai_weather/features/location/domain/entities/address_entity.dart';
 import 'package:ai_weather/features/weather/presentation/providers/location_state_providers.dart';
 import 'package:ai_weather/features/weather/presentation/widgets/current_weather_card.dart';
@@ -10,12 +13,37 @@ import 'package:ai_weather/features/weather/presentation/widgets/hourly_forecast
 import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
 import 'package:ai_weather/features/weather/presentation/providers/weather_state_providers.dart';
 
-
 class WeatherScreen extends ConsumerWidget {
   const WeatherScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final isNetworkConnectedAsync = ref.watch(isNetworkConnectedProvider);
+
+    return isNetworkConnectedAsync.when(
+      loading: () => const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      ),
+      error: (err, stack) => Scaffold(
+        body: NetworkErrorView(
+          message: '네트워크 상태를 확인할 수 없습니다.',
+          onRetry: () => ref.invalidate(isNetworkConnectedProvider),
+        ),
+      ),
+      data: (isConnected) {
+        if (!isConnected) {
+          return Scaffold(
+            body: NetworkErrorView(
+              message: '네트워크 연결이 끊겼습니다.',
+              onRetry: () => ref.invalidate(selectedWeatherLocationProvider),
+            ),
+          );
+        }
+        return _buildWeatherMainScaffold(context, ref);
+      },
+    );
+  }
+  Widget _buildWeatherMainScaffold(BuildContext context, WidgetRef ref) {
     final weatherLocationAsync = ref.watch(selectedWeatherLocationProvider);
 
     return Scaffold(
@@ -54,19 +82,15 @@ class WeatherScreen extends ConsumerWidget {
             ],
           ),
         ),
-        error: (err, stack) => Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('초기 위치를 가져오는 데 실패했습니다.'),
-              ElevatedButton(
-                onPressed: () =>
-                    ref.invalidate(selectedWeatherLocationProvider),
-                child: const Text('다시 시도'),
-              ),
-            ],
-          ),
-        ),
+        error: (err, stack) {
+          if (err is NetworkFailure) {
+            return NetworkErrorView(
+              message: err.message,
+              onRetry: () => ref.invalidate(selectedWeatherLocationProvider),
+            );
+          }
+          return _buildWeatherUI(context, ref);
+        }
       ),
     );
   }
@@ -98,10 +122,10 @@ class WeatherScreen extends ConsumerWidget {
                       color: Colors.grey,
                       size: 20,
                     ),
-                    loading: () => const SizedBox(
-                      width: 20,
-                      height: 20,
-                      child: CircularProgressIndicator(strokeWidth: 2.0),
+                    loading: () => const Icon(
+                      Icons.gps_fixed,
+                      color: Colors.grey,
+                      size: 20,
                     ),
                   );
                 },

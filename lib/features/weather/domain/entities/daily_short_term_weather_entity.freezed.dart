@@ -14,9 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DailyShortTermWeather {
 
- DateTime get date;// 해당 날짜
- double get minTemperature; double get maxTemperature; double get tempRange;// ✅ 오전/오후 상태 분리 (Rich Domain Model)
- SkyStatus get morningSkyStatus; SkyStatus get afternoonSkyStatus; PrecipitationType get morningPrecipitationType; PrecipitationType get afternoonPrecipitationType; int get maxPop;
+ DateTime get date; double get minTemperature; double get maxTemperature; double get tempRange; SkyStatus get morningSkyStatus; SkyStatus get afternoonSkyStatus; PrecipitationType get morningPrecipitationType; PrecipitationType get afternoonPrecipitationType; int get maxPop;
 /// Create a copy of DailyShortTermWeather
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -220,11 +218,9 @@ class _DailyShortTermWeather extends DailyShortTermWeather {
   
 
 @override final  DateTime date;
-// 해당 날짜
 @override final  double minTemperature;
 @override final  double maxTemperature;
 @override final  double tempRange;
-// ✅ 오전/오후 상태 분리 (Rich Domain Model)
 @override final  SkyStatus morningSkyStatus;
 @override final  SkyStatus afternoonSkyStatus;
 @override final  PrecipitationType morningPrecipitationType;

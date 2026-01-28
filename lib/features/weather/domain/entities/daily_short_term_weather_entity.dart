@@ -48,7 +48,6 @@ abstract class DailyShortTermWeather with _$DailyShortTermWeather {
     final difference = targetDate.difference(today).inDays;
 
     if (difference == 0) return '오늘';
-    if (difference == 1) return '내일';
     if (difference == -1) return '어제';
 
     const days = ['월', '화', '수', '목', '금', '토', '일'];

@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'address_entity.freezed.dart';
+part 'address_entity.g.dart';
 
 @freezed
 abstract class Address with _$Address {
@@ -16,6 +17,7 @@ abstract class Address with _$Address {
     double? latitude,
     double? longitude,
   }) = _Address;
+  factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
 }
 
 extension AddressX on Address {

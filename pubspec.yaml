@@ -16,6 +16,7 @@ dependencies:
   flutter_riverpod: ^3.0.3
   riverpod_annotation: ^3.0.3
   flutter_dotenv: ^6.0.0
+  connectivity_plus: ^7.0.0
   pretty_dio_logger: ^1.4.0
   dio: ^5.9.0
   retrofit: ^4.9.1
@@ -28,6 +29,7 @@ dependencies:
   logger: ^2.6.2
   collection: ^1.19.1
   skeletonizer: ^2.1.2
+  app_settings: ^7.0.0
 
 dev_dependencies:
   flutter_test:

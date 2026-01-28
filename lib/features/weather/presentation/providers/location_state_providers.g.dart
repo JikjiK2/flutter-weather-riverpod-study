@@ -34,7 +34,7 @@ final class SelectedWeatherLocationProvider
 }
 
 String _$selectedWeatherLocationHash() =>
-    r'3ec437d916a217129f2bfe9672e4f464178fc16c';
+    r'89e83b9118c00d960cc3c31048a05630b3a41aab';
 
 abstract class _$SelectedWeatherLocation extends $AsyncNotifier<Position> {
   FutureOr<Position> build();

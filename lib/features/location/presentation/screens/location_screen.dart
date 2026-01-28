@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ai_weather/features/location/domain/enums/location_permission_enums.dart';
 import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
+import 'package:ai_weather/features/weather/presentation/providers/location_state_providers.dart';
+import 'package:ai_weather/features/weather/presentation/providers/weather_state_providers.dart';
 
 class LocationScreen extends ConsumerWidget {
   const LocationScreen({super.key});
@@ -125,7 +127,7 @@ class LocationScreen extends ConsumerWidget {
   }
 
   Widget _buildGetCurrentLocationCard(BuildContext context, WidgetRef ref) {
-    final addressAsync = ref.watch(currentAddressProvider);
+    final addressAsync = ref.watch(weatherAddressProvider);
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -158,7 +160,7 @@ class LocationScreen extends ConsumerWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => ref.refresh(currentLocationProvider),
+              onPressed: () => ref.read(selectedWeatherLocationProvider.notifier).refresh(),
               child: const Text('현재 위치/주소 새로고침'),
             ),
           ],

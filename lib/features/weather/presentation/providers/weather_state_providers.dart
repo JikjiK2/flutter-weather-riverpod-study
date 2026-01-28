@@ -24,14 +24,30 @@ Future<(int nx, int ny)> weatherGridCoords(Ref ref) async {
 
 @Riverpod(keepAlive: true)
 Future<Address> weatherAddress(Ref ref) async {
-  final position = await ref.watch(selectedWeatherLocationProvider.future);
-  final address = await ref
-      .watch(locationRepositoryProvider)
-      .getAddressFromCoordinates(
-        lat: position.latitude,
-        lon: position.longitude,
-      );
-  return address;
+  await ref.watch(weatherGridCoordsProvider.future);
+  final position = ref.watch(selectedWeatherLocationProvider).value;
+  final locationRepo = ref.watch(locationRepositoryProvider);
+
+  if (position == null) {
+    return const Address(
+      latitude: defaultLatitude,
+      longitude: defaultLongitude,
+    );
+  }
+  try {
+    final address = await locationRepo.getAddressFromCoordinates(
+      lat: position.latitude,
+      lon: position.longitude,
+    );
+    return address;
+  } catch (e) {
+
+    final lastAddress = await locationRepo.getLastAddress();
+    return lastAddress ?? const Address(
+      latitude: defaultLatitude,
+      longitude: defaultLongitude,
+    );
+  }
 }
 
 @Riverpod(keepAlive: true)

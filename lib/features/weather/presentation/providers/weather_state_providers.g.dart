@@ -78,7 +78,7 @@ final class WeatherAddressProvider
   }
 }
 
-String _$weatherAddressHash() => r'fd319b7002d0e3940c276d7d3b27a914aa030336';
+String _$weatherAddressHash() => r'51b85def461070c8f90d7f1897ebbf6ca3b2f74f';
 
 @ProviderFor(midTermWeather)
 const midTermWeatherProvider = MidTermWeatherFamily._();

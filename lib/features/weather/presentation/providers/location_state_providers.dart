@@ -1,7 +1,7 @@
 import 'dart:async';
+import 'package:ai_weather/features/location/domain/enums/location_permission_enums.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:ai_weather/core/logger/app_logger_impl.dart';
 import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
 
 part 'location_state_providers.g.dart';
@@ -9,26 +9,38 @@ part 'location_state_providers.g.dart';
 @Riverpod(keepAlive: true)
 class SelectedWeatherLocation extends _$SelectedWeatherLocation {
   @override
-  Future<Position> build() async => _determinePosition();
+  Future<Position> build() async {
+    return _determinePosition();
+  }
 
   Future<Position> _determinePosition() async {
     final locationRepo = ref.read(locationRepositoryProvider);
-    final logger = ref.read(loggerProvider);
+
+    LocationPermissionStatus permission = await locationRepo.checkPermission();
+
+    if (permission == LocationPermissionStatus.denied) {
+      permission = await locationRepo.requestPermission();
+    }
+
+    if (permission != LocationPermissionStatus.granted) {
+      final lastPos = await locationRepo.getLastLocation();
+      return lastPos ?? _defaultPosition();
+    }
+
     try {
-      logger.i('실시간 위치 요청 시도');
       final position = await locationRepo.getCurrentPosition();
-      unawaited(
-        locationRepo.saveLastLocation(
-          lat: position.latitude,
-          lon: position.longitude,
-        ),
-      );
+      unawaited(locationRepo.saveLastLocation(lat: position.latitude, lon: position.longitude));
       return position;
     } catch (e) {
-      logger.w('실시간 위치 실패, 저장 위치 확인: $e');
-      final lastPosition = await locationRepo.getLastLocation();
-      return lastPosition ?? _defaultPosition();
+      final lastPos = await locationRepo.getLastLocation();
+      return lastPos ?? _defaultPosition();
     }
+  }
+
+  Future<void> updateToLastOrDeafult() async {
+    final locationRepo = ref.read(locationRepositoryProvider);
+    final lastPosition = await locationRepo.getLastLocation();
+    state = AsyncData(lastPosition ?? _defaultPosition());
   }
 
   Future<void> refresh() async {
@@ -36,8 +48,17 @@ class SelectedWeatherLocation extends _$SelectedWeatherLocation {
     state = await AsyncValue.guard(() => _determinePosition());
   }
 
-  Future<void> updateLocation(Position newPosition) async {
+  Future<void> updateLocation(Position newPosition, {String? address}) async {
+    final locationRepo = ref.read(locationRepositoryProvider);
     state = AsyncData(newPosition);
+
+    unawaited(
+      locationRepo.saveLastLocation(
+        lat: newPosition.latitude,
+        lon: newPosition.longitude,
+        address: address,
+      ),
+    );
   }
 
   Position _defaultPosition() => Position(

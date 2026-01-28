@@ -58,7 +58,7 @@ class _GoogleGeocodingApiDataSource implements GoogleGeocodingApiDataSource {
   Future<GoogleGeocodingResponse> searchAddress({
     required String address,
     String language = "ko",
-    String region = 'kr',
+    String region = "kr",
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
