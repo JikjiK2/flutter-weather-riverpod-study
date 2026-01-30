@@ -44,6 +44,6 @@ lib
 │       └── presentation
 │           ├── providers   # Riverpod Provider 정의
 │           ├── screens     # 화면 UI
-│           └── widgets     # 화면에 사용되는 위젯│            
+│           └── widgets     # 화면에 사용되는 위젯            
 ...
 ```
