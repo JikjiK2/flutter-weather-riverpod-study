@@ -28,7 +28,6 @@ class WeatherIconHelper {
       }
     }
 
-    // 2. 강수 없을 때 하늘 상태(SKY) 및 밤낮 구분
     final isNight = hour >= 18 || hour < 6;
     switch (sky) {
       case SkyStatus.sunny:
@@ -38,8 +37,7 @@ class WeatherIconHelper {
       case SkyStatus.cloudy:
         return Icons.cloud; // 흐림 (4)
       case SkyStatus.none:
-      default:
-        return isNight ? Icons.nightlight_round : Icons.wb_sunny;
+      return isNight ? Icons.nightlight_round : Icons.wb_sunny;
     }
   }
 
@@ -48,7 +46,6 @@ class WeatherIconHelper {
     required PrecipitationType pty,
     required int hour,
   }) {
-    // 강수 시 푸른색 계열 (소나기는 더 짙은 색)
     if (pty != PrecipitationType.none) {
       return pty == PrecipitationType.shower ? Colors.indigoAccent : Colors.blueAccent;
     }
@@ -62,8 +59,7 @@ class WeatherIconHelper {
       case SkyStatus.cloudy:
         return Colors.grey;
       case SkyStatus.none:
-      default:
-        return isNight ? Colors.amberAccent : const Color(0xffffcd27);
+      return isNight ? Colors.amberAccent : const Color(0xffffcd27);
     }
   }
 }

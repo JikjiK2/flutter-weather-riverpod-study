@@ -1,3 +1,4 @@
+import 'package:ai_weather/features/weather/presentation/providers/weather_home_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,12 +7,11 @@ import 'package:ai_weather/core/error/failures.dart';
 import 'package:ai_weather/core/network/network_status_provider.dart';
 import 'package:ai_weather/features/weather/presentation/screens/network_error_screen.dart';
 import 'package:ai_weather/features/location/domain/entities/address_entity.dart';
-import 'package:ai_weather/features/weather/presentation/providers/location_state_providers.dart';
+import 'package:ai_weather/features/location/presentation/providers/selected_location_controller.dart';
 import 'package:ai_weather/features/weather/presentation/widgets/current_weather_card.dart';
 import 'package:ai_weather/features/weather/presentation/widgets/daily_forecast_section.dart';
 import 'package:ai_weather/features/weather/presentation/widgets/hourly_forecast_section.dart';
 import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
-import 'package:ai_weather/features/weather/presentation/providers/weather_state_providers.dart';
 
 class WeatherScreen extends ConsumerWidget {
   const WeatherScreen({super.key});
@@ -35,7 +35,7 @@ class WeatherScreen extends ConsumerWidget {
           return Scaffold(
             body: NetworkErrorView(
               message: '네트워크 연결이 끊겼습니다.',
-              onRetry: () => ref.invalidate(selectedWeatherLocationProvider),
+              onRetry: () => ref.invalidate(selectedLocationControllerProvider),
             ),
           );
         }
@@ -44,7 +44,7 @@ class WeatherScreen extends ConsumerWidget {
     );
   }
   Widget _buildWeatherMainScaffold(BuildContext context, WidgetRef ref) {
-    final weatherLocationAsync = ref.watch(selectedWeatherLocationProvider);
+    final weatherLocationAsync = ref.watch(selectedLocationControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -65,7 +65,7 @@ class WeatherScreen extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.my_location),
             onPressed: () =>
-                ref.read(selectedWeatherLocationProvider.notifier).refresh(),
+                ref.read(selectedLocationControllerProvider.notifier).refresh(),
             tooltip: '현재 위치로 날씨 새로고침',
           ),
         ],
@@ -86,7 +86,7 @@ class WeatherScreen extends ConsumerWidget {
           if (err is NetworkFailure) {
             return NetworkErrorView(
               message: err.message,
-              onRetry: () => ref.invalidate(selectedWeatherLocationProvider),
+              onRetry: () => ref.invalidate(selectedLocationControllerProvider),
             );
           }
           return _buildWeatherUI(context, ref);
@@ -98,7 +98,7 @@ class WeatherScreen extends ConsumerWidget {
   Widget _buildWeatherUI(BuildContext context, WidgetRef ref) {
     return RefreshIndicator(
       onRefresh: () =>
-          ref.read(selectedWeatherLocationProvider.notifier).refresh(),
+          ref.read(selectedLocationControllerProvider.notifier).refresh(),
       child: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
@@ -133,7 +133,7 @@ class WeatherScreen extends ConsumerWidget {
               const SizedBox(width: 12),
               Consumer(
                 builder: (context, ref, _) {
-                  final addressAsync = ref.watch(weatherAddressProvider);
+                  final addressAsync = ref.watch(weatherAddressByLocationProvider);
                   return addressAsync.when(
                     data: (address) => Text(
                       address.displayAddress.removeFirstWord,

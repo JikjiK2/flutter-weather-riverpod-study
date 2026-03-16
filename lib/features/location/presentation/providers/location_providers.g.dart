@@ -240,6 +240,95 @@ final class OpenLocationSettingsProvider
 String _$openLocationSettingsHash() =>
     r'15a345b6fe01d5aba4a4e2dcb891a879483d5c0b';
 
+/// 좌표를 기반으로 주소를 가져오는 Provider (Location 피처로 이동)
+
+@ProviderFor(addressFromCoordinates)
+const addressFromCoordinatesProvider = AddressFromCoordinatesFamily._();
+
+/// 좌표를 기반으로 주소를 가져오는 Provider (Location 피처로 이동)
+
+final class AddressFromCoordinatesProvider
+    extends $FunctionalProvider<AsyncValue<Address>, Address, FutureOr<Address>>
+    with $FutureModifier<Address>, $FutureProvider<Address> {
+  /// 좌표를 기반으로 주소를 가져오는 Provider (Location 피처로 이동)
+  const AddressFromCoordinatesProvider._({
+    required AddressFromCoordinatesFamily super.from,
+    required ({double lat, double lon}) super.argument,
+  }) : super(
+         retry: null,
+         name: r'addressFromCoordinatesProvider',
+         isAutoDispose: false,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$addressFromCoordinatesHash();
+
+  @override
+  String toString() {
+    return r'addressFromCoordinatesProvider'
+        ''
+        '$argument';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<Address> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<Address> create(Ref ref) {
+    final argument = this.argument as ({double lat, double lon});
+    return addressFromCoordinates(ref, lat: argument.lat, lon: argument.lon);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is AddressFromCoordinatesProvider &&
+        other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$addressFromCoordinatesHash() =>
+    r'd03926b0fb1b7f24d55e4e49a5e20e4961c4d414';
+
+/// 좌표를 기반으로 주소를 가져오는 Provider (Location 피처로 이동)
+
+final class AddressFromCoordinatesFamily extends $Family
+    with
+        $FunctionalFamilyOverride<
+          FutureOr<Address>,
+          ({double lat, double lon})
+        > {
+  const AddressFromCoordinatesFamily._()
+    : super(
+        retry: null,
+        name: r'addressFromCoordinatesProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: false,
+      );
+
+  /// 좌표를 기반으로 주소를 가져오는 Provider (Location 피처로 이동)
+
+  AddressFromCoordinatesProvider call({
+    required double lat,
+    required double lon,
+  }) => AddressFromCoordinatesProvider._(
+    argument: (lat: lat, lon: lon),
+    from: this,
+  );
+
+  @override
+  String toString() => r'addressFromCoordinatesProvider';
+}
+
 @ProviderFor(searchAddressUseCase)
 const searchAddressUseCaseProvider = SearchAddressUseCaseProvider._();
 

@@ -3,10 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:ai_weather/features/weather/domain/entities/current_weather_entity.dart';
 import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
-import 'package:ai_weather/features/weather/presentation/providers/location_state_providers.dart';
-import 'package:ai_weather/features/weather/presentation/providers/weather_state_providers.dart';
+import 'package:ai_weather/features/weather/presentation/providers/weather_home_providers.dart';
 import 'package:ai_weather/features/weather/presentation/utils/weather_icon_helper.dart';
-
 
 class CurrentWeatherCard extends ConsumerWidget {
   const CurrentWeatherCard({super.key});
@@ -21,9 +19,12 @@ class CurrentWeatherCard extends ConsumerWidget {
         data: (weather) => _buildCard(context, weather, false),
         loading: () => Skeletonizer(
           enabled: true,
-      child: _buildCard(context, CurrentWeather.dummy, true),
+          child: _buildCard(context, CurrentWeather.dummy, true),
         ),
-        error: (err, stack) => _ErrorCard(error: err.toString()),
+        error: (err, stack) => _ErrorCard(
+          error: err.toString(),
+          onRetry: () => ref.invalidate(currentWeatherByLocationProvider),
+        ),
       ),
     );
   }
@@ -50,19 +51,19 @@ Widget _buildCard(BuildContext context, CurrentWeather weather, bool isLoading) 
                 children: [
                   Icon(
                     WeatherIconHelper.getIcon(
-                      sky: weather.skyStatus!,
+                      sky: weather.skyStatus ?? SkyStatus.sunny,
                       pty: weather.precipitationType,
                       hour: currentHour,
                     ),
                     color: WeatherIconHelper.getColor(
-                      sky: weather.skyStatus!,
+                      sky: weather.skyStatus ?? SkyStatus.sunny,
                       pty: weather.precipitationType,
                       hour: currentHour,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    skyStatusToString(weather.skyStatus!),
+                    skyStatusToString(weather.skyStatus ?? SkyStatus.sunny),
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -98,7 +99,6 @@ Widget _buildCard(BuildContext context, CurrentWeather weather, bool isLoading) 
   );
 }
 
-
 class _InfoItem extends StatelessWidget {
   final String label;
   final String value;
@@ -116,12 +116,13 @@ class _InfoItem extends StatelessWidget {
   }
 }
 
-class _ErrorCard extends ConsumerWidget {
+class _ErrorCard extends StatelessWidget {
   final String error;
-  const _ErrorCard({required this.error});
+  final VoidCallback onRetry;
+  const _ErrorCard({required this.error, required this.onRetry});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Card(
       color: Colors.red[50],
       child: Padding(
@@ -144,9 +145,7 @@ class _ErrorCard extends ConsumerWidget {
               textAlign: TextAlign.center,
             ),
             TextButton.icon(
-              onPressed: () {
-                ref.invalidate(selectedWeatherLocationProvider);
-              },
+              onPressed: onRetry,
               icon: const Icon(Icons.refresh, size: 18),
               label: const Text('다시 시도'),
             ),

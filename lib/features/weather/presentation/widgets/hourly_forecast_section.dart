@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:ai_weather/features/weather/presentation/utils/weather_icon_helper.dart';
 import 'package:ai_weather/features/weather/domain/entities/hourly_weather_entity.dart';
-import 'package:ai_weather/features/weather/presentation/providers/weather_state_providers.dart';
+import 'package:ai_weather/features/weather/presentation/providers/weather_home_providers.dart';
 import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
 
 class HourlyForecastSection extends ConsumerWidget {
@@ -11,9 +11,7 @@ class HourlyForecastSection extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final hourlyForecastAsync = ref.watch(
-      hourlyUltraSrtForecastByLocationProvider,
-    );
+    final hourlyForecastAsync = ref.watch(hourlyUltraSrtForecastByLocationProvider);
 
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 500),
@@ -112,4 +110,3 @@ class _HourlyItemCard extends StatelessWidget {
     );
   }
 }
-

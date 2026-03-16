@@ -14,7 +14,6 @@ class WeatherCalculator {
     } else {
       feelsLike = calculateWinterFeelsLikeTemperature(temp, windSpeedMs);
     }
-    // 소수점 첫째 자리까지 반올림
     return double.parse(feelsLike.toStringAsFixed(1));
   }
 

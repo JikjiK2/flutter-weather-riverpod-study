@@ -25,7 +25,6 @@ LocationRepository locationRepository(Ref ref) {
   );
 }
 
-
 @Riverpod(keepAlive: true)
 Stream<bool> locationIsServiceEnabled(Ref ref) async* {
   yield await Geolocator.isLocationServiceEnabled();
@@ -51,6 +50,17 @@ Future<void> openAppSettings(Ref ref) async {
 @Riverpod(keepAlive: true)
 Future<void> openLocationSettings(Ref ref) async {
   return ref.watch(locationRepositoryProvider).openLocationSettings();
+}
+
+@Riverpod(keepAlive: true)
+Future<Address> addressFromCoordinates(Ref ref, {required double lat, required double lon}) async {
+  final locationRepo = ref.watch(locationRepositoryProvider);
+  try {
+    return await locationRepo.getAddressFromCoordinates(lat: lat, lon: lon);
+  } catch (e) {
+    final lastAddress = await locationRepo.getLastAddress();
+    return lastAddress ?? Address(latitude: lat, longitude: lon);
+  }
 }
 
 @riverpod

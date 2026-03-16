@@ -1,4 +1,4 @@
-import 'package:ai_weather/features/weather/domain/entities/mid_term_weather_entity.dart';
+import 'package:ai_weather/core/utils/result.dart';
 import 'package:ai_weather/features/weather/domain/entities/daily_short_term_weather_entity.dart';
 import 'package:ai_weather/features/weather/domain/repositories/weather_repository.dart';
 import 'package:ai_weather/features/weather/utils/weather_api_utils.dart';
@@ -8,54 +8,65 @@ class GetUnifiedDailyForecastUseCase {
 
   GetUnifiedDailyForecastUseCase(this._repository);
 
-  Future<List<DailyShortTermWeather>> execute({
+  Future<Result<List<DailyShortTermWeather>>> execute({
     required int nx,
     required int ny,
     required String regId,
   }) async {
-    final now = DateTime.now();
-    final todayOnly = DateTime(now.year, now.month, now.day);
-    final yesterdayOnly = todayOnly.subtract(const Duration(days: 1));
+    return Result.guard(() async {
+      final now = DateTime.now();
+      final todayOnly = DateTime(now.year, now.month, now.day);
+      final yesterdayOnly = todayOnly.subtract(const Duration(days: 1));
 
-    final midBaseDate = MidTermApiUtils.getMidTermBaseTime(now);
-    final midTmFc = midBaseDate.baseDate + midBaseDate.baseTime;
+      final midBaseDate = MidTermApiUtils.getMidTermBaseTime(now);
+      final midTmFc = midBaseDate.baseDate + midBaseDate.baseTime;
 
-    final results = await Future.wait([
-      _repository.getShortTermMinMaxTemps(nx: nx, ny: ny, targetDate: todayOnly),
-      _repository.getShortTermMinMaxTemps(nx: nx, ny: ny, targetDate: yesterdayOnly),
-      _repository.getShortTermForecast(nx: nx, ny: ny),
-      _repository.getMidTermWeather(regId: regId, tmFc: midTmFc),
-    ]);
+      final todayRes = await _repository.getShortTermMinMaxTemps(nx: nx, ny: ny, targetDate: todayOnly);
+      final yesterdayRes = await _repository.getShortTermMinMaxTemps(nx: nx, ny: ny, targetDate: yesterdayOnly);
+      final shortTermRes = await _repository.getShortTermForecast(nx: nx, ny: ny);
+      final midTermRes = await _repository.getMidTermWeather(regId: regId, tmFc: midTmFc);
 
-    final todayOnlyForecast = results[0] as DailyShortTermWeather;
-    final yesterdayOnlyForecast = results[1] as DailyShortTermWeather;
-    final shortTermDailyList = results[2] as List<DailyShortTermWeather>;
-    final midTermWeather = results[3] as MidTermWeather;
+      final Map<DateTime, DailyShortTermWeather> unifiedMap = {};
 
-    final Map<DateTime, DailyShortTermWeather> unifiedMap = {};
+      yesterdayRes.when(
+        success: (d) => unifiedMap[yesterdayOnly] = d,
+        failure: (_) => null,
+      );
+      
+      todayRes.when(
+        success: (d) => unifiedMap[todayOnly] = d,
+        failure: (_) => null,
+      );
 
-    unifiedMap[yesterdayOnly] = yesterdayOnlyForecast;
-    unifiedMap[todayOnly] = todayOnlyForecast;
+      shortTermRes.when(
+        success: (shortTermDailyList) {
+          for (var daily in shortTermDailyList) {
+            final dateKey = DateTime(daily.date.year, daily.date.month, daily.date.day);
+            if (!unifiedMap.containsKey(dateKey)) {
+              unifiedMap[dateKey] = daily;
+            }
+          }
+        },
+        failure: (e) => throw e,
+      );
 
-    for (var daily in shortTermDailyList) {
-      final dateKey = DateTime(daily.date.year, daily.date.month, daily.date.day);
-      if (!unifiedMap.containsKey(dateKey)) {
-        unifiedMap[dateKey] = daily;
-      }
-    }
+      midTermRes.when(
+        success: (midTermWeather) {
+          for (var midTermData in midTermWeather.dailyForecasts) {
+            final dateKey = DateTime(midTermData.date.year, midTermData.date.month, midTermData.date.day);
+            if (!unifiedMap.containsKey(dateKey) || _isDataIncomplete(unifiedMap[dateKey]!)) {
+              unifiedMap[dateKey] = DailyShortTermWeather.fromMidTerm(midTermData);
+            }
+          }
+        },
+        failure: (_) => null,
+      );
 
-    for (var midTermData in midTermWeather.dailyForecasts) {
-      final dateKey = DateTime(midTermData.date.year, midTermData.date.month, midTermData.date.day);
+      final finalResult = unifiedMap.values.toList()
+        ..sort((a, b) => a.date.compareTo(b.date));
 
-      if (!unifiedMap.containsKey(dateKey) || _isDataIncomplete(unifiedMap[dateKey]!)) {
-        unifiedMap[dateKey] = DailyShortTermWeather.fromMidTerm(midTermData);
-      }
-    }
-
-    final finalResult = unifiedMap.values.toList()
-      ..sort((a, b) => a.date.compareTo(b.date));
-
-    return finalResult;
+      return finalResult;
+    });
   }
 
   bool _isDataIncomplete(DailyShortTermWeather data) {

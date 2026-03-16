@@ -9,98 +9,50 @@ part of 'weather_repository_impl.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(kmaShortTermApiDataSource)
-const kmaShortTermApiDataSourceProvider = KmaShortTermApiDataSourceProvider._();
+@ProviderFor(weatherRepositoryImpl)
+const weatherRepositoryImplProvider = WeatherRepositoryImplProvider._();
 
-final class KmaShortTermApiDataSourceProvider
+final class WeatherRepositoryImplProvider
     extends
         $FunctionalProvider<
-          KmaShortTermApiDataSource,
-          KmaShortTermApiDataSource,
-          KmaShortTermApiDataSource
+          WeatherRepository,
+          WeatherRepository,
+          WeatherRepository
         >
-    with $Provider<KmaShortTermApiDataSource> {
-  const KmaShortTermApiDataSourceProvider._()
+    with $Provider<WeatherRepository> {
+  const WeatherRepositoryImplProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'kmaShortTermApiDataSourceProvider',
+        name: r'weatherRepositoryImplProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$kmaShortTermApiDataSourceHash();
+  String debugGetCreateSourceHash() => _$weatherRepositoryImplHash();
 
   @$internal
   @override
-  $ProviderElement<KmaShortTermApiDataSource> $createElement(
+  $ProviderElement<WeatherRepository> $createElement(
     $ProviderPointer pointer,
   ) => $ProviderElement(pointer);
 
   @override
-  KmaShortTermApiDataSource create(Ref ref) {
-    return kmaShortTermApiDataSource(ref);
+  WeatherRepository create(Ref ref) {
+    return weatherRepositoryImpl(ref);
   }
 
   /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(KmaShortTermApiDataSource value) {
+  Override overrideWithValue(WeatherRepository value) {
     return $ProviderOverride(
       origin: this,
-      providerOverride: $SyncValueProvider<KmaShortTermApiDataSource>(value),
+      providerOverride: $SyncValueProvider<WeatherRepository>(value),
     );
   }
 }
 
-String _$kmaShortTermApiDataSourceHash() =>
-    r'96b90c9e5ef737c9eac8f89ebe7337af6d58e483';
-
-@ProviderFor(kmaMidTermApiDataSource)
-const kmaMidTermApiDataSourceProvider = KmaMidTermApiDataSourceProvider._();
-
-final class KmaMidTermApiDataSourceProvider
-    extends
-        $FunctionalProvider<
-          KmaMidTermApiDataSource,
-          KmaMidTermApiDataSource,
-          KmaMidTermApiDataSource
-        >
-    with $Provider<KmaMidTermApiDataSource> {
-  const KmaMidTermApiDataSourceProvider._()
-    : super(
-        from: null,
-        argument: null,
-        retry: null,
-        name: r'kmaMidTermApiDataSourceProvider',
-        isAutoDispose: false,
-        dependencies: null,
-        $allTransitiveDependencies: null,
-      );
-
-  @override
-  String debugGetCreateSourceHash() => _$kmaMidTermApiDataSourceHash();
-
-  @$internal
-  @override
-  $ProviderElement<KmaMidTermApiDataSource> $createElement(
-    $ProviderPointer pointer,
-  ) => $ProviderElement(pointer);
-
-  @override
-  KmaMidTermApiDataSource create(Ref ref) {
-    return kmaMidTermApiDataSource(ref);
-  }
-
-  /// {@macro riverpod.override_with_value}
-  Override overrideWithValue(KmaMidTermApiDataSource value) {
-    return $ProviderOverride(
-      origin: this,
-      providerOverride: $SyncValueProvider<KmaMidTermApiDataSource>(value),
-    );
-  }
-}
-
-String _$kmaMidTermApiDataSourceHash() =>
-    r'd62e7a651504c5a8c5440c876bd21ff33d0e52a9';
+String _$weatherRepositoryImplHash() =>
+    r'adeb1d7a458b891bedfefbfc55bdbf4f597e5abe';

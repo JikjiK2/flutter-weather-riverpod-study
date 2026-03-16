@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
-import 'package:ai_weather/features/weather/presentation/providers/location_state_providers.dart';
+import 'package:ai_weather/features/location/presentation/providers/selected_location_controller.dart';
 
 class AddressSearchScreen extends ConsumerStatefulWidget {
   const AddressSearchScreen({super.key});
@@ -120,7 +120,7 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
                       accuracy: 0, altitude: 0, altitudeAccuracy: 0,
                       heading: 0, headingAccuracy: 0, speed: 0, speedAccuracy: 0,
                     );
-                    ref.read(selectedWeatherLocationProvider.notifier)
+                    ref.read(selectedLocationControllerProvider.notifier)
                         .updateLocation(position, address: address.displayAddress);
                     context.pop();
                   },
@@ -156,7 +156,7 @@ class _AddressSearchScreenState extends ConsumerState<AddressSearchScreen> {
               timestamp: DateTime.now(),
               accuracy: 0, altitude: 0, altitudeAccuracy: 0, heading: 0, headingAccuracy: 0, speed: 0, speedAccuracy: 0,
             );
-            ref.read(selectedWeatherLocationProvider.notifier).updateLocation(position, address: address.displayAddress);
+            ref.read(selectedLocationControllerProvider.notifier).updateLocation(position, address: address.displayAddress);
             ref.read(locationSearchHistoryProvider.notifier).addAddress(address);
             context.pop();
           },

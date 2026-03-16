@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'location_state_providers.dart';
+part of 'selected_location_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -9,34 +9,35 @@ part of 'location_state_providers.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(SelectedWeatherLocation)
-const selectedWeatherLocationProvider = SelectedWeatherLocationProvider._();
+@ProviderFor(SelectedLocationController)
+const selectedLocationControllerProvider =
+    SelectedLocationControllerProvider._();
 
-final class SelectedWeatherLocationProvider
-    extends $AsyncNotifierProvider<SelectedWeatherLocation, Position> {
-  const SelectedWeatherLocationProvider._()
+final class SelectedLocationControllerProvider
+    extends $AsyncNotifierProvider<SelectedLocationController, Position> {
+  const SelectedLocationControllerProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'selectedWeatherLocationProvider',
+        name: r'selectedLocationControllerProvider',
         isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$selectedWeatherLocationHash();
+  String debugGetCreateSourceHash() => _$selectedLocationControllerHash();
 
   @$internal
   @override
-  SelectedWeatherLocation create() => SelectedWeatherLocation();
+  SelectedLocationController create() => SelectedLocationController();
 }
 
-String _$selectedWeatherLocationHash() =>
-    r'89e83b9118c00d960cc3c31048a05630b3a41aab';
+String _$selectedLocationControllerHash() =>
+    r'b9cf030bcd23401bc5bdc6a8fc38a1c4a95f7fcc';
 
-abstract class _$SelectedWeatherLocation extends $AsyncNotifier<Position> {
+abstract class _$SelectedLocationController extends $AsyncNotifier<Position> {
   FutureOr<Position> build();
   @$mustCallSuper
   @override

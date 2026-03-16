@@ -4,7 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'package:ai_weather/features/weather/domain/enums/weather_enums.dart';
 import 'package:ai_weather/features/weather/presentation/utils/weather_icon_helper.dart';
 import 'package:ai_weather/features/weather/domain/entities/daily_short_term_weather_entity.dart';
-import 'package:ai_weather/features/weather/presentation/providers/weather_state_providers.dart';
+import 'package:ai_weather/features/weather/presentation/providers/weather_home_providers.dart';
 import 'package:ai_weather/features/weather/presentation/widgets/section_error_widget.dart';
 
 class DailyForecastSection extends ConsumerWidget {
@@ -103,7 +103,6 @@ class _DailyItemRow extends StatelessWidget {
                   hour: 9,
                 ),
                 const SizedBox(width: 12),
-                // 오후 아이콘
                 _WeatherSmallIcon(
                   sky: forecast.afternoonSkyStatus,
                   pty: forecast.afternoonPrecipitationType,

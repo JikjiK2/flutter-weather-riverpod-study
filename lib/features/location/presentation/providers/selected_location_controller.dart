@@ -4,10 +4,10 @@ import 'package:geolocator/geolocator.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:ai_weather/features/location/presentation/providers/location_providers.dart';
 
-part 'location_state_providers.g.dart';
+part 'selected_location_controller.g.dart';
 
 @Riverpod(keepAlive: true)
-class SelectedWeatherLocation extends _$SelectedWeatherLocation {
+class SelectedLocationController extends _$SelectedLocationController {
   @override
   Future<Position> build() async {
     return _determinePosition();

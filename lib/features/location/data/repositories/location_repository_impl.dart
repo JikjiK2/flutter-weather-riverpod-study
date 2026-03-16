@@ -64,7 +64,7 @@ class LocationRepositoryImpl implements LocationRepository {
 
       return response.toAddressMap();
 
-    } on DioException catch (e) {
+    } on DioException {
       throw NetworkFailure();
     } catch (e, stacktrace) {
       _logger.e("주소 검색 오류: $e", stackTrace: stacktrace);

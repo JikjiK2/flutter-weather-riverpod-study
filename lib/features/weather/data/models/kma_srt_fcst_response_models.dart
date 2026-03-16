@@ -67,12 +67,11 @@ abstract class KmaSrtFcstApiResponse with _$KmaSrtFcstApiResponse {
     final List<DailyShortTermWeather> dailyList = [];
 
     dailyGroupedItems.forEach((dateStr, timeGroupedItems) {
-      if (dateStr == todayDateStr) return; // 오늘 날짜 제외 (별도 처리)
+      if (dateStr == todayDateStr) return;
 
       final tmnValue = timeGroupedItems['0000']?['TMN'];
       final tmxValue = timeGroupedItems['0000']?['TMX'];
 
-      // 최저/최고 기온이 모두 있어야 신뢰할 수 있는 단기 예보로 간주
       if (tmnValue != null && tmxValue != null) {
         final currentDay = DateTime(
           int.parse(dateStr.substring(0, 4)),
